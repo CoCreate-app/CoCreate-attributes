@@ -1,19 +1,19 @@
-# Contributing to CoCreate-xxx
+# Contributing to CoCreate-domEditorPanel
 
-This project is work of [many contributors](https://github.com/CoCreate-app/CoCreate-xxx/graphs/contributors).
-You're encouraged to submit [pull requests](https://github.com/CoCreate-app/CoCreate-xxx/pulls),
-[propose features and discuss issues](https://github.com/CoCreate-app/CoCreate-xxx/issues).
+This project is work of [many contributors](https://github.com/CoCreate-app/CoCreate-domEditorPanel/graphs/contributors).
+You're encouraged to submit [pull requests](https://github.com/CoCreate-app/CoCreate-domEditorPanel/pulls),
+[propose features and discuss issues](https://github.com/CoCreate-app/CoCreate-domEditorPanel/issues).
 
 In the examples below, substitute your Github username for `contributor` in URLs.
 
 ## Fork the Project
 
-Fork the [project on Github](https://github.com/CoCreate-app/CoCreate-xxx) and check out your copy.
+Fork the [project on Github](https://github.com/CoCreate-app/CoCreate-domEditorPanel) and check out your copy.
 
 ```
-git clone https://github.com/contributor/CoCreate-xxx.git
-cd CoCreate-xxx
-git remote add upstream https://github.com/CoCreate-app/CoCreate-xxx.git
+git clone https://github.com/contributor/CoCreate-domEditorPanel.git
+cd CoCreate-domEditorPanel
+git remote add upstream https://github.com/CoCreate-app/CoCreate-domEditorPanel.git
 ```
 
 ## Create a Topic Branch
@@ -70,7 +70,7 @@ git push origin my-feature-branch
 
 ## Make a Pull Request
 
-Go to [https://github.com/CoCreate-app/CoCreate-xxx](https://github.com/CoCreate-app/CoCreate-xxx) and select your feature branch.
+Go to [https://github.com/CoCreate-app/CoCreate-domEditorPanel](https://github.com/CoCreate-app/CoCreate-domEditorPanel) and select your feature branch.
 Click the 'Pull Request' button and fill out the form. Pull requests are usually reviewed within a few days.
 
 ## Rebase
