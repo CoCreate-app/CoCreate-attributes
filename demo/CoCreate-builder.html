@@ -107,7 +107,7 @@
   <!-- CoCreate SideNav Left -->
   <div id="menuL" class="cocreate-sidenav bg:medium-gray" data-main_content="canvas" sidenav_default_desktop="expanded" sidenav_default_tablet="offcanvas" sidenav_default_phone="offcanvas" sidenav_ontoggle_desktop="offcanvas" sidenav_ontoggle_tablet="offcanvas">
     <div class="">
-      <ul class="overflow:scroll height:100vh margin:5px bg:white padding:0">
+      <ul class="overflow:scroll height:100vh margin:5px bg:white padding:0 padding-left:5px">
         <div data-vdom_target="test" data-group_name="test"></div>
         <!-- CoCreate Render to get list of blocks -->
         <div data-template_id="template1" data-fetch_collection="blocks" data-filter_name="menu-position" data-filter_value="0" data-filter_value_type="number" data-filter_operator="$ne" data-order_by="menu-position" data-order_type="asc" data-pass_to="blocks">
@@ -136,7 +136,7 @@
   <div id="menuR" class="cocreate-sidenav sidenav-right bg:medium-gray" data-main_content="canvas" sidenav_default_desktop="expanded" sidenav_default_tablet="expanded">
     <div class="padding:5px">
       <form>
-        <input type="text" class="floating-label" placeholder="Text" name="name" data-attribute="class" data-target="element_id">
+        <input id="input1" type="text" class="floating-label" placeholder="Text" name="name" data-attribute="class" data-target="element_id">
         <input type="text" class="floating-label" placeholder="Text" name="name1" data-attribute="data-coc-draggable" data-target="element_id">
         <input type="color" class="floating-label" placeholder="color" name="color" id="color">
         <input type="search" class="floating-label" placeholder="Search" name="search" id="search" data-get_value="text">
