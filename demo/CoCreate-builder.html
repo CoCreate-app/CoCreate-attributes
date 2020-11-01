@@ -13,8 +13,7 @@
 
   <!-- CoCreate CSS -->
   <link rel="stylesheet" href="https://server.cocreate.app/css/CoCreate.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../CoCreate-vdom/src/CoCreate-vdom.css" type="text/css" />
-  <link rel="stylesheet" href="../../CoCreate-dnd/src/CoCreate-dnd.css" type="text/css" />
+
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" crossorigin="anonymous" />
@@ -105,7 +104,7 @@
   </div>
 
   <!-- CoCreate SideNav Left -->
-  <div id="menuL" class="cocreate-sidenav bg:medium-gray" data-main_content="canvas" sidenav_default_desktop="expanded" sidenav_default_tablet="offcanvas" sidenav_default_phone="offcanvas" sidenav_ontoggle_desktop="offcanvas" sidenav_ontoggle_tablet="offcanvas">
+  <div id="menuL" class="cocreate-sidenav bg:medium-gray" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="offcanvas" sidenav-default_phone="offcanvas" sidenav-ontoggle_desktop="offcanvas" sidenav-ontoggle_tablet="offcanvas">
     <div class="">
       <ul class="overflow:scroll height:100vh margin:5px bg:white padding:0 padding-left:5px">
         <div data-vdom_target="test" data-group_name="test"></div>
@@ -133,51 +132,116 @@
   <!-- End CoCreate SideNav Left -->
 
   <!-- CoCreate SideNav Right -->
-  <div id="menuR" class="cocreate-sidenav sidenav-right bg:medium-gray" data-main_content="canvas" sidenav_default_desktop="expanded" sidenav_default_tablet="expanded">
-    <div class="padding:5px">
+  <div id="menuR" class="cocreate-sidenav sidenav-right bg:medium-gray" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="expanded" sidenav-default_phone="expanded">
+    <div class="padding:5px cocreate-scroll">
       <form>
-        <input id="input1" type="text" class="floating-label" placeholder="Text" name="name" data-attribute="class" data-target="element_id">
-        <input type="text" class="floating-label" placeholder="Text" name="name1" data-attribute="data-coc-draggable" data-target="element_id">
-        <input type="color" class="floating-label" placeholder="color" name="color" id="color">
-        <input type="search" class="floating-label" placeholder="Search" name="search" id="search" data-get_value="text">
-        <input type="date" class="floating-label" placeholder="Date" name="date" id="date">
-        <input type="time" class="floating-label" placeholder="Time" name="time" id="time">
-        <input type="datetime-local" class="floating-label" placeholder="Date Time" name="date-time" id="date-time">
-        <textarea class="floating-label" placeholder="Text Area" name='text_area' id="text_area"></textarea>
+        <!--<input data-attribute_sync="class" type="text" class="floating-label attr" placeholder="Draggable" data-attribute_target="#new">-->
+        <!--<input data-attribute_sync="innerText" type="text" class="floating-label attr" placeholder="style-text" data-attribute_target="#new">-->
+        <!--<input data-attribute_sync="innerText" type="color" class="floating-label attr" placeholder="style-color" data-attribute_target="#new">-->
+        <!--<input data-attribute_sync="innerText" type="date" class="floating-label" placeholder="style-data-time" data-attribute_target="#new">-->
+        <!--<input type="search" class="floating-label" placeholder="Search" data-attribute_sync="innerText" data-attribute_target="#new">-->
+        <!--<input type="date" class="floating-label" placeholder="Date" data-attribute_sync="innerText" data-attribute_target="#new">-->
+        <!--<input type="time" class="floating-label" placeholder="Time" data-attribute_sync="innerText" data-attribute_target="#new">-->
+        <!--<input type="datetime-local" class="floating-label" placeholder="Date Time" data-attribute_sync="innerText" data-attribute_target="#new">-->
+        <!--<textarea class="floating-label" data-realtime="" placeholder="Text Area" data-attribute_sync="innerText" data-attribute_target="#new"></textarea>-->
 
-
-        <div data-realtime="true" name="selectField2" class="select--field sortable floating-label" placeholder="multiple" multiple>
-          <input class="option-search" placeholder="Search">
-          <ul class="selectable--list cocreate-scroll">
-            <li class="selectable" data-value="value 1">
-              <h3>value 1</h3>
-            </li>
-            <li class="selectable" data-value="value 2">
-              <h3>value 2</h3>
-            </li>
-            <li class="selectable" data-value="value 3">
-              <h3>value 3</h3>
-            </li>
-          </ul>
-        </div>
-
-
-
-        <div class="select--field sortable floating-label" name="selectField4" placeholder="single">
-          <input class="option-search" placeholder="Search">
-          <ul class="selectable--list  cocreate-scroll">
-            <li class="selectable" data-value="value 1">
-              <h3>value 1</h3>
-            </li>
-            <li class="selectable" data-value="value 2">
-              <h3>value 2</h3>
-            </li>
-            <li class="selectable" data-value="value 3">
-              <h3>value 3</h3>
-            </li>
-          </ul>
-        </div>
-
+        
+        <!--<h3 data-attribute_sync="innerText" data-attribute_target="#new" contenteditable>test</h3>-->
+        
+        
+        <p>different name:</p>
+        <input type="checkbox" id="vehicle11" name="vehicle1" value="background:green;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle1">background:green</label><br>
+        <input type="checkbox" id="vehicle21" name="vehicle2" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle2">color:blue</label></br>
+        
+        
+        <p>same name:</p>
+        <input type="checkbox" id="vehicle31" name="sameee" value="background:green;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle3">background:green</label><br>
+        <input type="checkbox" id="vehicle41" name="sameee" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle4">color:blue</label></br>
+        
+        
+        <!--<input id="radio1" type="radio" name="radiotest" value="background:green;" data-attribute_sync="style" data-attribute_target="#new">-->
+        <!-- <label for="radio1">background:green</label>-->
+        <!--<input id="radio2" type="radio" name="radiotest" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new">-->
+        <!-- <label for="radio2">color:blue</label>-->
+         
+        <!--<label for="male">Male</label><br>-->
+        
+        <select name="cars" id="cars" data-attribute_sync="style" data-attribute_target="#new">
+          <option value="background:green;">background:green;</option>
+          <option value="color:blue;">color:blue;</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+        <br>
+        <br>
+        <br>
+        <!-- multiple -->
+        <select name="cars" id="cars" data-attribute_sync="style" data-attribute_target="#new" multiple>
+          <option value="background:green;">background:green;</option>
+          <option value="color:blue;">color:blue;</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+        
+            <input type="checkbox" id="classxxx" name="classxxx" value="classxxx" data-attribute_sync="class" data-attribute_target="#new" checked><label for="classxxx">add class: classxxx</label><br>
+        
+        
+        <div thename="volvo" data-element_id="a">volvo</div>
+        <div thename="saab" data-element_id="b">saab</div>
+        <div id="new" thename="" data-element_id="c" style="font-size:18px;" class="class1 class2 classxxx">#ff0000</div>
+        <div thename="audi" data-element_id="d">audi</div>
+        
+      <!--<cocreate-select -->
+      <!--class="sortable floating-label"  -->
+      <!--data-attribute_sync="innerText" -->
+      <!--data-attribute_target="#new"-->
+      <!--name="selectField4" -->
+      <!--placeholder="Single Options">-->
+      <!--  <input class="option-search" placeholder="Search">-->
+      <!--  <ul class="selectable--list  cocreate-scroll">-->
+      <!--		<li class="selectable"value="value 1">-->
+      <!--		  <h3 value="hello">value 1</h3>-->
+      <!--		</li>-->
+      <!--		<li class="selectable" value="value 2">-->
+      <!--		  <h3 >value 2</h3>-->
+      <!--		</li>-->
+      <!--		<li class="selectable" value="value 3">-->
+      <!--		  <h3 >sss</h3>-->
+      <!--		</li>-->
+      <!--		<li class="selectable" value="value 3">-->
+      <!--		  <h3 >value 3</h3>-->
+      <!--		</li>-->
+      <!--  </ul>-->
+      <!--</cocreate-select>-->
+      
+      
+      <!--<cocreate-select class="floating-label sortable" multiple-->
+      <!--  data-attribute_sync="style" -->
+      <!--  data-attribute_target="#new"-->
+      <!--  name="selectField1" -->
+      <!--  placeholder="Multiple Documents" -->
+      <!--  data-limit_selectable="3">-->
+        
+      <!--  <input class="option-search" placeholder="Search">-->
+         
+      <!--  <ul class="selectable--list  cocreate-scroll">-->
+      <!--		<li class="selectable"value="background: red;">-->
+      <!--		  <h3 value="hello">background: red;</h3>-->
+      <!--		</li>-->
+      <!--		<li class="selectable" value="color: blue;">-->
+      <!--		  <h3 >color: blue;</h3>-->
+      <!--		</li>-->
+      <!--		<li class="selectable" value="font-size: 30px;">-->
+      <!--		  <h3 >font-size: 30px;</h3>-->
+      <!--		</li>-->
+      <!--		<li class="selectable" value="noy a css">-->
+      <!--		  <h3 >noy a css</h3>-->
+      <!--		</li>-->
+      <!--  </ul>-->
+        
+      <!--</cocreate-select>-->
+      
+      
       </form>
     </div>
     <div class="resizeHandler"></div>
@@ -199,12 +263,13 @@
   </script>
 
   <script defer src="https://server.cocreate.app/js/CoCreate.min.js"></script>
-  <script defer src="../../CoCreate-domEditor/src/domEditor.js"></script>
-  <script defer src="../../CoCreate-domEditor/src/element-config.js"></script>
-  <script defer src="../../CoCreate-dnd/dist/dnd.js"></script>
-  <script defer src="../../CoCreate-vdom/dist/CoCreate-vdom.js"></script>
-  <script defer src="../../CoCreate-collapsible/src/collapsible.js"></script>
-  <script defer src="../../CoCreate-domEditorPanel/src/domEditorPanel.js"></script>
+  <!--<script defer src="../../CoCreate-domEditor/src/domEditor.js"></script>-->
+  <!--<script defer src="../../CoCreate-domEditor/src/element-config.js"></script>-->
+  <!--<script defer src="../../CoCreate-dnd/dist/dnd.js"></script>-->
+  <!--<script defer src="../../CoCreate-vdom/dist/CoCreate-vdom.js"></script>-->
+  <!--<script defer src="../../CoCreate-collapsible/src/collapsible.js"></script>-->
+  <script defer src="https://server.cocreate.app/CoCreate-components/CoCreate-attributes/src/index.js"></script>
+  <script defer src="https://server.cocreate.app/CoCreate-components/CoCreate-select/src/CoCreate-select.js"></script>
 
 </body>
 
