@@ -69,11 +69,16 @@
 
 window.addEventListener("load", () => {
   //store all frames
+  let canvas
   try {
     
     let canvasIframe = document.querySelector("#canvas");
     let canvasWindow = canvasIframe.contentWindow;
-  let canvas = canvasIframe.contentDocument || canvasWindow.document;
+   canvas = canvasIframe.contentDocument || canvasWindow.document;
+  } catch (error) {
+    console.log(error)
+  }
+    try {
     
     console.log("attribute loaded");
     let allFrames = [{ document, window }];
@@ -390,7 +395,10 @@ window.addEventListener("load", () => {
             const elSelectorId = input.getAttribute("data-attribute_target");
       if (!elSelectorId) return;
      
-       let element =  canvas.querySelector(elSelectorId)
+       let element 
+       if(canvas)
+       element =  canvas.querySelector(elSelectorId)
+       else element=  allFrame(frame => frame.querySelector(elSelectorId))
      
     
         let read = input.getAttribute("data-attribute_sync");
