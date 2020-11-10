@@ -2,84 +2,47 @@
 
 /**
  * refactor:
- * refactor mutation observer to a component 
+ * refactor mutation observer to a component
  * refactor cc_select_utility, allFrame, parseCssRules, parseClassList to a global/general workspace
  */
 
-// const cc_select_utility = {
-//   // add option even duplicates on success true
-//   addOption: function (name, position = 0) {
-//     if (!name) return false;
-//     let container = this.querySelector(":scope > ul");
-//     let li = document.createElement("li");
-//     li.classList.add("selectable");
-//     li.setAttribute("value", name);
-//     let h3 = document.createElement("h3");
-//     h3.innerText = name;
-//     container.children[position].insertAdjacentElement("beforebegin", li);
-//     return true;
-//   },
 
-//   // remove option, if any removed, true returned
-//   removeOption: function (name) {
-//     let container = this.querySelector(":scope > ul");
-//     Array.from(container.children).forEach((option, i) => {
-//       if (option.getAttribute("value") === name) {
-//         container.children[i].remove();
-//         return true;
-//       }
-//     });
-//     return false;
-//   },
+const cocreateUtility = {
+  getAllSelectedOptions: function () {
+    let options = this.querySelectorAll(":scope > [selected]");
+    return Array.from(options).map((o) => o.getAttribute("value"));
+  },
+  getAllOptions: function () {
+    let options = this.querySelectorAll(":scope > ul > [value]");
+    return Array.from(options).map((o) => o.getAttribute("value"));
+  },
+  // select option or arrays of options
+  selectOption: function (optionName) {
+    // if(this.getAllOptions().includes(optionName))
+    CoCreateSelect.__selectValue(optionName, this);
+  },
 
-//   // select option or arrays of options
-//   selectOption: function (optionNames) {
-//     if (!Array.isArray(optionNames)) optionNames = [optionNames];
+  // unselect option or arrays of options, and remove all if not param
+  unselectOption: function (optionName) {
+    let options = this.querySelectorAll(":scope > [selected]");
+    Array.from(options).forEach((option) => {
+      if (optionName == option.getAttribute("value")) option.remove();
+    });
+  },
+};
 
-//     let container = this.querySelector(":scope > ul");
-
-//     optionNames.forEach((name) => {
-//       Array.from(container.children).forEach((option, i) => {
-//         if (option.getAttribute("value") === name) {
-//           let cloned = option.cloneNode(true);
-//           cloned.classList.remove("selectable");
-//           cloned.setAttribute("selected", "");
-//           this.insertAdjacentElement("afterbegin", cloned);
-//         }
-//       });
-//     });
-//   },
-
-//   // unselect option or arrays of options, and remove all if not param
-//   unselectOption: function (optionNames) {
-//     let selected = this.querySelectorAll(":scope > li");
-
-//     if (!optionNames) {
-//       selected.forEach((li) => li.remove());
-//       return;
-//     } else if (!Array.isArray(optionNames)) optionNames = [optionNames];
-
-//     optionNames.forEach((name) => {
-//       selected.forEach((option, i) => {
-//         if (option.getAttribute("value") === name) option.remove();
-//       });
-//     });
-//   },
-// };
 
 window.addEventListener("load", () => {
   //store all frames
-  let canvas
+  let canvas;
   try {
-    
     let canvasIframe = document.querySelector("#canvas");
     let canvasWindow = canvasIframe.contentWindow;
-   canvas = canvasIframe.contentDocument || canvasWindow.document;
+    canvas = canvasIframe.contentDocument || canvasWindow.document;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-    try {
-    
+  try {
     console.log("attribute loaded");
     let allFrames = [{ document, window }];
     for (let frame of document.querySelectorAll("iframe")) {
@@ -144,22 +107,38 @@ window.addEventListener("load", () => {
               callback("value");
               break;
             case "checkbox":
-              callback("value", { class: 'toggle', type: "checkbox", read: "checked" });
+              callback("value", {
+                class: "toggle",
+                type: "checkbox",
+                read: "checked",
+              });
               break;
             case "radio":
-              callback("value", { class: 'toggle', type: "radio", read: "checked" });
-              break;
+              callback("value", {
+                class: "toggle",
+                type: "radio",
+                read: "checked",
+              });
+
               break;
             default:
               callback("value");
           }
           break;
         case "select":
+          callback("value", {
+            type: "select",
+            class: input.multiple ? "multiselect" : "select",
+          });
+          break;
         case "textarea":
           callback("value");
           break;
         case "cocreate-select":
-          callback("COCREATE-SELECT");
+          callback("COCREATE-SELECT", {
+            type: "cocreate-select",
+            class: input.multiple ? "multiselect" : "select",
+          });
           break;
         default:
           if (input.getAttribute("contenteditable") !== null)
@@ -167,7 +146,6 @@ window.addEventListener("load", () => {
           else callback("value");
       }
     }
-
 
     function fromElementToBoolean({ input, element, inputValue, read }) {
       switch (read) {
@@ -209,63 +187,84 @@ window.addEventListener("load", () => {
     }
 
     function __addToElement(input, element, type, read) {
-      let value = input.getAttribute(type) || input[type];
-      switch (read) {
-        case "style":
-          let parsedCss = parseCssRules(value);
-          Object.assign(element.style, parsedCss);
-          break;
-        case "class":
-          if (input.type === "checkbox" || input.type === "radio")
+      let values;
+      if (typeof type === "object") values = type;
+      else values = [input.getAttribute(type) || input[type]];
+
+      values.forEach((value) => {
+        switch (read) {
+          case "style":
+            if (!value) return;
+            let parsedCss = parseCssRules(value);
+            Object.assign(element.style, parsedCss);
+
+            break;
+          case "class":
+            // value
+            //   .split(" ")
+            //   .forEach((classname) => element.classList.remove(classname));
+            if (!value) return;
             value
               .split(" ")
-              .forEach((classname) => element.classList.add(classname));
-          else element.classList = value;
-          break;
-        case "innerText":
-          element[read] = value;
-          triggerElementMutation({
-            type: "characterData",
-            target: { parentElement: element },
-          });
-          break;
-        default:
-          element.setAttribute(read, value);
-      }
+              .forEach(
+                (classname) => classname && element.classList.add(classname)
+              );
+
+            break;
+          case "innerText":
+            element[read] = value;
+            triggerElementMutation({
+              type: "characterData",
+              target: { parentElement: element },
+            });
+
+            break;
+          default:
+            element.setAttribute(read, value);
+        }
+      });
     }
 
     function __removeToElement(input, element, type, read) {
-      let value = input.getAttribute(type) || input[type];
-      switch (read) {
-        case "style":
-          let parsedCss = parseCssRules(value);
-          Object.keys(parsedCss).forEach((key) => {
-            if (parsedCss[key]) element.style[key] = "";
-          });
-          break;
-        case "class":
-          // value
-          //   .split(" ")
-          //   .forEach((classname) => element.classList.remove(classname));
-          if (input.type === "checkbox" || input.type === "radio")
+      let values;
+      if (typeof type === "object") values = type;
+      else values = [input.getAttribute(type) || input[type]];
+
+      values.forEach((value) => {
+        switch (read) {
+          case "style":
+            if (!value) return;
+            let parsedCss = parseCssRules(value);
+            Object.keys(parsedCss).forEach((key) => {
+              if (parsedCss[key]) element.style[key] = "";
+            });
+
+            break;
+          case "class":
+            // value
+            //   .split(" ")
+            //   .forEach((classname) => element.classList.remove(classname));
+            if (!value) return;
             value
               .split(" ")
-              .forEach((classname) => element.classList.remove(classname));
-          else element.classList = value;
+              .forEach(
+                (classname) => classname && element.classList.remove(classname)
+              );
 
-          break;
-        default:
-          element.removeAttribute(read);
-      }
+            break;
+          default:
+          // element.removeAttribute(read);
+        }
+      });
     }
 
     inputs.forEach((input) => {
       //add cc_select_utility
-      // if (input.tagName === "COCREATE-SELECT") {
-      //   for (let [k, v] of Object.entries(cc_select_utility)) {
-      //     input[k] = v;
-      //   }
-      // }
+      if (input.tagName === "COCREATE-SELECT") {
+        for (let [k, v] of Object.entries(cocreateUtility)) {
+          input[k] = v;
+        }
+      }
 
       input.addEventListener("input", (e) => {
         let input = e.target;
@@ -296,25 +295,11 @@ window.addEventListener("load", () => {
 
             if (metadata && metadata.type === "checkbox") {
               let status = input[metadata.read];
-              if (status) {
-                __addToElement(input, element, type, read);
-
-                let inputs = allFrame((frame) =>
-                  frame.getElementsByName(input.name)
-                );
-                inputs = Array.from(inputs);
-                if (inputs.length < 2) return;
-                let ourInputIndex = inputs.indexOf(input);
-                if (ourInputIndex !== -1) delete inputs[ourInputIndex];
-
-                inputs.forEach((input) => {
-                  if (input) __removeToElement(input, element, type, read);
-                });
-              } else {
-                __removeToElement(input, element, type, read);
-              }
+              if (status) __addToElement(input, element, type, read);
+              else __removeToElement(input, element, type, read);
             } else if (metadata && metadata.type === "radio") {
               __addToElement(input, element, type, read);
+
               let inputs = allFrame((frame) =>
                 frame.getElementsByName(input.name)
               );
@@ -325,7 +310,22 @@ window.addEventListener("load", () => {
               inputs.forEach((input) => {
                 if (input) __removeToElement(input, element, type, read);
               });
+            } else if (metadata && metadata.type === "select") {
+              let selectedOptions = getSelectOptions(input, true);
+              let unSelectedOptions = getSelectOptions(input, false);
+
+              __addToElement(input, element, selectedOptions, read);
+              __removeToElement(input, element, unSelectedOptions, read);
+            } else if (metadata && metadata.type === "cocreate-select") {
+              let selectedOptions = input.getAllSelectedOptions();
+              let unSelectedOptions = input
+                .getAllOptions()
+                .filter((o) => !selectedOptions.includes(o));
+
+              __addToElement(input, element, selectedOptions, read);
+              __removeToElement(input, element, unSelectedOptions, read);
             } else {
+              __removeToElement(input, element, "lastValue", read);
               __addToElement(input, element, type, read);
             }
           });
@@ -333,7 +333,98 @@ window.addEventListener("load", () => {
       });
     });
 
+    function getSelectOptions(select, state) {
+      let options = Array.from(select.options);
+      return options
+        .filter((o) => (state === undefined ? true : o.selected == state))
+        .map((o) => o.value);
+    }
 
+    function isObjectEqual(object1, object2) {
+      for (let [key, value] of Object.entries(object1))
+        if (object1[key] !== object2[key] || object1[key] === "") return false;
+
+      return true;
+    }
+
+    function fromElementToSelect({ input, element, read }) {
+      for (let i = 0, len = input.options.length; i < len; i++) {
+        switch (read) {
+          case "style":
+            let parsed = parseCssRules(input.options[i].value);
+
+            if (isObjectEqual(parsed, element.style))
+              input.options[i].selected = true;
+            else input.options[i].selected = false;
+            // if(unStyle.some(style => isObjectEqual(parsed, style)))
+
+            break;
+          case "class":
+            if (element.classList.contains(input.options[i].value))
+              input.options[i].selected = true;
+            else input.options[i].selected = false;
+
+            break;
+          default:
+            if (element.getAttribute(read) == input.options[i].value)
+              input.options[i].selected = true;
+            else input.options[i].selected = false;
+        }
+      }
+    }
+
+    function fromElementToCCSelect({ input, element, read }) {
+      let options = input.getAllOptions();
+      for (let i = 0, len = options.length; i < len; i++) {
+        switch (read) {
+          case "style":
+            let parsed = parseCssRules(options[i]);
+
+            if (isObjectEqual(parsed, element.style))
+              input.selectOption(options[i]);
+            else input.unselectOption(options[i]);
+
+            break;
+          case "class":
+            if (element.classList.contains(options[i]))
+              input.selectOption(options[i]);
+            else input.unselectOption(options[i]);
+
+            break;
+          default:
+            if (element.getAttribute(read) == options[i])
+              input.selectOption(options[i]);
+            else input.unselectOption(options[i]);
+        }
+      }
+    }
+
+    allFrame((frame) =>
+      frame.querySelectorAll("[data-attribute_target]")
+    ).forEach((input) => {
+      let elementSel = input.getAttribute("data-attribute_target");
+      let element = allFrame((frame) => frame.querySelector(elementSel))[0];
+
+      let read = input.getAttribute("data-attribute_sync");
+      if (element.getAttribute(read))
+        fromInput(input, (type, metadata) => {
+          if (metadata && metadata.class === "toggle")
+            input.checked = fromElementToBoolean({
+              input,
+              element,
+              inputValue: input.getAttribute("value"),
+              read,
+            });
+          else if (input.tagName == "SELECT") {
+            fromElementToSelect({ input, element, read });
+          } else if (input.tagName == "COCREATE-SELECT") {
+            fromElementToCCSelect({ input, element, read });
+          } else {
+            input.lastValue = input.value;
+            input.value = fromElementToText({ element, read });
+          }
+        });
+    });
 
     function triggerElementMutation(mutation) {
       let element;
@@ -349,7 +440,7 @@ window.addEventListener("load", () => {
           element = mutation.target.parentElement;
           break;
       }
-
+      if (element.getAttribute("data-attribute_sync")) return;
       let connectedInput = inputs.filter((input) => {
         if (input.getAttribute("data-attribute_sync") !== attributeName)
           return false;
@@ -362,14 +453,23 @@ window.addEventListener("load", () => {
         let read = input.getAttribute("data-attribute_sync");
         if (read === attributeName)
           fromInput(input, (type, metadata) => {
-            if (metadata && metadata.class === 'toggle')
+            if (metadata && metadata.class === "toggle")
               input.checked = fromElementToBoolean({
                 input,
                 element,
                 inputValue: input.getAttribute("value"),
                 read,
               });
-            else input.value = fromElementToText({ element, read });
+            else if (input.tagName == "SELECT") {
+              fromElementToSelect({ input, element, read });
+            } else if (input.tagName == "COCREATE-SELECT") {
+              fromElementToCCSelect({ input, element, read });
+            } else {
+              let inputValue = fromElementToText({ element, read });
+              if (input.value.trim() == inputValue) return;
+              input.lastValue = input.value;
+              input.value = inputValue;
+            }
           });
       });
     }
@@ -388,57 +488,52 @@ window.addEventListener("load", () => {
       subtree: true,
       characterData: true,
     };
-    allFrame((frame) => observer.observe(frame, config));
-    
-    function initInput(input)
-    {
-            const elSelectorId = input.getAttribute("data-attribute_target");
+    // allFrame((frame) => observer.observe(frame, config));
+    observer.observe(document.body, config);
+
+    function initInput(input) {
+      const elSelectorId = input.getAttribute("data-attribute_target");
       if (!elSelectorId) return;
-     
-       let element 
-       if(canvas)
-       element =  canvas.querySelector(elSelectorId)
-       else element=  allFrame(frame => frame.querySelector(elSelectorId))
-     
-    
-        let read = input.getAttribute("data-attribute_sync");
-        fromInput(input, (type, metadata) => {
-          if (metadata && metadata.class === 'toggle')
-            input.checked = fromElementToBoolean({
-              input,
-              element,
-              inputValue: input.getAttribute("value"),
-              read,
-            });
-          else input.value = fromElementToText({ element, read });
-        });
-  
+
+      let element;
+      if (canvas) element = canvas.querySelector(elSelectorId);
+      else element = allFrame((frame) => frame.querySelector(elSelectorId));
+
+      let read = input.getAttribute("data-attribute_sync");
+      fromInput(input, (type, metadata) => {
+        if (metadata && metadata.class === "toggle")
+          input.checked = fromElementToBoolean({
+            input,
+            element,
+            inputValue: input.getAttribute("value"),
+            read,
+          });
+        else input.value = fromElementToText({ element, read });
+      });
     }
-    
+
     inputs.forEach((input) => {
-      initInput(input)
+      initInput(input);
     });
-    
-        const mutationCallbackInput = function (mutationsList, observer) {
+
+    const mutationCallbackInput = function (mutationsList, observer) {
       for (let mutation of mutationsList) {
-        if(mutation.target.tagName === "INPUT")
-        initInput(mutation.target);
+        if (mutation.target.tagName === "INPUT") initInput(mutation.target);
       }
     };
 
     const observer2 = new MutationObserver(mutationCallbackInput);
 
-    allFrame((frame) => observer2.observe(frame, {
-      attributes: true,
-      subtree: true,
-    attributeFilter: ["data-attribute_target"],
-    }));
-    
+    allFrame((frame) =>
+      observer2.observe(frame, {
+        attributes: true,
+        subtree: true,
+        attributeFilter: ["data-attribute_target"],
+      })
+    );
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-  
-  
 });
 
 // used to listen for click to update input
