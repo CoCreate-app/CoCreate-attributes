@@ -1,4 +1,3 @@
-/*global MutationObserver*/
 
 /**
  * refactor:
@@ -470,23 +469,21 @@ window.addEventListener("load", () => {
           });
       });
     }
+    
+    canvasWindow.CoCreateObserver.add({
+      observe: ["attributes",'characterData'],
+      task: mutation => triggerElementMutation(mutation),
+    });    
 
-    // observe attribute mutation to update
-    const mutationCallback = function (mutationsList, observer) {
-      for (let mutation of mutationsList) {
-        triggerElementMutation(mutation);
-      }
-    };
+    window.CoCreateObserver.add({
+      observe: ["attributes"],
+      include: "INPUT[data-attribute_target]",
+      task: mutation => initInput(mutation.target),
+    });    
 
-    const observer = new MutationObserver(mutationCallback);
-    const config = {
-      attributes: true,
-      childList: false,
-      subtree: true,
-      characterData: true,
-    };
-    // allFrame((frame) => observer.observe(frame, config));
-    observer.observe(document.body, config);
+    inputs.forEach((input) => {
+      initInput(input);
+    });
 
     function initInput(input) {
       const elSelectorId = input.getAttribute("data-attribute_target");
@@ -509,25 +506,8 @@ window.addEventListener("load", () => {
       });
     }
 
-    inputs.forEach((input) => {
-      initInput(input);
-    });
 
-    const mutationCallbackInput = function (mutationsList, observer) {
-      for (let mutation of mutationsList) {
-        if (mutation.target.tagName === "INPUT") initInput(mutation.target);
-      }
-    };
 
-    const observer2 = new MutationObserver(mutationCallbackInput);
-
-    allFrame((frame) =>
-      observer2.observe(frame, {
-        attributes: true,
-        subtree: true,
-        attributeFilter: ["data-attribute_target"],
-      })
-    );
   } catch (error) {
     console.log(error);
   }
