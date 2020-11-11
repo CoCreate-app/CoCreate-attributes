@@ -39,10 +39,7 @@ window.addEventListener("load", () => {
     let canvasIframe = document.querySelector("#canvas");
     let canvasWindow = canvasIframe.contentWindow;
     canvas = canvasIframe.contentDocument || canvasWindow.document;
-  } catch (error) {
-    console.log(error);
-  }
-  try {
+
     console.log("attribute loaded");
     let allFrames = [{ document, window }];
     for (let frame of document.querySelectorAll("iframe")) {
