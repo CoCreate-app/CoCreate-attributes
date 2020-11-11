@@ -406,7 +406,7 @@ window.addEventListener("load", () => {
       let element = allFrame((frame) => frame.querySelector(elementSel))[0];
 
       let read = input.getAttribute("data-attribute_sync");
-      if (element.getAttribute(read))
+      if (element && element.getAttribute(read))
         fromInput(input, (type, metadata) => {
           if (metadata && metadata.class === "toggle")
             input.checked = fromElementToBoolean({
