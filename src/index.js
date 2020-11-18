@@ -216,7 +216,10 @@ window.addEventListener("load", () => {
 
             break;
           default:
+          if(value)
             element.setAttribute(read, value);
+            else
+            element.removeAttribute(read);
         }
       });
     }
@@ -261,8 +264,12 @@ window.addEventListener("load", () => {
           input[k] = v;
         }
       }
+      inputAddEventListener(input)
+    });
 
-      input.addEventListener("input", (e) => {
+
+    function inputAddEventListener(input){
+          input.addEventListener("input", (e) => {
         let input = e.target;
 
         const elSelectorId = input.getAttribute("data-attribute_target");
@@ -327,8 +334,7 @@ window.addEventListener("load", () => {
           });
         });
       });
-    });
-
+    }
     function getSelectOptions(select, state) {
       let options = Array.from(select.options);
       return options
@@ -388,9 +394,12 @@ window.addEventListener("load", () => {
 
             break;
           default:
-            if (element.getAttribute(read) == options[i])
-              input.selectOption(options[i]);
-            else input.unselectOption(options[i]);
+          if(element.getAttribute(read))
+            input.selectOption(element.getAttribute(read));
+          // todo: might break
+            // if (element.getAttribute(read) == options[i])
+            //   input.selectOption(options[i]);
+            // else input.unselectOption(options[i]);
         }
       }
     }
@@ -479,7 +488,6 @@ window.addEventListener("load", () => {
       name: 'ccAttribute',
       observe: ["attributes"],
       attributes:['data-attribute_target'],
-      include: "INPUT",
       task: mutation => initInput(mutation.target),
     });    
 
@@ -488,6 +496,16 @@ window.addEventListener("load", () => {
     });
 
     function initInput(input) {
+      if(!inputs.includes(input))
+      {
+        inputs.push(input)
+        inputAddEventListener(input)
+      }
+      if (input.tagName === "COCREATE-SELECT" && !input.selectOption) {
+        for (let [k, v] of Object.entries(cocreateUtility)) {
+          input[k] = v;
+        }
+      }
       const elSelectorId = input.getAttribute("data-attribute_target");
       if (!elSelectorId) return;
 
@@ -504,6 +522,11 @@ window.addEventListener("load", () => {
             inputValue: input.getAttribute("value"),
             read,
           });
+        else if(metadata && metadata.class === "select" && metadata.type === "cocreate-select")
+        {
+          fromElementToCCSelect({ input, element, read });
+          // input.selectOption(fromElementToText({ element, read }))
+        }
         else input.value = fromElementToText({ element, read });
       });
     }
