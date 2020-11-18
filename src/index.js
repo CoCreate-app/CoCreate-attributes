@@ -476,8 +476,10 @@ window.addEventListener("load", () => {
     });    
 
     window.CoCreateObserver.add({
+      name: 'ccAttribute',
       observe: ["attributes"],
-      include: "INPUT[data-attribute_target]",
+      attributes:['data-attribute_target'],
+      include: "INPUT",
       task: mutation => initInput(mutation.target),
     });    
 
