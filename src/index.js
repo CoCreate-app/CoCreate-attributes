@@ -9,13 +9,14 @@
 
   let filters = [];
   let allFrames = new Map();
+  let tools = {};
   window.ccAttribute = { init, addFilter };
 
   // first time load
 
   window.addEventListener("load", () => {
     init({ windowObject: window, docObject: document });
-   window.CoCreateObserver.add({
+    window.CoCreateObserver.add({
       observe: ["attributes", "characterData"],
       task: (mutation) => triggerElementMutation(mutation),
     });
@@ -89,9 +90,9 @@
     );
   }
 
-  function init({ windowObject, docObject, isIframe, frame }) {
+  function init({ windowObject, docObject, isIframe, frame, onCollaboration }) {
     let ref;
-
+    tools.onCollaboration = onCollaboration;
     if (isIframe) {
       let frameWindow = frame.contentWindow;
       let frameDocument = frameWindow.document || frame.contentDocument;
@@ -108,20 +109,19 @@
       allFrames.set("main", ref);
     }
 
-  ref.window.addEventListener("load", () => {
-   ref.window.CoCreateObserver.add({
-      observe: ["attributes", "characterData"],
-      task: (mutation) => triggerElementMutation(mutation),
-    });
+    ref.window.addEventListener("load", () => {
+      ref.window.CoCreateObserver.add({
+        observe: ["attributes", "characterData"],
+        task: (mutation) => triggerElementMutation(mutation),
+      });
 
-    ref.window.CoCreateObserver.add({
-      name: "ccAttribute",
-      observe: ["attributes"],
-      attributes: ["data-attribute_target"],
-      task: (mutation) => updateInput(mutation.target),
+      ref.window.CoCreateObserver.add({
+        name: "ccAttribute",
+        observe: ["attributes"],
+        attributes: ["data-attribute_target"],
+        task: (mutation) => updateInput(mutation.target),
+      });
     });
-  });
- 
 
     ref.window.HTMLElement.prototype.getAllSelectedOptions = function getAllSelectedOptions() {
       let options = this.querySelectorAll(":scope > [selected]");
@@ -374,11 +374,12 @@
     }
   }
 
-  function __addToElement(input, element, type, read) {
-    let values;
-    if (typeof type === "object") values = type;
-    else values = [input.getAttribute(type) || input[type]];
-
+  function __addToElement(input, element, type, read, values) {
+    if (!values) {
+      if (typeof type === "object") values = type;
+      else values = [input.getAttribute(type) || input[type]];
+      collaborate({ method: "add", values, element, type, read });
+    }
     values.forEach((value) => {
       switch (read) {
         case "style":
@@ -414,11 +415,12 @@
     });
   }
 
-  function __removeToElement(input, element, type, read) {
-    let values;
-    if (typeof type === "object") values = type;
-    else values = [input.getAttribute(type) || input[type]];
-
+  function __removeToElement(input, element, type, read, values) {
+    if (!values) {
+      if (typeof type === "object") values = type;
+      else values = [input.getAttribute(type) || input[type]];
+      collaborate({ method: "remove", values, element, type, read });
+    }
     values.forEach((value) => {
       switch (read) {
         case "style":
@@ -514,5 +516,43 @@
         // else input.unselectOption(options[i]);
       }
     }
+  }
+
+  CoCreateSocket.listen("ccAttribute", function ({
+    method,
+    values,
+    element,
+    type,
+    read,
+  }) {
+    element = allFrame((frame) =>
+      frame.querySelector("[data-element_id=" + element + "]")
+    )[0];
+    if (method === "add") {
+      __addToElement(null, element, type, read, values);
+    } else if (method === "remove") {
+      __removeToElement(null, element, type, read, values);
+    }
+  });
+
+  function collaborate(data) {
+    tools.onCollaboration({
+          value: Array.isArray(data.values)? data.values.join(' '): data.values,
+          read: data.read,
+          element: data.element,
+
+    });
+
+    CoCreate.sendMessage({
+      broadcast_sender: false,
+      rooms: "",
+      emit: {
+        message: "ccAttribute",
+        data: {
+          ...data,
+          element: data.element.getAttribute("data-element_id"),
+        },
+      },
+    });
   }
 })();
