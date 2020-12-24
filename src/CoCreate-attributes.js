@@ -13,7 +13,6 @@
   window.ccAttribute = { init, addFilter };
 
   // first time load
-
   window.addEventListener("load", () => {
     init({ windowObject: window, docObject: document });
     window.CoCreateObserver.add({
@@ -31,6 +30,7 @@
       frame.querySelectorAll("[data-attribute_target]")
     ).forEach((input) => updateInput(input));
   });
+
   function updateInput(input) {
     const elSelectorId = input.getAttribute("data-attribute_target");
     if (!elSelectorId) return;
@@ -49,9 +49,11 @@
           });
         else if (input.tagName == "SELECT") {
           fromElementToSelect({ input, element, read });
-        } else if (input.tagName == "COCREATE-SELECT") {
+        }
+        else if (input.tagName == "COCREATE-SELECT") {
           fromElementToCCSelect({ input, element, read });
-        } else {
+        }
+        else {
           input.lastValue = input.value;
           input.value = fromElementToText({ element, read });
           // todo: up or bottom is correct which one?
@@ -90,7 +92,7 @@
     );
   }
 
-  function init({ windowObject, docObject, isIframe, frame, onCollaboration }) {
+  function init({ windowObject, docObject, isIframe, frame, onCollaboration = () => {} }) {
     let ref;
     tools.onCollaboration = onCollaboration;
     if (isIframe) {
@@ -104,7 +106,8 @@
         isIframe: true,
       };
       allFrames.set(frame, ref);
-    } else {
+    }
+    else {
       ref = { window: windowObject, document: docObject, isIframe: false };
       allFrames.set("main", ref);
     }
@@ -125,18 +128,29 @@
 
     ref.window.HTMLElement.prototype.getAllSelectedOptions = function getAllSelectedOptions() {
       let options = this.querySelectorAll(":scope > [selected]");
-      return Array.from(options).map((o) => o.getAttribute("value"));
+      return Array.from(options).map((o) => o.getAttribute("data-value"));
     };
     ref.window.HTMLElement.prototype.getAllOptions = function getAllOptions() {
-      let options = this.querySelectorAll(":scope > ul > [value]");
-      return Array.from(options).map((o) => o.getAttribute("value"));
+      let options = this.querySelectorAll(":scope > ul > [data-value]");
+      return Array.from(options).map((o) => o.getAttribute("data-value"));
     };
     // select option or arrays of options
     ref.window.HTMLElement.prototype.selectOption = function selectOption(
       optionName
     ) {
-      // if(this.getAllOptions().includes(optionName))
-      this.CoCreateSelect.__selectValue(optionName, this);
+
+      this.querySelectorAll(':scope > li').forEach(op => {
+        op.remove();
+      })
+      let html = `<li class="clone_units" data-template_id="units1" data-value="${optionName}"
+      templateid="units1" data-render_array="units" selected="">
+      <span value="${optionName}">${optionName}</span>
+      <span class="remove">x</span>
+      </li>`;
+      let el = CoCreateUtils.parseTextToHtml(html);
+
+      this.insertAdjacentElement('afterBegin', el);
+
     };
 
     // unselect option or arrays of options, and remove all if not param
@@ -166,7 +180,8 @@
             let status = input[metadata.read];
             if (status) __addToElement(input, element, type, read);
             else __removeToElement(input, element, type, read);
-          } else if (metadata && metadata.type === "radio") {
+          }
+          else if (metadata && metadata.type === "radio") {
             __addToElement(input, element, type, read);
 
             let inputs = allFrame((frame) =>
@@ -179,21 +194,24 @@
             inputs.forEach((input) => {
               if (input) __removeToElement(input, element, type, read);
             });
-          } else if (metadata && metadata.type === "select") {
+          }
+          else if (metadata && metadata.type === "select") {
             let selectedOptions = getSelectOptions(input, true);
             let unSelectedOptions = getSelectOptions(input, false);
 
             __addToElement(input, element, selectedOptions, read);
             __removeToElement(input, element, unSelectedOptions, read);
-          } else if (metadata && metadata.type === "cocreate-select") {
-            let selectedOptions = input.getAllSelectedOptions();
-            let unSelectedOptions = input
+          }
+          else if (metadata && metadata.type === "cocreate-select") {
+            let selectedOptions2 = input.getAllSelectedOptions();
+            let unSelectedOptions2 = input
               .getAllOptions()
-              .filter((o) => !selectedOptions.includes(o));
+              .filter((o) => !selectedOptions2.includes(o));
 
-            __addToElement(input, element, selectedOptions, read);
-            __removeToElement(input, element, unSelectedOptions, read);
-          } else {
+            __addToElement(input, element, selectedOptions2, read);
+            __removeToElement(input, element, unSelectedOptions2, read);
+          }
+          else {
             __removeToElement(input, element, "lastValue", read);
             __addToElement(input, element, type, read);
           }
@@ -261,9 +279,11 @@
             });
           else if (input.tagName == "SELECT") {
             fromElementToSelect({ input, element, read });
-          } else if (input.tagName == "COCREATE-SELECT") {
+          }
+          else if (input.tagName == "COCREATE-SELECT") {
             fromElementToCCSelect({ input, element, read });
-          } else {
+          }
+          else {
             let inputValue = fromElementToText({ element, read });
             if (input.value.trim() == inputValue) return;
             input.lastValue = input.value;
@@ -444,7 +464,7 @@
 
           break;
         default:
-        // element.removeAttribute(read);
+          // element.removeAttribute(read);
       }
     });
   }
@@ -490,35 +510,39 @@
   }
 
   function fromElementToCCSelect({ input, element, read }) {
-    let options = input.getAllOptions();
-    for (let i = 0, len = options.length; i < len; i++) {
-      switch (read) {
-        case "style":
+    let options;
+
+    switch (read) {
+      case "style":
+        options = input.getAllOptions();
+        for (let i = 0, len = options.length; i < len; i++) {
           let parsed = parseCssRules(options[i]);
 
           if (isObjectEqual(parsed, element.style))
             input.selectOption(options[i]);
           else input.unselectOption(options[i]);
-
-          break;
-        case "class":
+        }
+        break;
+      case "class":
+        options = input.getAllOptions();
+        for (let i = 0, len = options.length; i < len; i++) {
           if (element.classList.contains(options[i]))
             input.selectOption(options[i]);
           else input.unselectOption(options[i]);
-
-          break;
-        default:
-          if (element.getAttribute(read))
-            input.selectOption(element.getAttribute(read));
+        }
+        break;
+      default:
+        if (element.getAttribute(read))
+          input.selectOption(element.getAttribute(read));
         // todo: might break
         // if (element.getAttribute(read) == options[i])
         //   input.selectOption(options[i]);
         // else input.unselectOption(options[i]);
-      }
     }
+
   }
 
-  CoCreateSocket.listen("ccAttribute", function ({
+  CoCreateSocket.listen("ccAttribute", function({
     method,
     values,
     element,
@@ -530,16 +554,17 @@
     )[0];
     if (method === "add") {
       __addToElement(null, element, type, read, values);
-    } else if (method === "remove") {
+    }
+    else if (method === "remove") {
       __removeToElement(null, element, type, read, values);
     }
   });
 
   function collaborate(data) {
     tools.onCollaboration({
-          value: Array.isArray(data.values)? data.values.join(' '): data.values,
-          read: data.read,
-          element: data.element,
+      value: Array.isArray(data.values) ? data.values.join(' ') : data.values,
+      read: data.read,
+      element: data.element,
 
     });
 
