@@ -30,7 +30,7 @@
 
 <body>
   <!-- Navbar  -->
-  <div class="nav display:flex align-items:center bg:light-gray" data-main_content_id="canvas" data-scroll_effect="hide-nav" data-scroll_up="1" data-scroll_down="1">
+  <div class="nav display:flex align-items:center background:whitesmoke" data-main_content_id="canvas" data-scroll_effect="hide-nav" data-scroll_up="1" data-scroll_down="1">
 
     <!-- Menu Icon Animations -->
     <a class="nav-toggle menu_icon--Vdots" data-toggle_sidenav="menuL">
@@ -104,9 +104,9 @@
   </div>
 
   <!-- CoCreate SideNav Left -->
-  <div id="menuL" class="cocreate-sidenav bg:medium-gray" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="offcanvas" sidenav-default_phone="offcanvas" sidenav-ontoggle_desktop="offcanvas" sidenav-ontoggle_tablet="offcanvas">
+  <div id="menuL" class="cocreate-sidenav background:gainsboro" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="offcanvas" sidenav-default_phone="offcanvas" sidenav-ontoggle_desktop="offcanvas" sidenav-ontoggle_tablet="offcanvas">
     <div class="">
-      <ul class="overflow:scroll height:100vh margin:5px bg:white padding:0 padding-left:5px">
+      <ul class="overflow:scroll height:100vh margin:5px background:white padding:0 padding-left:5px">
         <div data-vdom_target="test" data-group_name="test"></div>
         <!-- CoCreate Render to get list of blocks -->
         <div data-template_id="template1" data-fetch_collection="blocks" data-filter_name="menu-position" data-filter_value="0" data-filter_value_type="number" data-filter_operator="$ne" data-order_by="menu-position" data-order_type="asc" data-pass_to="blocks">
@@ -132,7 +132,7 @@
   <!-- End CoCreate SideNav Left -->
 
   <!-- CoCreate SideNav Right -->
-  <div id="menuR" class="cocreate-sidenav sidenav-right bg:medium-gray" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="expanded" sidenav-default_phone="expanded">
+  <div id="menuR" class="cocreate-sidenav sidenav-right background:gainsboro" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="expanded" sidenav-default_phone="expanded">
     <div class="padding:5px cocreate-scroll">
       <form>
         <input data-attribute_sync="myAttribute" type="text" class="floating-label attr" placeholder="Draggable" data-attribute_target="#new">
@@ -204,50 +204,51 @@
         <div id="new" thename="" data-element_id="c" style="font-size:18px;" class="class1 class2 classxxx">#ff0000</div>
         <div thename="audi" data-element_id="d">audi</div>
         
-      <!--<cocreate-select -->
-      <!--class="sortable floating-label"  -->
-      <!--data-attribute_sync="style" -->
-      <!--data-attribute_target="#new"-->
-      <!--name="selectField4" -->
-      <!--placeholder="Single Options">-->
-      <!--  <input class="option-search" placeholder="Search">-->
-      <!--  <ul class="selectable--list  cocreate-scroll">-->
-      <!--		<li class="selectable"value="background:green;">-->
-      <!--		  <h3>background:green;</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="color:blue;">-->
-      <!--		  <h3 >color:blue;</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="value 3">-->
-      <!--		  <h3 >sss</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="value 3">-->
-      <!--		  <h3 >value 3</h3>-->
-      <!--		</li>-->
-      <!--  </ul>-->
-      <!--</cocreate-select>-->
-      <!--      <cocreate-select -->
-      <!--class="sortable floating-label"  -->
-      <!--data-attribute_sync="myAttribute" -->
-      <!--data-attribute_target="#new"-->
-      <!--name="selectField4" -->
-      <!--placeholder="Single Options">-->
-      <!--  <input class="option-search" placeholder="Search">-->
-      <!--  <ul class="selectable--list  cocreate-scroll">-->
-      <!--		<li class="selectable"value="background:green;">-->
-      <!--		  <h3>background:green;</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="color:blue;">-->
-      <!--		  <h3 >color:blue;</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="value 3">-->
-      <!--		  <h3 >sss</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="value 3">-->
-      <!--		  <h3 >value 3</h3>-->
-      <!--		</li>-->
-      <!--  </ul>-->
-      <!--</cocreate-select>-->
+      <cocreate-select 
+      class="sortable floating-label"  
+      data-attribute_sync="style" 
+      data-attribute_target="#new"
+      name="selectField4" 
+      placeholder="Single Options">
+        <input class="option-search" placeholder="Search">
+        <ul class="selectable--list  cocreate-scroll">
+      		<li class="selectable"value="background:green;">
+      		  <h3>background:green;</h3>
+      		</li>
+      		<li class="selectable" value="color:blue;">
+      		  <h3 >color:blue;</h3>
+      		</li>
+      		<li class="selectable" value="value 3">
+      		  <h3 >sss</h3>
+      		</li>
+      		<li class="selectable" value="value 3">
+      		  <h3 >value 3</h3>
+      		</li>
+        </ul>
+      </cocreate-select>
+            <cocreate-select 
+      class="sortable floating-label"  
+      data-attribute_sync="style" 
+      data-attribute_target="#new"
+      name="selectField4" 
+      multiple
+      placeholder="Single Options">
+        <input class="option-search" placeholder="Search">
+        <ul class="selectable--list  cocreate-scroll">
+      		<li class="selectable"value="background:green;">
+      		  <h3>background:green;</h3>
+      		</li>
+      		<li class="selectable" value="color:blue;">
+      		  <h3 >color:blue;</h3>
+      		</li>
+      		<li class="selectable" value="value 3">
+      		  <h3 >sss</h3>
+      		</li>
+      		<li class="selectable" value="value 3">
+      		  <h3 >value 3</h3>
+      		</li>
+        </ul>
+      </cocreate-select>
       
       <!--<cocreate-select class="floating-label sortable" multiple-->
       <!--  data-attribute_sync="style" -->
@@ -283,7 +284,7 @@
   <!-- End CoCreate SideNav Right -->
 
   <!-- floating btn -->
-  <a class="position:fixed bottom:15px right:15px padding:15px bg:blue grow-hover round z-index:12" target="modal" href="block-form.html" data-pass_collection="blocks" data-modal_width="320px" data-modal_height="100%" data-modal_color="#229954" data-pass_to="render">
+  <a class="position:fixed bottom:15px right:15px padding:15px background:dodgerblue grow-hover round z-index:12" target="modal" href="block-form.html" data-pass_collection="blocks" data-modal_width="320px" data-modal_height="100%" data-modal_color="#229954" data-pass_to="render">
 	   <i class="fa fa-plus"></i>
   </a>
   <!-- end floating btn -->
@@ -296,14 +297,9 @@
     }
   </script>
 
-  <script defer src="https://server.cocreate.app/js/CoCreate.min.js"></script>
-  <!--<script defer src="../../CoCreate-domEditor/src/domEditor.js"></script>-->
-  <!--<script defer src="../../CoCreate-domEditor/src/element-config.js"></script>-->
-  <!--<script defer src="../../CoCreate-dnd/dist/dnd.js"></script>-->
-  <!--<script defer src="../../CoCreate-vdom/dist/CoCreate-vdom.js"></script>-->
-  <!--<script defer src="../../CoCreate-collapsible/src/collapsible.js"></script>-->
-  <script defer src="https://server.cocreate.app/CoCreate-components/CoCreate-attributes/src/index.js"></script>
-  <script defer src="https://server.cocreate.app/CoCreate-components/CoCreate-select/src/CoCreate-select.js"></script>
+  <!--<script defer src="https://server.cocreate.app/js/CoCreate.min.js"></script>-->
+  <script defer src="https://server.cocreate.app/CoCreate-components/CoCreate-attributes/dist/CoCreate-attributes.js"></script>
+
 
 </body>
 

@@ -4,6 +4,7 @@
  * refactor cc_select_utility, allFrame, parseCssRules, parseClassList to a global/general workspace
  */
 
+
 (() => {
   //store all frames
 
@@ -74,6 +75,13 @@
 
     return styleObject;
   }
+  
+  function parseCssRulesAsArray(str) {
+    if (str.split)
+      return str.split(";").slice(0,-1).map(st => st.trim())
+    return [];
+  }
+  
 
   function allFrame(callback) {
     let result = new Set();
@@ -128,40 +136,13 @@
 
     ref.window.HTMLElement.prototype.getAllSelectedOptions = function getAllSelectedOptions() {
       let options = this.querySelectorAll(":scope > [selected]");
-      return Array.from(options).map((o) => o.getAttribute("data-value"));
+      return Array.from(options).map((o) => o.getAttribute("value"));
     };
     ref.window.HTMLElement.prototype.getAllOptions = function getAllOptions() {
-      let options = this.querySelectorAll(":scope > ul > [data-value]");
-      return Array.from(options).map((o) => o.getAttribute("data-value"));
+      let options = this.querySelectorAll(":scope > ul > [value]");
+      return Array.from(options).map((o) => o.getAttribute("value"));
     };
-    // select option or arrays of options
-    ref.window.HTMLElement.prototype.selectOption = function selectOption(
-      optionName
-    ) {
-
-      this.querySelectorAll(':scope > li').forEach(op => {
-        op.remove();
-      })
-      let html = `<li class="clone_units" data-template_id="units1" data-value="${optionName}"
-      templateid="units1" data-render_array="units" selected="">
-      <span value="${optionName}">${optionName}</span>
-      <span class="remove">x</span>
-      </li>`;
-      let el = CoCreateUtils.parseTextToHtml(html);
-
-      this.insertAdjacentElement('afterBegin', el);
-
-    };
-
-    // unselect option or arrays of options, and remove all if not param
-    ref.window.HTMLElement.prototype.unselectOption = function unselectOption(
-      optionName
-    ) {
-      let options = this.querySelectorAll(":scope > [selected]");
-      Array.from(options).forEach((option) => {
-        if (optionName == option.getAttribute("value")) option.remove();
-      });
-    };
+  
 
     ref.document.addEventListener("input", (e) => {
       let input = e.target;
@@ -204,12 +185,13 @@
           }
           else if (metadata && metadata.type === "cocreate-select") {
             let selectedOptions2 = input.getAllSelectedOptions();
-            let unSelectedOptions2 = input
-              .getAllOptions()
-              .filter((o) => !selectedOptions2.includes(o));
+            // let unSelectedOptions2 = input
+            //   .getAllOptions()
+            //   .filter((o) => !selectedOptions2.includes(o));
 
+            
             __addToElement(input, element, selectedOptions2, read);
-            __removeToElement(input, element, unSelectedOptions2, read);
+            // __removeToElement(input, element, unSelectedOptions2, read);
           }
           else {
             __removeToElement(input, element, "lastValue", read);
@@ -254,7 +236,7 @@
         element = mutation.target.parentElement;
         break;
     }
-    if (element.getAttribute("data-attribute_sync")) return;
+    if (!element ||  (element && element.getAttribute("data-attribute_sync"))) return;
 
     let connectedInput = allFrame((frame) =>
       frame.querySelectorAll("[data-attribute_target]")
@@ -294,7 +276,7 @@
   }
 
   function parseClassList(str) {
-    if (str.split) return str.split(" ");
+    if (str.split) return str.split(" ").map(st => st.trim());
     return [];
   }
 
@@ -510,30 +492,38 @@
   }
 
   function fromElementToCCSelect({ input, element, read }) {
-    let options;
+    let options, selOptions = [], selOptions2;
 
     switch (read) {
       case "style":
-        options = input.getAllOptions();
-        for (let i = 0, len = options.length; i < len; i++) {
-          let parsed = parseCssRules(options[i]);
+        // options = input.getAllOptions();
 
-          if (isObjectEqual(parsed, element.style))
-            input.selectOption(options[i]);
-          else input.unselectOption(options[i]);
-        }
+        // for (let i = 0, len = options.length; i < len; i++) {
+        //   let parsed = parseCssRules(options[i]);
+
+        //   if (isObjectEqual(parsed, element.style))
+        //     selOptions.push( options[i] );
+        // }
+        // CoCreateSelect.renderValue(input, selOptions)
+        
+        
+          selOptions2 = parseCssRulesAsArray(element.getAttribute('style'))
+          CoCreateSelect.renderValue(input, selOptions2)
         break;
       case "class":
-        options = input.getAllOptions();
-        for (let i = 0, len = options.length; i < len; i++) {
-          if (element.classList.contains(options[i]))
-            input.selectOption(options[i]);
-          else input.unselectOption(options[i]);
-        }
+        // options = input.getAllOptions();
+        // for (let i = 0, len = options.length; i < len; i++) {
+        //   if (element.classList.contains(options[i]))
+        //     selOptions.push( options[i] );
+        // }
+        // CoCreateSelect.renderValue(input, selOptions)
+          selOptions2 = parseClassList(element.getAttribute('class'))
+          CoCreateSelect.renderValue(input, selOptions2)
+        
         break;
       default:
         if (element.getAttribute(read))
-          input.selectOption(element.getAttribute(read));
+          CoCreateSelect.renderValue(input, element.getAttribute(read))
         // todo: might break
         // if (element.getAttribute(read) == options[i])
         //   input.selectOption(options[i]);
