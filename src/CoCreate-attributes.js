@@ -5,13 +5,12 @@
  */
 
 
-(() => {
   //store all frames
 
   let filters = [];
   let allFrames = new Map();
   let tools = {};
-  window.ccAttribute = { init, addFilter };
+  const CoCreateAttribute = { init, addFilter };
 
   // first time load
   window.addEventListener("load", () => {
@@ -570,4 +569,6 @@
       },
     });
   }
-})();
+  
+  export default CoCreateAttribute;
+
