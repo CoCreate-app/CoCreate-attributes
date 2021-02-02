@@ -10,7 +10,7 @@
   let filters = [];
   let allFrames = new Map();
   let tools = {};
-  const CoCreateAttribute = { init, addFilter };
+
 
   // first time load
   window.addEventListener("load", () => {
@@ -531,7 +531,7 @@
 
   }
 
-  CoCreateSocket.listen("ccAttribute", function({
+  CoCreate.socket.listen("ccAttribute", function({
     method,
     values,
     element,
@@ -557,7 +557,7 @@
 
     });
 
-    CoCreate.sendMessage({
+    CoCreate.message.send({
       broadcast_sender: false,
       rooms: "",
       emit: {
@@ -569,6 +569,6 @@
       },
     });
   }
-  
-  export default CoCreateAttribute;
+
+export default { init, addFilter };
 
