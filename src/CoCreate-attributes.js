@@ -15,16 +15,16 @@
   // first time load
   window.addEventListener("load", () => {
     init({ windowObject: window, docObject: document });
-    window.CoCreateObserver.add({
+    window.CoCreate.observer.add({
       observe: ["attributes", "characterData"],
-      task: (mutation) => triggerElementMutation(mutation),
+      callback: (mutation) => triggerElementMutation(mutation),
     });
 
-    window.CoCreateObserver.add({
+    window.CoCreate.observer.add({
       name: "ccAttribute",
       observe: ["attributes"],
       attributes: ["data-attribute_target"],
-      task: (mutation) => updateInput(mutation.target),
+      callback: (mutation) => updateInput(mutation.target),
     });
     allFrame((frame) =>
       frame.querySelectorAll("[data-attribute_target]")
@@ -120,16 +120,16 @@
     }
 
     ref.window.addEventListener("load", () => {
-      ref.window.CoCreateObserver.add({
+      ref.window.CoCreate.observer.add({
         observe: ["attributes", "characterData"],
-        task: (mutation) => triggerElementMutation(mutation),
+        callback: (mutation) => triggerElementMutation(mutation),
       });
 
-      ref.window.CoCreateObserver.add({
+      ref.window.CoCreate.observer.add({
         name: "ccAttribute",
         observe: ["attributes"],
         attributes: ["data-attribute_target"],
-        task: (mutation) => updateInput(mutation.target),
+        callback: (mutation) => updateInput(mutation.target),
       });
     });
 
@@ -503,11 +503,11 @@
         //   if (isObjectEqual(parsed, element.style))
         //     selOptions.push( options[i] );
         // }
-        // CoCreateSelect.renderValue(input, selOptions)
+        // CoCreate.select.renderValue(input, selOptions)
         
         
           selOptions2 = parseCssRulesAsArray(element.getAttribute('style'))
-          CoCreateSelect.renderValue(input, selOptions2)
+          CoCreate.select.renderValue(input, selOptions2)
         break;
       case "class":
         // options = input.getAllOptions();
@@ -515,14 +515,14 @@
         //   if (element.classList.contains(options[i]))
         //     selOptions.push( options[i] );
         // }
-        // CoCreateSelect.renderValue(input, selOptions)
+        // CoCreate.select.renderValue(input, selOptions)
           selOptions2 = parseClassList(element.getAttribute('class'))
-          CoCreateSelect.renderValue(input, selOptions2)
+          CoCreate.select.renderValue(input, selOptions2)
         
         break;
       default:
         if (element.getAttribute(read))
-          CoCreateSelect.renderValue(input, element.getAttribute(read))
+          CoCreate.select.renderValue(input, element.getAttribute(read))
         // todo: might break
         // if (element.getAttribute(read) == options[i])
         //   input.selectOption(options[i]);
@@ -530,7 +530,7 @@
     }
 
   }
-
+  console.log('sdfsddddddddddddd dfsdfsdfsd')
   CoCreate.socket.listen("ccAttribute", function({
     method,
     values,
