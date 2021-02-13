@@ -15,12 +15,12 @@ let tools = {};
 // first time load
 window.addEventListener("load", () => {
   init({ windowObject: window, docObject: document });
-  window.CoCreate.observer.add({
+  window.CoCreate.observer.init({
     observe: ["attributes", "characterData"],
     callback: (mutation) => triggerElementMutation(mutation),
   });
 
-  window.CoCreate.observer.add({
+  window.CoCreate.observer.init({
     name: "ccAttribute",
     observe: ["attributes"],
     attributes: ["data-attribute_target"],
@@ -127,12 +127,12 @@ function init({ windowObject, docObject, isIframe, frame, onCollaboration = () =
   }
 
   ref.window.addEventListener("load", () => {
-    ref.window.CoCreate.observer.add({
+    ref.window.CoCreate.observer.init({
       observe: ["attributes", "characterData"],
       callback: (mutation) => triggerElementMutation(mutation),
     });
 
-    ref.window.CoCreate.observer.add({
+    ref.window.CoCreate.observer.init({
       name: "ccAttribute",
       observe: ["attributes"],
       attributes: ["data-attribute_target"],
