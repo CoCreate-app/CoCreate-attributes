@@ -11,10 +11,11 @@ import {
     getCoCreateStyle,
     toCamelCase,
     parseUnit,
-    rgba2hex,
-    parseClassRules
+    rgba2hex
 }
 from './common.js';
+
+
 
 
 
@@ -228,41 +229,6 @@ attributes.prototype.validateInput = function validateInput(input) {
     };
 }
 
-attributes.prototype.deduce = function deduce({
-    inputValue,
-    destObject,
-    parse,
-    // run,
-}) {
-    let addValues = {},
-        removeValue = {};
-    if (typeof inputValue == 'string') {
-        Object.assign(addValues, parse(inputValue))
-    }
-    else {
-        inputValue.forEach(inputSValue => {
-            let parse = parse(inputSValue.value);
-
-            if (inputSValue.checked)
-                Object.assign(addValues, parse);
-            else
-                Object.assign(removeValue, parse);
-        })
-
-        if (destObject)
-            for (let [key, value] of Object.entries(destObject)) {
-                if (removeValue.hasOwnProperty(key))
-                    delete destObject[key]
-
-            }
-
-    }
-    if (destObject)
-        Object.assign(destObject, addValues);
-    return { addValues, removeValue }
-
-}
-
 
 attributes.prototype.updateElementByValue = function updateElementByValue({ type, property, camelProperty, input, element, newValue, inputValue }) {
     let computedStyles, value, removeValue, hasUpdated;
@@ -277,82 +243,73 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
         case 'attribute':
             switch (property) {
                 case 'style':
-                    // if (typeof inputValue == 'string') {
-                    //     let style = parseCssRules(inputValue);
-                    //     Object.assign(element.style, )
-                    //     return Object.keys(style).length;
+                    if (typeof inputValue == 'string') {
+                        let style = parseCssRules(inputValue);
+                        Object.assign(element.style, )
+                        return Object.keys(style).length;
 
-                    // }
-                    // else {
-                    //     value = {}, removeValue = {};
-                    //     inputValue.forEach(inputSValue => {
-                    //         let parse = parseCssRules(inputSValue.value);
+                    }
+                    else {
+                        value = {}, removeValue = {};
+                        inputValue.forEach(inputSValue => {
+                            let parse = parseCssRules(inputSValue.value);
 
-                    //         if (inputSValue.checked)
-                    //             Object.assign(value, parse);
-                    //         else
-                    //             Object.assign(removeValue, parse);
-                    //     })
-                    let elStyle = parseCssRules(element.getAttribute('style'));
+                            if (inputSValue.checked)
+                                Object.assign(value, parse);
+                            else
+                                Object.assign(removeValue, parse);
+                        })
+                        let elStyle = parseCssRules(element.getAttribute('style'));
 
-                    //     for (let [key, value] of Object.entries(elStyle)) {
-                    //         if (removeValue.hasOwnProperty(key))
-                    //             delete elStyle[key]
+                        for (let [key, value] of Object.entries(elStyle)) {
+                            if (removeValue.hasOwnProperty(key))
+                                delete elStyle[key]
 
-                    //     }
-                    //     Object.assign(elStyle, value);
+                        }
+                        Object.assign(elStyle, value);
 
-                    let beforeLen = Object.keys(elStyle).length;
-                    this.deduce({ inputValue, destObject: elStyle, parse: parseCssRules })
-                    let afterLen = Object.keys(elStyle).length;
-                    let strStyle = "";
-                    for (let [key, value] of Object.entries(elStyle))
-                        strStyle += `${key}: ${value};`
-                    element.setAttribute('style', strStyle)
+                        let strStyle = "";
+                        for (let [key, value] of Object.entries(elStyle))
+                            strStyle += `${key}: ${value};`
+                        element.setAttribute('style', strStyle)
 
-                    //todo: better way to save elStyle when getting and here to compare
-                    return beforeLen != afterLen;
+                        //todo: better way to save elStyle when getting and here to compare
+                        return Object.keys(elStyle).length;
 
-                    // }
+                    }
 
 
 
                 case 'class':
-                    // if (typeof inputValue == 'string') {
-                    //     let classNames = inputValue.split(' ');
-                    //     classNames.forEach(className => {
-                    //         className && element.classList.add(className);
-                    //     });
-                    //     return classNames.length;
-                    // }
-                    // else {
-                    //     value = [], removeValue = [];
-                    //     inputValue.forEach(inputSValue => {
-                    //         let parse = inputSValue.value.split(' ');
+                    if (typeof inputValue == 'string') {
+                        let classNames = inputValue.split(' ');
+                        classNames.forEach(className => {
+                            className && element.classList.add(className);
+                        });
+                        return classNames.length;
+                    }
+                    else {
+                        value = [], removeValue = [];
+                        inputValue.forEach(inputSValue => {
+                            let parse = inputSValue.value.split(' ');
 
-                    //         if (inputSValue.checked)
-                    //             value = value.concat(parse)
-                    //         else
-                    //             removeValue = removeValue.concat(parse)
+                            if (inputSValue.checked)
+                                value = value.concat(parse)
+                            else
+                                removeValue = removeValue.concat(parse)
 
-                    //     })
+                        })
+                        removeValue.forEach(className => element.classList.remove(className))
+                        value.forEach(className => element.classList.add(className))
 
-                    let { addValues, removeValue } = this.deduce({ inputValue, parse: parseClassRules })
-                    removeValue.forEach(className => element.classList.remove(className))
-                    addValues.forEach(className => element.classList.add(className))
-
-                    //todo: fix
-                    return true;
-                    // }
+                        //todo: fix
+                        return true;
+                    }
 
 
 
 
                 default:
-                    let { addValues, removeValue } = this.deduce({ inputValue, parse: parseClassRules })
-                    removeValue.forEach(className => element.classList.remove(className))
-                    addValues.forEach(className => element.classList.add(className))
-
                     if (typeof inputValue == 'string') {
 
                         return setAttributeIfDif.call(element, property, inputValue)
