@@ -52,7 +52,7 @@ attributes.prototype.init = function init() {
     this.initDocument.defaultView.CoCreate.observer.init({
         name: "ccStyle",
         observe: ["attributes"],
-        attributes: ["data-attributes_target", "data-attributes_unit"],
+        attributes: ["data-attributes_target", "value", "data-attributes_unit"],
         include: "INPUT, .pickr, cocreate-select",
         callback: async m => await this.watchInputChange(m),
     });
@@ -65,35 +65,42 @@ attributes.prototype.init = function init() {
 
     this.observerElements(this.initDocument.defaultView);
 
-    CoCreate.socket.listen("ccStyle", function({
-        value,
-        type,
-        property,
-        camelProperty,
-    }) {
-        let sync;
-        switch (type) {
-            case 'style':
-                sync = property
-                break;
-            default:
-                sync = camelProperty;
-
-        }
-        let input = this.initDocument.querySelector(
-            `[data-attributes=${type}][data-attributes_sync=${sync}]:not(${this.exclude})`
-        )
-
-        this.perInput(input, (inputMeta, element) =>
-            this.updateElement({ ...inputMeta, input, element, newValue: value, isColl: false }))
-
-
-    });
+    CoCreate.socket.listen("ccStyle", (args) => this.listen(args));
 
 
 
 }
 
+
+attributes.prototype.listen = async function listen({
+    value,
+    type,
+    property,
+    camelProperty,
+    elementId,
+    elementSelector
+}) {
+    // let sync;
+    // switch (type) {
+    //     case 'style':
+    //         sync = property
+    //         break;
+    //     default:
+    //         sync = camelProperty;
+
+    // }
+    let input = this.initDocument.querySelector(
+        `[data-attributes=${type}][data-attributes_sync=${property}]:not(${this.exclude})`
+    );
+    
+    let element = await this.complexSelector(elementSelector,
+                (canvasDoc, selector) => canvasDoc.querySelector(selector));
+    
+    this.perInput(input, (inputMeta) =>
+        this.updateElement({ ...inputMeta, input, element, newValue: value, isColl: false }))
+
+
+}
 
 attributes.prototype.collaborate = function collaborate({
     element,
@@ -103,6 +110,7 @@ attributes.prototype.collaborate = function collaborate({
     let elementId = element.getAttribute('data-element_id');
     if (!elementId)
         return console.warn('no element id, collaboration skiped');
+    let elementSelector = rest.input.getAttribute('data-attributes_target');
 
     this.callback({ ...rest, element });
 
@@ -114,6 +122,7 @@ attributes.prototype.collaborate = function collaborate({
             data: {
                 ...rest,
                 elementId,
+                elementSelector
             },
 
         },
@@ -194,11 +203,19 @@ attributes.prototype.watchInputChange = async function watchInputChange(mutation
 
 
 attributes.prototype.perInput = async function perInput(input, callback) {
-    let inputMeta, element;
-    inputMeta = this.validateInput(input);
-    element = inputMeta && await this.getElementFromInput(input);
-    if (!element) return
-    callback(inputMeta, element)
+
+
+    try {
+        let inputMeta, element;
+        inputMeta = this.validateInput(input);
+        element = inputMeta && await this.getElementFromInput(input);
+        if (!element) throw new Error('attribute: Element can not be found')
+        callback(inputMeta, element)
+    }
+    catch (error) {
+        console.error(error)
+    }
+
 }
 
 
@@ -361,8 +378,11 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 }
 
 attributes.prototype.updateElement = function updateElement({ input, element, newValue, isColl, ...rest }) {
-
-    let inputValue = newValue || this.getInputValue(input);
+    let inputValue;
+    if (newValue)
+        inputValue = parseUnit(newValue)[0];
+    else
+        inputValue = this.getInputValue(input);
 
     let hasUpdated = this.updateElementByValue({ ...rest, input, element, inputValue })
 
