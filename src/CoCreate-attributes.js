@@ -74,30 +74,23 @@ attributes.prototype.init = function init() {
 
 attributes.prototype.listen = async function listen({
     value,
+    unit,
     type,
     property,
     camelProperty,
     elementId,
     elementSelector
 }) {
-    // let sync;
-    // switch (type) {
-    //     case 'style':
-    //         sync = property
-    //         break;
-    //     default:
-    //         sync = camelProperty;
 
-    // }
     let input = this.initDocument.querySelector(
         `[data-attributes=${type}][data-attributes_sync=${property}]:not(${this.exclude})`
     );
-    
+
     let element = await this.complexSelector(elementSelector,
-                (canvasDoc, selector) => canvasDoc.querySelector(selector));
-    
-    this.perInput(input, (inputMeta) =>
-        this.updateElement({ ...inputMeta, input, element, newValue: value, isColl: false }))
+        (canvasDoc, selector) => canvasDoc.querySelector(selector));
+
+
+    this.updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false })
 
 
 }
@@ -112,7 +105,7 @@ attributes.prototype.collaborate = function collaborate({
         return console.warn('no element id, collaboration skiped');
     let elementSelector = rest.input.getAttribute('data-attributes_target');
 
-    this.callback({ ...rest, element });
+
 
     CoCreate.message.send({
         broadcast_sender: false,
@@ -209,7 +202,7 @@ attributes.prototype.perInput = async function perInput(input, callback) {
         let inputMeta, element;
         inputMeta = this.validateInput(input);
         element = inputMeta && await this.getElementFromInput(input);
-        if (!element) throw new Error('attribute: Element can not be found')
+        if (!element) return;
         callback(inputMeta, element)
     }
     catch (error) {
@@ -247,8 +240,8 @@ attributes.prototype.validateInput = function validateInput(input) {
 }
 
 
-attributes.prototype.updateElementByValue = function updateElementByValue({ type, property, camelProperty, input, element, newValue, inputValue }) {
-    let computedStyles, value, removeValue, hasUpdated;
+attributes.prototype.updateElementByValue = function updateElementByValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
+    let computedStyles, value, removeValue, hasUpdated, unit;
     switch (type) {
         case 'property':
             if (element[camelProperty] != inputValue) {
@@ -355,8 +348,9 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
             break;
         case 'classstyle':
-            inputValue = inputValue || newValue || '';
-            value = inputValue ? inputValue + (input.getAttribute('data-attributes_unit') || '') : '';
+            unit = (input.getAttribute('data-attributes_unit') || '');
+            value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
+            value = value || '';
             computedStyles = this.getRealStaticCompStyle(element);
             return setStyleClassIfDif(element, {
                 property,
@@ -367,8 +361,9 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
 
         case 'style':
-            inputValue = inputValue || newValue || '';
-            value = inputValue ? inputValue + (input.getAttribute('data-attributes_unit') || '') : '';
+            unit = (input.getAttribute('data-attributes_unit') || '');
+            value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
+            value = value || '';
             computedStyles = this.getRealStaticCompStyle(element);
             return setStyleIfDif.call(element, { property, camelProperty, value, computedStyles })
 
@@ -377,26 +372,31 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
 }
 
-attributes.prototype.updateElement = function updateElement({ input, element, newValue, isColl, ...rest }) {
-    let inputValue;
-    if (newValue)
-        inputValue = parseUnit(newValue)[0];
-    else
-        inputValue = this.getInputValue(input);
+attributes.prototype.updateElement = function updateElement({ input, element, collValue, isColl, unit, ...rest }) {
 
-    let hasUpdated = this.updateElementByValue({ ...rest, input, element, inputValue })
+
+    let inputValue = collValue || this.getInputValue(input);
+    inputValue = unit ? inputValue + unit : inputValue;
+    let hasUpdated = this.updateElementByValue({ ...rest, input, element, inputValue, hasCollValue: !!collValue })
 
     cache.reset(element)
 
+
+    let params = {
+        value: inputValue,
+        unit: input.getAttribute('data-attributes_unit'),
+        input,
+        element,
+        ...rest
+    };
+
     hasUpdated &&
         isColl &&
-        this.collaborate({
-            value: inputValue + (input.getAttribute('data-attributes_unit') || ''),
-            input,
-            element,
-            ...rest
-        });
-
+        this.collaborate(params);
+        
+    hasUpdated &&
+        !isColl &&
+        this.callback(params);
 
     // not needed since crdt
     // when function called on collboration
@@ -604,11 +604,15 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
         return
     }
     if (canvas.contentDocument.readyState === 'loading') {
+        try {
+            await new Promise((resolve, reject) => {
+                canvas.contentWindow.addEventListener('load', (e) => resolve())
+            });
+        }
+        catch (err) {
+            console.error('iframe can not be loaded')
+        }
 
-        let prmise = new Promise((resolve, reject) => {
-            canvas.contentWindow.addEventListener('load', (e) => resolve())
-        });
-        await prmise;
     }
     this.observerElements(canvas.contentWindow)
     return callback(canvas.contentWindow.document, selector);

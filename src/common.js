@@ -1,9 +1,8 @@
 /*global CoCreate*/
 
-export function parseClassRules(str)
-{
+export function parseClassRules(str) {
     return str.split(' ').filter(cln => cln);
-    
+
 }
 
 export function getCoCreateStyle(classList) {
@@ -19,7 +18,7 @@ export function getCoCreateStyle(classList) {
 
 
 
-export function setStyleClassIfDif(element, { property, camelProperty,value, computedStyles }) {
+export function setStyleClassIfDif(element, { property, camelProperty, value, computedStyles }) {
     let classList = element.classList;
     let styleList = new Map();
     classList.forEach((classname) => {
@@ -34,11 +33,19 @@ export function setStyleClassIfDif(element, { property, camelProperty,value, com
             if (elValue != value)
                 return classList.replace(`${property}:${elValue}`, `${property}:${value}`);
         }
-        else if (computedStyles[camelProperty] != value)
-            return classList.add(`${property}:${value}`);
+        else if (computedStyles[camelProperty] != value && !classList.has(`${property}:${value}`))
+        {
+            classList.add(`${property}:${value}`);
+            return true;
+        }
+
     }
     else {
-        return classList.remove(`${property}:${elValue}`);
+        if (classList.contains(`${property}:${elValue}`)) {
+            classList.remove(`${property}:${elValue}`);
+            return true;
+        }
+
     }
 
     return false
