@@ -1,28 +1,25 @@
 // Webpack uses this to work with directories
-const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 
-let isProduction = process.env.NODE_ENV === 'production';
+let isProduction = process.env.NODE_ENV === "production";
 
 // This is main configuration object.
 // Here you write different options and tell Webpack what to do
 module.exports = {
-
   // Path to your entry point. From this file Webpack will begin his work
   entry: {
-    'CoCreate-attributes': './src/CoCreate-attributes.js',
+    "CoCreate-attributes": "./src/CoCreate-attributes.js",
   },
 
- // Path and filename of your result bundle.
+  // Path and filename of your result bundle.
   // Webpack will bundle all JavaScript into this file
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: isProduction ? '[name].min.js' : '[name].js',
-    libraryTarget: 'umd',
-    libraryExport: 'default',
-    library: ['CoCreate', 'attributes'],
+    path: path.resolve(__dirname, "dist"),
+    filename: isProduction ? "[name].min.js" : "[name].js",
+    libraryTarget: "umd",
+    libraryExport: "default",
+    library: ["CoCreate", "attributes"],
     globalObject: "this",
   },
 
@@ -30,32 +27,43 @@ module.exports = {
   // Depending on mode Webpack will apply different things
   // on final bundle. For now we don't need production's JavaScript
   // minifying and other thing so let's set mode to development
-  mode: isProduction ? 'production' : 'development',
+  mode: isProduction ? "production" : "development",
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            plugins: ["@babel/plugin-transform-modules-commonjs"],
+          },
+        },
       },
-    ]
+    ],
   },
 
   // add source map
-  ...(isProduction ? {} : { devtool: 'eval-source-map' }),
+  ...(isProduction ? {} : { devtool: "eval-source-map" }),
 
   // add uglifyJs
-  optimization: {
-    minimizer: [new UglifyJsPlugin({
-      uglifyOptions: {
-        // get options: https://github.com/mishoo/UglifyJS
-        drop_console: isProduction
-      },
-    })],
-  },
 
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: true,
+        // cache: true,
+        parallel: true,
+        // sourceMap: true, // Must be set to true if using source-maps in production
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+          // extractComments: 'all',
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+    ],
+  },
 };
