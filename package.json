@@ -61,7 +61,6 @@
     "@cocreate/docs": "^1.0.3",
     "@cocreate/crdt": "^1.0.0",
     "@cocreate/pickr": "^1.0.0",
-    "@cocreate/CoCreateJS": "^1.0.0",
     "html-webpack-plugin": "^5.3.1"
   }
 }
