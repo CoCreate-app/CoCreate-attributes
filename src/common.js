@@ -1,5 +1,5 @@
 /*global CoCreate*/
-import select from '../../CoCreate-select'
+import select from '@cocreate/select'
 export function parseClassRules(str) {
     return str.split(' ').filter(cln => cln);
 

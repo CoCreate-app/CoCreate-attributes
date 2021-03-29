@@ -15,12 +15,15 @@ import {
 }
 from './common.js';
 
-import observer from '../../CoCreate-observer/src'
-import pickr from '../../../CoCreate-plugins/CoCreate-pickr/src'
+import observer from '@cocreate/observer'
+import crdt from '@cocreate/crdt'
+import pickr from '@cocreate/pickr'
 import { socket, message } from '../../../CoCreateJS/src'
-// dev start
-// import '../../CoCreate-select'
-// import selected from '../../CoCreate-selected'
+// // dev start
+// import '@cocreate/select'
+// import selected from '@cocreate/selected'
+// import domToText from '@cocreate/domToText'
+
 
 // selected.config({
 //     srcDocument: document,
@@ -50,10 +53,10 @@ import { socket, message } from '../../../CoCreateJS/src'
 // }
 
 
-// dev end
+// // dev end
 
 let cache = new elStore();
-
+let types = ['attribute', 'classstyle', 'style', 'innerText']
 
 function attributes({ document: initDocument, exclude = "", callback = () => {} }) {
     this.exclude = exclude;
@@ -69,7 +72,7 @@ attributes.prototype.init = function init() {
     this.scanNewElement()
     // this.initDocument.defaultView.CoCreate.observer.init({
     observer.init({
-        name: "ccStyle",
+        name: "ccAttribute",
         observe: ["attributes"],
         attributes: ["data-attributes_target", "value", "data-attributes_unit"],
         include: "INPUT, .pickr, cocreate-select",
@@ -82,6 +85,8 @@ attributes.prototype.init = function init() {
             this.updateElement({ ...inputMeta, input, element, isColl: true }))
     });
 
+
+    // observer elements change to reflect inputs (data-units)
     this.observerElements(this.initDocument.defaultView);
 
     socket.listen("ccStyle", (args) => this.listen(args));
@@ -107,12 +112,12 @@ attributes.prototype.listen = async function listen({
     let input = this.initDocument.querySelector(
         selector
     );
-    let element
-    if (selector.indexOf(';') !== -1)
-        element = await this.complexSelector(elementSelector,
-            (canvasDoc, selector) => canvasDoc.querySelector(selector));
-    else
-        element = this.initDocument.querySelector(elementSelector)
+    // if (selector.indexOf(';') !== -1)
+    // let element
+    let element = await this.complexSelector(elementSelector,
+        (canvasDoc, selector) => canvasDoc.querySelector(selector));
+    // else
+    //     element = this.initDocument.querySelector(elementSelector)
 
     this.updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false })
 
@@ -154,7 +159,9 @@ attributes.prototype.scanNewElement = function scanNewElement() {
 }
 attributes.prototype.observerElements = function observerElements(initWindow) {
     // initWindow.CoCreate.observer.init({
+    // let observer = initWindow.CoCreate.observer ?
     observer.init({
+        name: 'ccAttribute',
         observe: ["attributes", "characterData"],
         callback: (mutation) => {
             let element = mutation.target;
@@ -267,12 +274,14 @@ attributes.prototype.validateInput = function validateInput(input) {
 
 
 attributes.prototype.updateElementByValue = function updateElementByValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
-    let computedStyles, value, removeValue, hasUpdated, unit;
+    let computedStyles, value, removeValue, hasUpdated, unit, parsedInt;
     switch (type) {
 
 
 
         case 'classstyle':
+            parsedInt = parseInt(value)
+
             unit = (input.getAttribute('data-attributes_unit') || '');
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
@@ -329,31 +338,66 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
 }
 
-attributes.prototype.updateElement = function updateElement({ input, element, collValue, isColl, unit, ...rest }) {
+
+attributes.prototype.removeZeros = function removeZeros(str) {
+    let i = 0;
+    for (let len = str.length; i < len; i++) {
+        if (str[i] !== '0')
+            break;
+    }
+    return str.substr(i) || str && '0';
+}
+
+attributes.prototype.updateElement = function updateElement({ input, element, collValue, isColl, unit, type, property, ...rest }) {
+
 
 
     let inputValue = collValue != undefined ? collValue : this.getInputValue(input);
-    inputValue = unit && inputValue ? inputValue + unit : inputValue;
-    let hasUpdated = this.updateElementByValue({ ...rest, input, element, inputValue, hasCollValue: collValue != undefined })
+
+    if (!Array.isArray(inputValue)) {
+        inputValue = unit && inputValue ? inputValue + unit : inputValue;
+        inputValue = this.removeZeros(inputValue)
+    }
+    else
+        inputValue.forEach(a => this.removeZeros(a.value))
+
+    let hasUpdated = this.updateElementByValue({ ...rest, type, property, input, element, inputValue, hasCollValue: collValue != undefined })
 
     cache.reset(element)
 
+    // attribute is default when it's not attribute
 
-    let params = {
-        value: inputValue,
-        unit: input.getAttribute('data-attributes_unit'),
-        input,
-        element,
-        ...rest
-    };
+
 
     hasUpdated &&
         isColl &&
-        this.collaborate(params);
+        this.collaborate({
+            value: inputValue,
+            unit: input.getAttribute('data-attributes_unit'),
+            input,
+            element,
+            type,
+            property,
+            ...rest,
+
+        });
+    if (!types.includes(type)) {
+        property = type;
+        type = 'attribute';
+    }
 
     hasUpdated &&
-        !isColl &&
-        this.callback(params);
+        isColl &&
+        this.callback({
+            value: Array.isArray(inputValue) ? inputValue[0].value : inputValue,
+            unit: input.getAttribute('data-attributes_unit'),
+            input,
+            element,
+            type,
+            property,
+            ...rest,
+
+        });
 
     // not needed since crdt
     // when function called on collboration
@@ -400,27 +444,28 @@ attributes.prototype.updateInput = function updateInput({ type, property, camelP
             break;
     }
 
-    this.setInputValue(input, value);
+    this.setInputValue(input, value != undefined ? value : '');
 
 }
 
 attributes.prototype.setInputValue = function setInputValue(input, value) {
-    let inputType = input.tagName.toLowerCase() || input.classList.has('.pickr') && 'pickr';
+    // console.log(input.getAttribute('name'))
 
+    let inputType = input.tagName.toLowerCase() || input.classList.has('.pickr') && 'pickr';
     switch (inputType) {
-        case 'input':
-            switch (input.type) {
-                case 'checkbox':
-                case 'radio':
-                    input.checked = value == input.value ? true : false;
-                    break;
-                default:
-                    input.value = value;
-            }
-            break;
-        case "textarea":
-            input.value = value;
-            break;
+        // case 'input':
+        //     switch (input.type) {
+        //         case 'checkbox':
+        //         case 'radio':
+        //             input.checked = value == input.value ? true : false;
+        //             break;
+        //         default:
+        //             input.value = value;
+        //     }
+        //     break;
+        // case "textarea":
+        //     input.value = value;
+        //     break;
         case 'select':
             let options = Array.from(input.options)
             options.forEach(option => {
@@ -439,7 +484,14 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
             pickr.disabledEvent = false;
 
         default:
-            console.warn('CoCreateStyle: unidentified input: ', inputType, 'input ', input)
+            crdt.replaceText({
+                collection: 'aaaaa',
+                document_id: 'null',
+                name: input.getAttribute('name'),
+                value: value + '',
+                position: '0',
+            })
+            // console.warn('CoCreateStyle: unidentified input: ', inputType, 'input ', input)
     }
 }
 
@@ -557,7 +609,8 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
         console.warn('complex selector canvas now found for', comSelector)
         return
     }
-    if (canvas.contentDocument.readyState === 'loading') {
+
+    if ( /*!canvas.contentWindow.observedByCCAttributes &&*/ canvas.contentDocument.readyState === 'loading') {
         try {
             await new Promise((resolve, reject) => {
                 canvas.contentWindow.addEventListener('load', (e) => resolve())
@@ -566,9 +619,10 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
         catch (err) {
             console.error('iframe can not be loaded')
         }
-
+        // this.observerElements(canvas.contentWindow)
+        // canvas.contentWindow.observedByCCAttributes = true;
     }
-    this.observerElements(canvas.contentWindow)
+
     return callback(canvas.contentWindow.document, selector);
 }
 
@@ -630,7 +684,24 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
 
 
 // window.addEventListener('load', () => {
-//     let attribute = new attributes({ document, exclude: '#ghostEffect,.vdom-item ' })
+//     let attribute = new attributes({ document, exclude: '#ghostEffect,.vdom-item ',
+//       callback: ({
+//         value,
+//         type,
+//         property,
+//         element,
+//     }) => {
+//           if (document.contains(element))
+//         domToText.domToText({
+//           method: type == 'attribute' ? 'setAttribute' : type, 
+//           property: property,
+//           target: element.getAttribute("data-element_id"),
+//           tagName: element.tagName,
+//           value,
+//           ...crdtCon
+//         })
+
+//     },})
 //     attribute.init()
 // })
 
@@ -643,15 +714,15 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
 //         property,
 //         element,
 //     }) => {
-//         //   if (document.contains(element))
-//         // domToText.domToText({
-//         //   method: type == 'attribute' ? 'setAttribute' : type, 
-//         //   property: property,
-//         //   target: element.getAttribute("data-element_id"),
-//         //   tagName: element.tagName,
-//         //   value,
-//         //   ...crdtCon
-//         // })
+//           if (document.contains(element))
+//         domToText.domToText({
+//           method: type == 'attribute' ? 'setAttribute' : type, 
+//           property: property,
+//           target: element.getAttribute("data-element_id"),
+//           tagName: element.tagName,
+//           value,
+//           ...crdtCon
+//         })
 
 //     },
 // })
@@ -666,104 +737,3 @@ export default {
         return s;
     }
 };
-
-
-
-
-
-
-//  case 'attribute':
-//             switch (property) {
-//                 case 'style':
-//                     if (typeof inputValue == 'string') {
-//                         let style = parseCssRules(inputValue);
-//                         Object.assign(element.style, )
-//                         return Object.keys(style).length;
-
-//                     }
-//                     else {
-//                         value = {}, removeValue = {};
-//                         inputValue.forEach(inputSValue => {
-//                             let parse = parseCssRules(inputSValue.value);
-
-//                             if (inputSValue.checked)
-//                                 Object.assign(value, parse);
-//                             else
-//                                 Object.assign(removeValue, parse);
-//                         })
-//                         let elStyle = parseCssRules(element.getAttribute('style'));
-
-//                         for (let [key, value] of Object.entries(elStyle)) {
-//                             if (removeValue.hasOwnProperty(key))
-//                                 delete elStyle[key]
-
-//                         }
-//                         Object.assign(elStyle, value);
-
-//                         let strStyle = "";
-//                         for (let [key, value] of Object.entries(elStyle))
-//                             strStyle += `${key}: ${value};`
-//                         element.setAttribute('style', strStyle)
-
-//                         //todo: better way to save elStyle when getting and here to compare
-//                         return Object.keys(elStyle).length;
-
-//                     }
-
-
-
-//                 case 'class':
-//                     if (typeof inputValue == 'string') {
-//                         let classNames = inputValue.split(' ');
-//                         classNames.forEach(className => {
-//                             className && element.classList.add(className);
-//                         });
-//                         return classNames.length;
-//                     }
-//                     else {
-//                         value = [], removeValue = [];
-//                         inputValue.forEach(inputSValue => {
-//                             let parse = inputSValue.value.split(' ');
-
-//                             if (inputSValue.checked)
-//                                 value = value.concat(parse)
-//                             else
-//                                 removeValue = removeValue.concat(parse)
-
-//                         })
-//                         removeValue.forEach(className => element.classList.remove(className))
-//                         value.forEach(className => element.classList.add(className))
-
-//                         //todo: fix
-//                         return true;
-//                     }
-
-
-
-
-//                 default:
-//                     if (typeof inputValue == 'string') {
-
-//                         return setAttributeIfDif.call(element, property, inputValue)
-//                     }
-//                     else {
-//                         for (let inputSValue of inputValue) {
-//                             if (inputSValue.checked) {
-//                                 // unconventional change
-//                                 if (property === 'data-attributes_unit' && ['auto', 'inherit', 'initial'].includes(inputSValue.value)) {
-//                                     element.value = inputSValue.value;
-//                                     removeAllSelectedOptions.call(input)
-//                                 }
-//                                 else
-//                                     // unconventional change
-//                                     return setAttributeIfDif.call(element, property, inputSValue.value)
-
-//                             }
-
-//                         }
-
-
-//                     }
-
-//                     break;
-//             }
