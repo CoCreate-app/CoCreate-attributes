@@ -58,6 +58,7 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
+    "@cocreate/cocreatejs": "^1.0.0",
     "@cocreate/docs": "^1.0.3",
     "@cocreate/crdt": "^1.0.0",
     "@cocreate/pickr": "^1.0.0",
