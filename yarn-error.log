@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js link
+  /usr/bin/node /usr/share/yarn/bin/yarn.js start
 
 PATH: 
   /home/ubuntu/.rvm/gems/ruby-2.6.3/bin:/home/ubuntu/.rvm/gems/ruby-2.6.3@global/bin:/home/ubuntu/.rvm/rubies/ruby-2.6.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin:/home/ubuntu/bin:/home/ubuntu/.rvm/bin:/home/ubuntu/.local/bin:/home/ubuntu/bin:/home/ubuntu/.rvm/bin:/home/ubuntu/.rvm/bin:/home/ubuntu/.local/bin:/home/ubuntu/bin:/home/ubuntu/.rvm/bin:/home/ubuntu/.rvm/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  SyntaxError: /home/ubuntu/environment/public/CoCreate-components/CoCreate-attributes/package.json: Unexpected string in JSON at position 1891
+  SyntaxError: /home/ubuntu/environment/public/CoCreate-components/CoCreate-attributes/package.json: Unexpected token } in JSON at position 1842
       at JSON.parse (<anonymous>)
       at /usr/share/yarn/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
@@ -24,7 +24,7 @@ Trace:
 npm manifest: 
   {
     "name": "@cocreate/attributes",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "description": "A simple HTML5 and pure javascript component. Easy configuration using data-attributes and/or JavaScript API. Highly customizable and styleable.",
     "keywords": [
       "cocreate",
@@ -79,15 +79,10 @@ npm manifest:
       "uglifyjs-webpack-plugin": "^2.2.0",
       "webpack": "^5.24.4",
       "webpack-cli": "^4.5.0",
-      "webpack-log": "^3.0.1"
-    },
-    "dependencies": {
-      "@cocreate/docs": "^1.0.3",
-      "@cocreate/crdt": "^1.0.0"
-      "@cocreate/pickr": "^1.0.0"
-      "@cocreate/CoCreateJS": "^1.0.0"
+      "webpack-log": "^3.0.1",
       "html-webpack-plugin": "^5.3.1"
-    }
+    },
+  
   }
 
 yarn manifest: 

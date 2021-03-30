@@ -1,0 +1,109 @@
+    .vdom-item {
+      display: flex;
+      flex-direction: column;
+      order: 2;
+      background-color: white;
+      border-top: 1px solid gray;
+      cursor: pointer;
+    }
+
+    .vdom-item .fa-arrows-alt {
+      cursor: all-scroll;
+      float: right;
+    }
+
+    .vdom-item i {
+      padding: 5px;
+    }
+
+    .vdom-item.layer-hidden {
+      opacity: .5;
+    }
+
+    /*.parent.vdom-item .vdom-item .element-name {*/
+    /*  padding-left: 20px;*/
+    /*}*/
+
+    /*.parent .parent.vdom-item .vdom-item .element-name {*/
+    /*  padding-left: 30px;*/
+    /*}*/
+
+    /*.parent .parent .parent.vdom-item .vdom-item .element-name {*/
+    /*  padding-left: 40px;*/
+    /*}*/
+
+    /*.parent .parent .parent .parent.vdom-item .vdom-item .element-name {*/
+    /*  padding-left: 50px;*/
+    /*}*/
+
+    /*.parent .parent .parent .parent .parent.vdom-item .vdom-item .element-name {*/
+    /*  padding-left: 60px;*/
+    /*}*/
+
+    .parent .icon-container {
+      padding-left: 10px;
+    }
+
+    .parent .parent .icon-container {
+      padding-left: 20px;
+    }
+
+    .parent .parent .parent .icon-container {
+      padding-left: 30px;
+    }
+
+    .parent .parent .parent .parent .icon-container {
+      padding-left: 40px;
+    }
+
+    .parent .parent .parent .parent .parent .icon-container {
+      padding-left: 50px;
+    }
+    .parent .parent .parent .parent .parent .parent .icon-container {
+      padding-left: 60px;
+    }
+    .parent .parent .parent .parent .parent .parent .parent .icon-container {
+      padding-left: 70px;
+    }
+    .parent .parent .parent .parent .parent .parent .parent .parent .icon-container {
+      padding-left: 80px;
+    }
+    
+    .parent .element-name {
+      padding-left: 40px;
+    }
+    .parent .parent .element-name{
+      padding-left: 50px;
+    }
+    .parent .parent .parent .element-name{
+      padding-left: 60px;
+    }
+    .parent .parent .parent .parent .element-name{
+      padding-left: 70px;
+    }
+    .parent .parent .parent .parent .parent .element-name {
+      padding-left: 80px;
+    }
+    .parent .parent .parent .parent .parent .parent .element-name {
+      padding-left: 90px;
+    }
+    .parent .parent .parent .parent .parent .parent .parent .element-name {
+      padding-left: 100px;
+    }
+    .parent .parent .parent .parent .parent  .parent  .parent  .parent .element-name {
+      padding-left: 110px;
+    }
+    
+    .parent .icon-container + .element-name{
+      padding-left: 0px !important;
+    }
+    
+    /*span i {*/
+    /*  padding-right: 5px;*/
+    /*}*/
+    
+    .parent>span {
+      /* the width of arrow */
+      margin-left: -6px;
+    }
+    

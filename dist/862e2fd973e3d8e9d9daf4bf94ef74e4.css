@@ -1,0 +1,33 @@
+    [data-cloneable],
+    [data-draggable] {
+      cursor: pointer;
+    }
+
+    [data-cloneable],
+    [data-draggable],
+    [data-droppable],
+    [data-hoverable] {
+      outline: 1px dashed gray;
+    }
+
+   [CoC-dragging=true] {
+      height:0px;
+      overflow:hidden;
+    }
+    
+    #dropMarker{
+      background-color:green;
+      position :absolute;
+      display:none;
+      z-index:100000;
+    }
+    
+    #ghostEffect{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      whiteSpace: nowrap;
+      opacity: 0.5;
+      position: fixed;
+      z-index: 100000;
+      border: 1px solid grey;
+    }

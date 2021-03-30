@@ -18,7 +18,7 @@ from './common.js';
 import observer from '@cocreate/observer'
 import crdt from '@cocreate/crdt'
 import pickr from '@cocreate/pickr'
-import { socket, message } from '@cocreate/cocreatejs'
+import message from '@cocreate/message'
 // // dev start
 // import '@cocreate/select'
 // import selected from '@cocreate/selected'
@@ -89,7 +89,7 @@ attributes.prototype.init = function init() {
     // observer elements change to reflect inputs (data-units)
     this.observerElements(this.initDocument.defaultView);
 
-    socket.listen("ccStyle", (args) => this.listen(args));
+    message.listen("ccStyle", (args) => this.listen(args));
 
 
 

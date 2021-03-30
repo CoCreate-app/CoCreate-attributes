@@ -846,10 +846,33 @@
     parse-html-comments "^1.3.1"
     ws "^7.3.1"
 
+"@cocreate/observer@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@cocreate/observer/-/observer-1.0.1.tgz#f6c221c474c51532628416ec89b7e61cc83f7e09"
+  integrity sha512-IgsoumhEq5qsFwCLL9iVPXXdOgzvMDxoNrMgrBmvMsM+6PYUA781FBRUG9a8nGWwfmDMP7sahO84fojyjE2g6w==
+  dependencies:
+    "@cocreate/docs" "^1.0.3"
+
+"@cocreate/pickr@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@cocreate/pickr/-/pickr-1.1.1.tgz#07b043809ac570a13e46e3bd92cc1c7869837830"
+  integrity sha512-BICvrG4DZlhMlB15jpqd6JThXDTW007/m1AdpYZPDbuEe0q9yivzdaUA2rWrlNPTmIrZHQd2hqqioK+6WlFrBA==
+  dependencies:
+    "@cocreate/docs" "^1.0.3"
+    "@simonwep/pickr" "^1.8.0"
+
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.2.tgz#8f03a22a04de437254e8ce8cc84ba39689288752"
   integrity sha512-HyYEUDeIj5rRQU2Hk5HTB2uHsbRQpF70nvMhVzi+VJR0X+xNEhjPui4/kBf3VeH/wqD28PT4sVOm8qqLjBrSZg==
+
+"@simonwep/pickr@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@simonwep/pickr/-/pickr-1.8.0.tgz#adbff9a4f7f0e59dec9946508c5e481b7abae0f8"
+  integrity sha512-VaSD7TwktOsro5nQ/FjRx5JAJ09k5CNfGRHacgVRxeVPolUQwelz1SjL8HAOKZwTSmcnIObptpHABQS4zgN7sw==
+  dependencies:
+    core-js "^3.8.0"
+    nanopop "^2.1.0"
 
 "@types/anymatch@*":
   version "1.3.1"
@@ -1400,6 +1423,11 @@ core-js-compat@^3.8.1, core-js-compat@^3.9.0:
   dependencies:
     browserslist "^4.16.3"
     semver "7.0.0"
+
+core-js@^3.8.0:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.9.1.tgz#cec8de593db8eb2a85ffb0dbdeb312cb6e5460ae"
+  integrity sha512-gSjRvzkxQc1zjM/5paAmL4idJBFzuJoo+jDjF1tStYFMV2ERfD02HhahhCGXUyHxQRG4yFKVSdO6g62eoRMcDg==
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -2137,6 +2165,15 @@ mimic-fn@^2.1.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
 
+mini-css-extract-plugin@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.4.0.tgz#c8e571c4b6d63afa56c47260343adf623349c473"
+  integrity sha512-DyQr5DhXXARKZoc4kwvCvD95kh69dUupfuKOmBUqZ4kBTmRaRZcU32lYu3cLd6nEGXhQ1l7LzZ3F/CjItaY6VQ==
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
+    webpack-sources "^1.1.0"
+
 minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
@@ -2193,6 +2230,11 @@ nanoid@^2.0.3:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.11.tgz#ec24b8a758d591561531b4176a01e3ab4f0f0280"
   integrity sha512-s/snB+WGm6uwi0WjsZdaVcuf3KJXlfGl2LcxgwkEwJF0D/BWzVWAZW/XY4bFaiR7s0Jk3FPvlnepg1H1b1UwlA==
+
+nanopop@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/nanopop/-/nanopop-2.1.0.tgz#23476513cee2405888afd2e8a4b54066b70b9e60"
+  integrity sha512-jGTwpFRexSH+fxappnGQtN9dspgE2ipa1aOjtR24igG0pv6JCxImIAmrLRHX+zUF5+1wtsFVbKyfP51kIGAVNw==
 
 neo-async@^2.6.2:
   version "2.6.2"
@@ -2957,7 +2999,7 @@ webpack-merge@^5.7.3:
     clone-deep "^4.0.1"
     wildcard "^2.0.0"
 
-webpack-sources@^1.4.0:
+webpack-sources@^1.1.0, webpack-sources@^1.4.0:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.4.3.tgz#eedd8ec0b928fbf1cbfe994e22d2d890f330a933"
   integrity sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==
