@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.2...v1.0.3) (2021-03-30)
+
+
+### Bug Fixes
+
+* cocreatejs from npm ([cbdcf42](https://github.com/CoCreate-app/CoCreate-attributes/commit/cbdcf42a0b917af63e97c52c39973943d5cbfd49))
+
 ## [1.0.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.1...v1.0.2) (2021-03-29)
 
 
