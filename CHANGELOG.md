@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.1...v1.0.2) (2021-03-29)
+
+
+### Bug Fixes
+
+* Package.json paths ([b80f861](https://github.com/CoCreate-app/CoCreate-attributes/commit/b80f861fd4d607301ca4a516ab76ec097a52e303))
+
 ## [1.0.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.0...v1.0.1) (2021-03-29)
 
 
