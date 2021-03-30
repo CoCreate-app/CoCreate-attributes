@@ -44,10 +44,9 @@
   "main": "./src/index.js",
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@babel/plugin-transform-regenerator": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.9.6",
     "babel-loader": "^8.1.0",
+<<<<<<< HEAD
     "clean-webpack-plugin": "^3.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
@@ -55,6 +54,9 @@
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.1.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
+=======
+    "terser-webpack-plugin": "^5.1.1",
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
     "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0",
     "webpack-log": "^3.0.1"

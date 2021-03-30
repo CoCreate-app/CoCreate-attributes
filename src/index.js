@@ -106,18 +106,28 @@ attributes.prototype.listen = async function listen({
     elementSelector
 }) {
 
+<<<<<<< HEAD:src/index.js
 
     let selector = property ? `[data-attributes=${type}][data-attributes_property=${property}]:not(${this.exclude})` : `[data-attributes=${type}]:not(${this.exclude})`;
 
+=======
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5:src/CoCreate-attributes.js
     let input = this.initDocument.querySelector(
         selector
     );
+<<<<<<< HEAD:src/index.js
     // if (selector.indexOf(';') !== -1)
     // let element
     let element = await this.complexSelector(elementSelector,
         (canvasDoc, selector) => canvasDoc.querySelector(selector));
     // else
     //     element = this.initDocument.querySelector(elementSelector)
+=======
+
+    let element = await this.complexSelector(elementSelector,
+        (canvasDoc, selector) => canvasDoc.querySelector(selector));
+
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5:src/CoCreate-attributes.js
 
     this.updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false })
 
@@ -134,6 +144,10 @@ attributes.prototype.collaborate = function collaborate({
         return console.warn('no element id, collaboration skiped');
     let elementSelector = rest.input.getAttribute('data-attributes_target');
 
+<<<<<<< HEAD:src/index.js
+=======
+
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5:src/CoCreate-attributes.js
 
 
     message.send({
@@ -274,7 +288,11 @@ attributes.prototype.validateInput = function validateInput(input) {
 
 
 attributes.prototype.updateElementByValue = function updateElementByValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
+<<<<<<< HEAD:src/index.js
     let computedStyles, value, removeValue, hasUpdated, unit, parsedInt;
+=======
+    let computedStyles, value, removeValue, hasUpdated, unit;
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5:src/CoCreate-attributes.js
     switch (type) {
 
 
@@ -344,16 +362,39 @@ attributes.prototype.removeZeros = function removeZeros(str) {
     for (let len = str.length; i < len; i++) {
         if (str[i] !== '0')
             break;
+<<<<<<< HEAD:src/index.js
     }
     return str.substr(i) || str && '0';
 }
 
 attributes.prototype.updateElement = function updateElement({ input, element, collValue, isColl, unit, type, property, ...rest }) {
+=======
+        case 'classstyle':
+            unit = (input.getAttribute('data-attributes_unit') || '');
+            value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
+            value = value || '';
+            computedStyles = this.getRealStaticCompStyle(element);
+            return setStyleClassIfDif(element, {
+                property,
+                camelProperty,
+                value,
+                computedStyles
+            })
+
+
+        case 'style':
+            unit = (input.getAttribute('data-attributes_unit') || '');
+            value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
+            value = value || '';
+            computedStyles = this.getRealStaticCompStyle(element);
+            return setStyleIfDif.call(element, { property, camelProperty, value, computedStyles })
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5:src/CoCreate-attributes.js
 
 
 
     let inputValue = collValue != undefined ? collValue : this.getInputValue(input);
 
+<<<<<<< HEAD:src/index.js
     if (!Array.isArray(inputValue)) {
         inputValue = unit && inputValue ? inputValue + unit : inputValue;
         inputValue = this.removeZeros(inputValue)
@@ -398,6 +439,33 @@ attributes.prototype.updateElement = function updateElement({ input, element, co
             ...rest,
 
         });
+=======
+attributes.prototype.updateElement = function updateElement({ input, element, collValue, isColl, unit, ...rest }) {
+
+
+    let inputValue = collValue || this.getInputValue(input);
+    inputValue = unit ? inputValue + unit : inputValue;
+    let hasUpdated = this.updateElementByValue({ ...rest, input, element, inputValue, hasCollValue: !!collValue })
+
+    cache.reset(element)
+
+
+    let params = {
+        value: inputValue,
+        unit: input.getAttribute('data-attributes_unit'),
+        input,
+        element,
+        ...rest
+    };
+
+    hasUpdated &&
+        isColl &&
+        this.collaborate(params);
+        
+    hasUpdated &&
+        !isColl &&
+        this.callback(params);
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5:src/CoCreate-attributes.js
 
     // not needed since crdt
     // when function called on collboration
@@ -609,6 +677,7 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
         console.warn('complex selector canvas now found for', comSelector)
         return
     }
+<<<<<<< HEAD:src/index.js
 
     if ( /*!canvas.contentWindow.observedByCCAttributes &&*/ canvas.contentDocument.readyState === 'loading') {
         try {
@@ -621,6 +690,18 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
         }
         // this.observerElements(canvas.contentWindow)
         // canvas.contentWindow.observedByCCAttributes = true;
+=======
+    if (canvas.contentDocument.readyState === 'loading') {
+        try {
+            await new Promise((resolve, reject) => {
+                canvas.contentWindow.addEventListener('load', (e) => resolve())
+            });
+        }
+        catch (err) {
+            console.error('iframe can not be loaded')
+        }
+
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5:src/CoCreate-attributes.js
     }
 
     return callback(canvas.contentWindow.document, selector);

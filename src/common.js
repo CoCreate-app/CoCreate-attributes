@@ -1,5 +1,9 @@
 /*global CoCreate*/
+<<<<<<< HEAD
 import select from '@cocreate/select'
+=======
+
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
 export function parseClassRules(str) {
     return str.split(' ').filter(cln => cln);
 
@@ -33,7 +37,11 @@ export function setStyleClassIfDif(element, { property, camelProperty, value, co
             if (elValue != value)
                 return classList.replace(`${property}:${elValue}`, `${property}:${value}`);
         }
+<<<<<<< HEAD
         else if (computedStyles[camelProperty] != value && !classList.contains(`${property}:${value}`))
+=======
+        else if (computedStyles[camelProperty] != value && !classList.has(`${property}:${value}`))
+>>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
         {
             classList.add(`${property}:${value}`);
             return true;
