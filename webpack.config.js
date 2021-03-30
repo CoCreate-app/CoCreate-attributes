@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const path = require("path")
 const TerserPlugin = require("terser-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
@@ -13,27 +12,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: isProduction ? "[name].min.js" : "[name][hash].js",
-=======
-// Webpack uses this to work with directories
-const path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
-
-let isProduction = process.env.NODE_ENV === "production";
-
-// This is main configuration object.
-// Here you write different options and tell Webpack what to do
-module.exports = {
-  // Path to your entry point. From this file Webpack will begin his work
-  entry: {
-    "CoCreate-attributes": "./src/CoCreate-attributes.js",
-  },
-
-  // Path and filename of your result bundle.
-  // Webpack will bundle all JavaScript into this file
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: isProduction ? "[name].min.js" : "[name].js",
->>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
     libraryTarget: "umd",
     libraryExport: "default",
     library: ["CoCreate", "attributes"],
@@ -59,11 +37,7 @@ module.exports = {
   module: {
     rules: [
       {
-<<<<<<< HEAD
-        test: /.js$/,
-=======
         test: /\.js$/,
->>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
         exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
@@ -72,7 +46,6 @@ module.exports = {
           },
         },
       },
-<<<<<<< HEAD
       {
         test: /.css$/i,
         use: [
@@ -80,19 +53,13 @@ module.exports = {
           "file-loader",
         ],
       },
-=======
->>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
     ],
   },
 
   // add source map
   ...(isProduction ? {} : { devtool: "eval-source-map" }),
 
-<<<<<<< HEAD
-=======
-  // add uglifyJs
 
->>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
   optimization: {
     minimize: true,
     minimizer: [
@@ -110,7 +77,6 @@ module.exports = {
         },
       }),
     ],
-<<<<<<< HEAD
     splitChunks: {
       chunks: "all",
       minSize: 200,
@@ -119,7 +85,3 @@ module.exports = {
     },
   },
 }
-=======
-  },
-};
->>>>>>> b6b6a6528824694693e0a4cc70aa1e5bc57aded5
