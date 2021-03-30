@@ -1,3 +1,12 @@
+## [1.0.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.3...v1.0.4) (2021-03-30)
+
+
+### Bug Fixes
+
+* import from npm ([1beec13](https://github.com/CoCreate-app/CoCreate-attributes/commit/1beec139864d5b4b65f1a7a9531e612ee28ae73d))
+* import from npm ([5301da9](https://github.com/CoCreate-app/CoCreate-attributes/commit/5301da92fb51786ac1dc25f887a9f213c7290d3b))
+* import paths using npm ([1584211](https://github.com/CoCreate-app/CoCreate-attributes/commit/1584211df31346630f86eee06f9e29792ca032b9))
+
 ## [1.0.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.2...v1.0.3) (2021-03-30)
 
 
