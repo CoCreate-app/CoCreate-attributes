@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.4...v1.0.5) (2021-03-31)
+
+
+### Bug Fixes
+
+* remove yarn.lock and package-lock.json ([b7a0e50](https://github.com/CoCreate-app/CoCreate-attributes/commit/b7a0e504a6cc128c9d12725e7c049b1495ba7e55))
+
 ## [1.0.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.3...v1.0.4) (2021-03-30)
 
 
