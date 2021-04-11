@@ -18,7 +18,7 @@ from './common.js';
 import observer from '@cocreate/observer'
 import crdt from '@cocreate/crdt'
 import pickr from '@cocreate/pickr'
-import message from '@cocreate/message'
+import message from '@cocreate/message-client'
 // // dev start
 // import '@cocreate/select'
 // import selected from '@cocreate/selected'
