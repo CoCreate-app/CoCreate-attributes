@@ -9,7 +9,7 @@ A simple attributes component in vanilla javascript. Easily configured using HTM
 
 ![CoCreate-attributes](https://cdn.cocreate.app/docs/CoCreate-attributes.gif)
 
-## [Docs & Demo](https://cocreate.app/docs/clone)
+## [Docs & Demo](https://cocreate.app/docs/attributes)
 
 For a complete guide and working demo refer to the [doumentation](https://cocreate.app/docs/attributes)
 
