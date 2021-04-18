@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
-  <title>CoCreate-builder | CoCreate</title>
+  <title>CoCreate-attributes | CoCreateJS</title>
   <meta name="description" content="Website and web app Builder framework using Cocreate Componets" />
   <meta name="keywords" content="helper classes, utility classes, css framework, css library, inline style classes" />
   <meta name="robots" content="index,follow" />
 
-  <!-- CoCreate CSS -->
+  <!-- CoCreate CSS CDN -->
   <link rel="stylesheet" href="https://cdn.cocreate.app/latest/CoCreate.min.css" type="text/css" />
 
 
@@ -29,124 +29,20 @@
 </head>
 
 <body>
-  <!-- Navbar  -->
-  <div class="nav display:flex align-items:center background:whitesmoke" data-main_content_id="canvas" data-scroll_effect="hide-nav" data-scroll_up="1" data-scroll_down="1">
 
-    <!-- Menu Icon Animations -->
-    <a class="nav-toggle menu_icon--Vdots" data-toggle_sidenav="menuL">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-    </a>
-
-    <!-- Horizontal Scroll Nav/Tabs -->
-    <ul class="cocreate-scroll display:inline-flex direction:rtl font-size:24px align-items:center list-style-type:none width:100% height:50px">
-
-      <!-- Modal Controls -->
-      <li class="margin-right:15px">
-        <a class="btn-modal-close"><i class="fas fa-times"></i></a>
-      </li>
-      <li class="margin-right:15px"><a class="btn-modal-maximize"><i data-transform_to="far fa-window-restore" class="far fa-window-maximize">
-  			  </i></a>
-      </li>
-      <li class="margin-right:15px"><a class="btn-modal-minimize"><i class="far fa-window-minimize">
-  			  </i></a>
-      </li>
-
-      <!-- fullscreen toogle and icon transform-->
-      <li class="margin-right:15px">
-        <a class="fs-toggle"><i data-transform_to="fas fa-compress" class="fas fa-expand"></i></a>
-      </li>
-
-      <!-- Open code Editor in modal-->
-      <li class="margin-right:15px">
-        <a target="modal" href="code-editor.html" data-modal_header="true" data-pass_collection="blocks" data-pass_document_id="" data-pass_to="form-fields" data-modal_width="100%" data-modal_height="100%" data-modal_color="#229954">
-      	    <i class="fa fa-code"></i>
-          </a>
-      </li>
-
-      <!-- Builder Controls -->
-      <li class="margin-right:15px">
-        <a id="clean-canvas">
-						<i class="far fa-trash-alt"></i>
-					</a>
-      </li>
-      <li class="margin-right:15px">
-        <a id='element-borders' class=""><i class="far fa-square"></i></a>
-      </li>
-      <li class="margin-right:15px">
-        <a id="redo-canvas" class=""><i class="fas fa-redo-alt"></i></a>
-      </li>
-      <li class="margin-right:15px">
-        <a id='undo-canvas' class=""><i class="fas fa-undo-alt"></i></a>
-      </li>
-
-      <li class="margin-right:15px">
-        <a id="desktop-view" class=""><i class="fas fa-desktop"></i></a>
-      </li>
-      <li class="margin-right:15px">
-        <a id="tablet-view" class=""><i class="fas fa-tablet-alt"></i></a>
-      </li>
-      <li class="margin-right:15px">
-        <a id="mobile-view" class=""><i class="fas fa-mobile-alt"></i></a>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Modal viewport -->
-  <div class="position:fixed margin-top:50px" data-main_content_id="canvas" id="modal-viewport"></div>
 
   <!-- Main Container -->
   <div data-main_content_id="canvas" class="height:100vh overflow:scroll">
     <iframe data-vdom_id="test" id="canvas" src="./iframe.html" frameborder="0" width="100%" height="100%"></iframe>
   </div>
 
-  <!-- CoCreate SideNav Left -->
-  <div id="menuL" class="cocreate-sidenav background:gainsboro" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="offcanvas" sidenav-default_phone="offcanvas" sidenav-ontoggle_desktop="offcanvas" sidenav-ontoggle_tablet="offcanvas">
-    <div class="">
-      <ul class="overflow:scroll height:100vh margin:5px background:white padding:0 padding-left:5px">
-        <div data-vdom_target="test" data-group_name="test"></div>
-        <!-- CoCreate Render to get list of blocks -->
-        <div data-template_id="template1" data-fetch_collection="blocks" data-filter_name="menu-position" data-filter_value="0" data-filter_value_type="number" data-filter_operator="$ne" data-order_by="menu-position" data-order_type="asc" data-pass_to="blocks">
-        </div>
-
-        <!-- template -->
-        <li data-CoC-draggable="true" class="template menuItem" id="header" data-insert-html='{{html}}'>
-          <span data-collection="" data-document_id="" name="icon" data-pass_id="blocks" class="padding-10px"></span>
-          <span data-collection="" data-document_id="" name="name" data-pass_id="blocks"></span>
-          <div class="float-right">
-            <a target="modal" href="block-form.html" data-pass_collection="blocks" data-pass_document_id="" data-pass_id="blocks" data-pass_to="form-fields" data-modal_width="320px" data-modal_height="100%" data-modal_color="#229954">
-                <i class="fas fa-pencil-alt"></i>
-      				</a>
-          </div>
-          <span data-collection="" data-document_id="" name="html" data-pass_id="blocks"></span>
-        </li>
-
-      </ul>
-    </div>
-
-    <div class="resizeHandler"></div>
-  </div>
-  <!-- End CoCreate SideNav Left -->
+  
 
   <!-- CoCreate SideNav Right -->
   <div id="menuR" class="cocreate-sidenav sidenav-right background:gainsboro" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="expanded" sidenav-default_phone="expanded">
     <div class="padding:5px cocreate-scroll">
       <form>
         <input data-attribute_sync="myAttribute" type="text" class="floating-label attr" placeholder="Draggable" data-attribute_target="#new">
-        <!--<input data-attribute_sync="innerText" type="text" class="floating-label attr" placeholder="style-text" data-attribute_target="#new">-->
-        <!--<input data-attribute_sync="innerText" type="color" class="floating-label attr" placeholder="style-color" data-attribute_target="#new">-->
-        <!--<input data-attribute_sync="innerText" type="date" class="floating-label" placeholder="style-data-time" data-attribute_target="#new">-->
-        <!--<input type="search" class="floating-label" placeholder="Search" data-attribute_sync="innerText" data-attribute_target="#new">-->
-        <!--<input type="date" class="floating-label" placeholder="Date" data-attribute_sync="innerText" data-attribute_target="#new">-->
-        <!--<input type="time" class="floating-label" placeholder="Time" data-attribute_sync="innerText" data-attribute_target="#new">-->
-        <!--<input type="datetime-local" class="floating-label" placeholder="Date Time" data-attribute_sync="innerText" data-attribute_target="#new">-->
-        <!--<textarea class="floating-label" data-realtime="" placeholder="Text Area" data-attribute_sync="innerText" data-attribute_target="#new"></textarea>-->
-
-        
-        <!--<h3 data-attribute_sync="innerText" data-attribute_target="#new" contenteditable>test</h3>-->
         
         
         <p>different name:</p>
@@ -175,13 +71,6 @@
         <br>
         <br>
         <br>
-        <!-- multiple -->
-        <!--<select name="cars" id="cars" data-attribute_sync="style" data-attribute_target="#new" multiple>-->
-        <!--  <option value="background:green;">background:green;</option>-->
-        <!--  <option value="color:blue;">color:blue;</option>-->
-        <!--  <option value="mercedes">Mercedes</option>-->
-        <!--  <option value="audi">Audi</option>-->
-        <!--</select>-->
         
         <select name="cars" id="cars" data-attribute_sync="class" data-attribute_target="#new" multiple>
           <option value="class1">class1</option>
@@ -250,32 +139,6 @@
         </ul>
       </cocreate-select>
       
-      <!--<cocreate-select class="floating-label sortable" multiple-->
-      <!--  data-attribute_sync="style" -->
-      <!--  data-attribute_target="#new"-->
-      <!--  name="selectField1" -->
-      <!--  placeholder="Multiple Documents" -->
-      <!--  data-limit_selectable="3">-->
-        
-      <!--  <input class="option-search" placeholder="Search">-->
-         
-      <!--  <ul class="selectable--list  cocreate-scroll">-->
-      <!--		<li class="selectable"value="background: red;">-->
-      <!--		  <h3 value="hello">background: red;</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="color: blue;">-->
-      <!--		  <h3 >color: blue;</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="font-size: 30px;">-->
-      <!--		  <h3 >font-size: 30px;</h3>-->
-      <!--		</li>-->
-      <!--		<li class="selectable" value="noy a css">-->
-      <!--		  <h3 >noy a css</h3>-->
-      <!--		</li>-->
-      <!--  </ul>-->
-        
-      <!--</cocreate-select>-->
-      
       
       </form>
     </div>
@@ -297,8 +160,8 @@
     }
   </script>
 
-  <!--<script defer src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>-->
-  <script defer src="https://server.cocreate.app/CoCreate-components/CoCreate-attributes/dist/CoCreate-attributes.js"></script>
+  <!--CoCreateJS CDN-->
+  <script src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>
 
 
 </body>
