@@ -59,7 +59,8 @@
   "dependencies": {
     "@cocreate/crdt": "^1.0.5",
     "@cocreate/message-client": "^1.0.0",
-    "@cocreate/observer": "^1.0.1",
-    "@cocreate/pickr": "^1.1.1"
+    "@cocreate/observer": "^1.0.2",
+    "@cocreate/pickr": "^1.1.1",
+    "@cocreate/select": "^1.0.6"
   }
 }
