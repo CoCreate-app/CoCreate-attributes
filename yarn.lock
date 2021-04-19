@@ -883,7 +883,11 @@
     parse-html-comments "^1.3.1"
     ws "^7.3.1"
 
+<<<<<<< HEAD
 "@cocreate/form@^1.0.4", "@cocreate/form@^1.0.8":
+=======
+"@cocreate/form@^1.0.4":
+>>>>>>> 20c9064d791f47341f028253f911c5cc48682590
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@cocreate/form/-/form-1.0.9.tgz#df8d0fa2df595293fcd72e82093b3845d32df162"
   integrity sha512-ACK4pD/8WZgZrhrukamIA4Jc+EIWx/Q0AR1cBWS0hsd7IbS1FKmpFCGnC2v4cu2lEV4ZFh3nkMouALfWvL5UDw==
@@ -907,12 +911,20 @@
     "@cocreate/utils" "^1.0.3"
 
 "@cocreate/message-client@^1.0.0":
+<<<<<<< HEAD
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@cocreate/message-client/-/message-client-1.0.2.tgz#5562d6483be6b4a16e84e3b61565a747315ac8f7"
   integrity sha512-84V6jjbHmozLSiFeSpaCaav3bvsnvaN+MdyDg2Rqb/5d+LXDnt0TnXASKgISTI1qkvn5imra92kNUrA70FjD2g==
   dependencies:
     "@cocreate/docs" "^1.0.3"
     "@cocreate/socket-client" "^1.0.4"
+=======
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@cocreate/message-client/-/message-client-1.0.1.tgz#24ac5a56851a20d5764dd351fb45b39295a75b5f"
+  integrity sha512-dRHbm0FlrZQFr+E8v2OLk1tJqQ8KpEUBTylxhzVZQ3sc/Z2trNxKs6pesCQE5aXSuamFZkcLQ9xNusO7TwOkaQ==
+  dependencies:
+    "@cocreate/docs" "^1.0.3"
+>>>>>>> 20c9064d791f47341f028253f911c5cc48682590
     mini-css-extract-plugin "^1.5.0"
 
 "@cocreate/observer@^1.0.0", "@cocreate/observer@^1.0.2":
