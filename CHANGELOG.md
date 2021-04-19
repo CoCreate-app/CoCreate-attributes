@@ -1,3 +1,11 @@
+## [1.0.9](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.8...v1.0.9) (2021-04-19)
+
+
+### Bug Fixes
+
+* ci and build process ([2626cf5](https://github.com/CoCreate-app/CoCreate-attributes/commit/2626cf5a12d8b9b5ac4796d6ced689bd08ced236))
+* npm publish and cdn deployment ([b25cc92](https://github.com/CoCreate-app/CoCreate-attributes/commit/b25cc9273d2135c79ec4c0322187a51721d9692d))
+
 ## [1.0.8](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.7...v1.0.8) (2021-04-14)
 
 
