@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.11...v1.0.12) (2021-04-23)
+
+
+### Bug Fixes
+
+* readme and documentation. Removed securitykeys ([d1be6ab](https://github.com/CoCreate-app/CoCreate-attributes/commit/d1be6ab6ea6cce4f6f051d0cc363932307b90ad9))
+
 ## [1.0.11](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.10...v1.0.11) (2021-04-19)
 
 
