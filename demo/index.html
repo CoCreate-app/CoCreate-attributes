@@ -1,156 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
+  <head>
+    <title>Attributes | CoCreateJS</title>
+    <!-- CoCreate Favicon -->
+    <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
+  </head>
+  <body>
   
-  <meta name="description" content="Website and web app Builder framework using Cocreate Componets" />
-  <meta name="keywords" content="helper classes, utility classes, css framework, css library, inline style classes" />
-  <meta name="robots" content="index,follow" />
-  
-  <title>CoCreate Attributes | CoCreateJS</title>
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" crossorigin="anonymous" />
-
-  <style>
-    /* this is already apart of COCreate.min.css but we only remove and add one hidden in an element */
-
-    .hidden.hidden {
-      /*display: none;*/
-    }
-  </style>
-
-</head>
-
-<body>
-
-
-  <!-- Main Container -->
-  <div data-main_content_id="canvas" class="height:100vh overflow:scroll">
-    <iframe data-vdom_id="test" id="canvas" src="./iframe.html" frameborder="0" width="100%" height="100%"></iframe>
-  </div>
-
-  
-
-  <!-- CoCreate SideNav Right -->
-  <div id="menuR" class="cocreate-sidenav sidenav-right background:gainsboro" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="expanded" sidenav-default_phone="expanded">
-    <div class="padding:5px cocreate-scroll">
-      <form>
-        <input data-attribute_sync="myAttribute" type="text" class="floating-label attr" placeholder="Draggable" data-attribute_target="#new">
-        <p>different name:</p>
-        <input type="checkbox" id="vehicle11" name="vehicle1" value="background:green;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle1">background:green</label><br>
-        <input type="checkbox" id="vehicle21" name="vehicle2" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle2">color:blue</label></br>
-        <p>same name:</p>
-        <input type="checkbox" id="vehicle31" name="sameee" value="background:green;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle3">background:green</label><br>
-        <input type="checkbox" id="vehicle41" name="sameee" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle4">color:blue</label></br>
-        <input id="radio1" type="radio" name="radiotest" value="background:green;" data-attribute_sync="style" data-attribute_target="#new">
-         <label for="radio1">background:green</label>
-        <input id="radio2" type="radio" name="radiotest" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new">
-         <label for="radio2">color:blue</label>
-         
-        
-        <select name="cars" id="cars" data-attribute_sync="style" data-attribute_target="#new">
-          <option value="background:green;">background:green;</option>
-          <option value="color:blue;">color:blue;</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-        <br>
-        <br>
-        <br>
-        
-        <select name="cars" id="cars" data-attribute_sync="class" data-attribute_target="#new" multiple>
-          <option value="class1">class1</option>
-          <option value="class2">class2</option>
-          <option value="class3">class3</option>
-          <option value="class4">class4</option>
-        </select>
-          <select name="cars" id="cars" data-attribute_sync="myAttribute" data-attribute_target="#new" multiple>
-          <option value="class1">myAttribute </option>
-          <option value="class2">myAttribute class2</option>
-          <option value="class3">myAttribute class3</option>
-          <option value="class4">myAttribute class4</option>
-        </select>
-  
-            <input type="checkbox" id="classxxx" name="classxxx" value="classxxx" data-attribute_sync="class" data-attribute_target="#new" checked><label for="classxxx">add class: classxxx</label><br>
-        <div thename="volvo" data-element_id="a">volvo</div>
-        <div thename="saab" data-element_id="b">saab</div>
-        <div id="new" thename="" data-element_id="c" style="font-size:18px;" class="class1 class2 classxxx">#ff0000</div>
-        <div thename="audi" data-element_id="d">audi</div>
-        
-      <cocreate-select 
-      class="sortable floating-label"  
-      data-attribute_sync="style" 
-      data-attribute_target="#new"
-      name="selectField4" 
-      placeholder="Single Options">
-        <input class="option-search" placeholder="Search">
-        <ul class="selectable--list  cocreate-scroll">
-      		<li class="selectable"value="background:green;">
-      		  <h3>background:green;</h3>
-      		</li>
-      		<li class="selectable" value="color:blue;">
-      		  <h3 >color:blue;</h3>
-      		</li>
-      		<li class="selectable" value="value 3">
-      		  <h3 >sss</h3>
-      		</li>
-      		<li class="selectable" value="value 3">
-      		  <h3 >value 3</h3>
-      		</li>
-        </ul>
-      </cocreate-select>
-            <cocreate-select 
-      class="sortable floating-label"  
-      data-attribute_sync="style" 
-      data-attribute_target="#new"
-      name="selectField4" 
-      multiple
-      placeholder="Single Options">
-        <input class="option-search" placeholder="Search">
-        <ul class="selectable--list  cocreate-scroll">
-      		<li class="selectable"value="background:green;">
-      		  <h3>background:green;</h3>
-      		</li>
-      		<li class="selectable" value="color:blue;">
-      		  <h3 >color:blue;</h3>
-      		</li>
-      		<li class="selectable" value="value 3">
-      		  <h3 >sss</h3>
-      		</li>
-      		<li class="selectable" value="value 3">
-      		  <h3 >value 3</h3>
-      		</li>
-        </ul>
-      </cocreate-select>
-      
-      
-      </form>
+    <!-- Main Container -->
+    <div data-main_content_id="canvas" class="height:100vh overflow:scroll">
+      <iframe data-vdom_id="test" id="canvas" src="./iframe.html" frameborder="0" width="100%" height="100%"></iframe>
     </div>
-    <div class="resizeHandler"></div>
-  </div>
-  <!-- End CoCreate SideNav Right -->
-
-  <!-- floating btn -->
-  <a class="position:fixed bottom:15px right:15px padding:15px background:dodgerblue grow-hover round z-index:12" target="modal" href="block-form.html" data-pass_collection="blocks" data-modal_width="320px" data-modal_height="100%" data-modal_color="#229954" data-pass_to="render">
-	   <i class="fa fa-plus"></i>
-  </a>
-  <!-- end floating btn -->
-
-  <script>
-    var config = {
-      apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
-            organization_Id: '5de0387b12e200ea63204d6c'
-    }
-  </script>
-
-  <!--CoCreateJS CDN-->
-  <script src="https://cdn.cocreate.app/attributes/latest/CoCreate-attributes.min.js" ></script>
-
-</body>
-
+  
+    
+    <!-- CoCreate SideNav Right -->
+    <div id="menuR" class="cocreate-sidenav sidenav-right background:gainsboro" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="expanded" sidenav-default_phone="expanded">
+      <div class="padding:5px cocreate-scroll">
+        <form>
+          <input data-attribute_sync="myAttribute" type="text" class="floating-label attr" placeholder="Draggable" data-attribute_target="#new">
+          <p>different name:</p>
+          <input type="checkbox" id="vehicle11" name="vehicle1" value="background:green;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle1">background:green</label><br>
+          <input type="checkbox" id="vehicle21" name="vehicle2" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle2">color:blue</label></br>
+          <p>same name:</p>
+          <input type="checkbox" id="vehicle31" name="sameee" value="background:green;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle3">background:green</label><br>
+          <input type="checkbox" id="vehicle41" name="sameee" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new"><label for="vehicle4">color:blue</label></br>
+          <input id="radio1" type="radio" name="radiotest" value="background:green;" data-attribute_sync="style" data-attribute_target="#new">
+           <label for="radio1">background:green</label>
+          <input id="radio2" type="radio" name="radiotest" value="color:blue;" data-attribute_sync="style" data-attribute_target="#new">
+           <label for="radio2">color:blue</label>
+           
+          
+          <select name="cars" id="cars" data-attribute_sync="style" data-attribute_target="#new">
+            <option value="background:green;">background:green;</option>
+            <option value="color:blue;">color:blue;</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          <br>
+          <br>
+          <br>
+          
+          <select name="cars" id="cars" data-attribute_sync="class" data-attribute_target="#new" multiple>
+            <option value="class1">class1</option>
+            <option value="class2">class2</option>
+            <option value="class3">class3</option>
+            <option value="class4">class4</option>
+          </select>
+            <select name="cars" id="cars" data-attribute_sync="myAttribute" data-attribute_target="#new" multiple>
+            <option value="class1">myAttribute </option>
+            <option value="class2">myAttribute class2</option>
+            <option value="class3">myAttribute class3</option>
+            <option value="class4">myAttribute class4</option>
+          </select>
+    
+              <input type="checkbox" id="classxxx" name="classxxx" value="classxxx" data-attribute_sync="class" data-attribute_target="#new" checked><label for="classxxx">add class: classxxx</label><br>
+          <div thename="volvo" data-element_id="a">volvo</div>
+          <div thename="saab" data-element_id="b">saab</div>
+          <div id="new" thename="" data-element_id="c" style="font-size:18px;" class="class1 class2 classxxx">#ff0000</div>
+          <div thename="audi" data-element_id="d">audi</div>
+          
+        <cocreate-select 
+        class="sortable floating-label"  
+        data-attribute_sync="style" 
+        data-attribute_target="#new"
+        name="selectField4" 
+        placeholder="Single Options">
+          <input class="option-search" placeholder="Search">
+          <ul class="selectable--list  cocreate-scroll">
+        		<li class="selectable"value="background:green;">
+        		  <h3>background:green;</h3>
+        		</li>
+        		<li class="selectable" value="color:blue;">
+        		  <h3 >color:blue;</h3>
+        		</li>
+        		<li class="selectable" value="value 3">
+        		  <h3 >sss</h3>
+        		</li>
+        		<li class="selectable" value="value 3">
+        		  <h3 >value 3</h3>
+        		</li>
+          </ul>
+        </cocreate-select>
+              <cocreate-select 
+        class="sortable floating-label"  
+        data-attribute_sync="style" 
+        data-attribute_target="#new"
+        name="selectField4" 
+        multiple
+        placeholder="Single Options">
+          <input class="option-search" placeholder="Search">
+          <ul class="selectable--list  cocreate-scroll">
+        		<li class="selectable"value="background:green;">
+        		  <h3>background:green;</h3>
+        		</li>
+        		<li class="selectable" value="color:blue;">
+        		  <h3 >color:blue;</h3>
+        		</li>
+        		<li class="selectable" value="value 3">
+        		  <h3 >sss</h3>
+        		</li>
+        		<li class="selectable" value="value 3">
+        		  <h3 >value 3</h3>
+        		</li>
+          </ul>
+        </cocreate-select>
+        
+        
+        </form>
+      </div>
+      <div class="resizeHandler"></div>
+    </div>
+    <!-- End CoCreate SideNav Right -->
+  
+    <!-- floating btn -->
+    <a class="position:fixed bottom:15px right:15px padding:15px background:dodgerblue grow-hover round z-index:12" target="modal" href="block-form.html" data-pass_collection="blocks" data-modal_width="320px" data-modal_height="100%" data-modal_color="#229954" data-pass_to="render">
+  	   <i class="fa fa-plus"></i>
+    </a>
+    <!-- end floating btn -->
+  
+    <script>
+      var config = {
+        apiKey: 'c2b08663-06e3-440c-ef6f-13978b42883a',
+              organization_Id: '5de0387b12e200ea63204d6c'
+      }
+    </script>
+  
+    <!--CoCreateJS CDN-->
+    <script src="https://cdn.cocreate.app/attributes/latest/CoCreate-attributes.min.js" ></script>
+  
+  </body>
 </html>
