@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.13...v1.0.14) (2021-04-27)
+
+
+### Bug Fixes
+
+* add host in docs ([8b5b3b1](https://github.com/CoCreate-app/CoCreate-attributes/commit/8b5b3b1a8166d3345ab9fbf55acbcd00b673ed4b))
+
 ## [1.0.13](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.12...v1.0.13) (2021-04-27)
 
 
