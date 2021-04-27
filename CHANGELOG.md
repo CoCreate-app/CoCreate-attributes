@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.12...v1.0.13) (2021-04-27)
+
+
+### Bug Fixes
+
+* Update to readme, demo, added cdn scripts ([97a72ac](https://github.com/CoCreate-app/CoCreate-attributes/commit/97a72ac55ed1b8735c21269cc193152eae4d629e))
+
 ## [1.0.12](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.11...v1.0.12) (2021-04-23)
 
 
