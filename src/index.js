@@ -60,6 +60,7 @@ let types = ['attribute', 'classstyle', 'style', 'innerText']
 
 function attributes({ document: initDocument, exclude = "", callback = () => {} }) {
     this.exclude = exclude;
+    // this.callback will be called by type which can be "attribute" "classstyle" "style" "innertext"
     this.callback = callback;
     this.initDocument = initDocument;
 
