@@ -475,7 +475,8 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
             })
             break;
         case 'cocreate-select':
-            renderOptions(input, value)
+            
+            renderOptions(input, Array.isArray(value) ? value: [value])
             break;
         case 'pickr':
             // todo: how to perform validation
