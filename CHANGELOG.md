@@ -1,3 +1,10 @@
+## [1.0.15](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.14...v1.0.15) (2021-05-08)
+
+
+### Bug Fixes
+
+* add css auto parse and save to docs. ([73de3db](https://github.com/CoCreate-app/CoCreate-attributes/commit/73de3db9d6fffc2a51282d01c228f0bc4b5a62f2))
+
 ## [1.0.14](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.13...v1.0.14) (2021-04-27)
 
 
