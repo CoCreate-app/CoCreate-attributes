@@ -1,6 +1,6 @@
 /*global CoCreate*/
 
-import select from '@cocreate/select'
+import select, { container } from '@cocreate/select'
 
 export function parseClassRules(str) {
     return str.split(' ').filter(cln => cln);
@@ -35,8 +35,7 @@ export function setStyleClassIfDif(element, { property, camelProperty, value, co
             if (elValue != value)
                 return classList.replace(`${property}:${elValue}`, `${property}:${value}`);
         }
-        else if (computedStyles[camelProperty] != value && !classList.contains(`${property}:${value}`))
-        {
+        else if (computedStyles[camelProperty] != value && !classList.contains(`${property}:${value}`)) {
             classList.add(`${property}:${value}`);
             return true;
         }
@@ -91,10 +90,14 @@ export function removeAllSelectedOptions() {
 // };
 
 export function renderOptions(input, arrValue) {
-    if (arrValue && arrValue.length)
-        select.renderValue(input, arrValue)
-    else
-        removeAllSelectedOptions.call(input)
+    if (container.has(input)) {
+        let instance = container.get(input);
+        if (arrValue && arrValue.length)
+            arrValue.forEach(option => instance.selectOption)
+        else
+            instance.unselectAll()
+    }
+
 }
 // CoCreate Select helper end  
 export function parseCssRules(str) {
