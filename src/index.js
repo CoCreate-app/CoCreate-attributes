@@ -233,17 +233,13 @@ attributes.prototype.watchInputChange = async function watchInputChange(mutation
 attributes.prototype.perInput = async function perInput(input, callback) {
 
 
-    try {
+ 
         let inputMeta, element;
         inputMeta = this.validateInput(input);
         element = inputMeta && await this.getElementFromInput(input);
         if (!element) return;
         callback(inputMeta, element)
-    }
-    catch (error) {
-        console.error(error)
-    }
-
+  
 }
 
 

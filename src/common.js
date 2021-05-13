@@ -93,7 +93,7 @@ export function renderOptions(input, arrValue) {
     if (container.has(input)) {
         let instance = container.get(input);
         if (arrValue && arrValue.length)
-            arrValue.forEach(option => instance.selectOption)
+            arrValue.forEach(option => instance.selectOption(option))
         else
             instance.unselectAll()
     }
