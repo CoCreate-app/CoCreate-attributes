@@ -516,7 +516,9 @@ attributes.prototype.packMultiValue = function packMultiValue({
 
 attributes.prototype.getInputValue = function getInputValue(input) {
     if (!input) return;
-    let inputType = input.tagName.toLowerCase() || input.classList.has('.pickr') && 'pickr';
+    let inputType = input.classList.contains('.pickr') && 'pickr'
+        || input.matches(ccSelectSelector) && 'cocreate-select'
+        || input.tagName.toLowerCase();
 
     switch (inputType) {
         case 'input':
