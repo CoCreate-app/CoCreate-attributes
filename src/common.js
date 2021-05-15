@@ -73,21 +73,6 @@ export function setStyleIfDif({ property, camelProperty, value, computedStyles }
 }
 
 
-// CoCreate Select helper
-// export function getAllSelectedOptions() {
-//     let options = this.querySelectorAll(":scope > [selected]");
-//     return Array.from(options).map((o) => o.getAttribute("value"));
-// };
-
-export function removeAllSelectedOptions() {
-    let options = this.querySelectorAll(":scope > [selected]");
-    return Array.from(options).forEach((o) => o.remove());
-};
-
-// export function getAllOptions() {
-//     let options = this.querySelectorAll(":scope > ul > [value]");
-//     return Array.from(options).map((o) => o.getAttribute("value"));
-// };
 
 export function renderOptions(input, arrValue) {
     if (container.has(input)) {

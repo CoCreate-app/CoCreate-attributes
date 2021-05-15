@@ -4,7 +4,6 @@ import {
     elStore,
     parseCssRules,
     renderOptions,
-    removeAllSelectedOptions,
     setStyleIfDif,
     setAttributeIfDif,
     setStyleClassIfDif,
@@ -18,7 +17,10 @@ from './common.js';
 import observer from '@cocreate/observer'
 import crdt from '@cocreate/crdt'
 import pickr from '@cocreate/pickr'
-import message from '@cocreate/message-client'
+import message from '@cocreate/message-client';
+import {containerSelector as ccSelectSelector} from '@cocreate/select/src/config';
+import {container} from '@cocreate/select';
+
 // // dev start
 // import '@cocreate/select'
 // import selected from '@cocreate/selected'
@@ -315,7 +317,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                         // unconventional change
                         if (type === 'data-attributes_unit' && ['auto', 'inherit', 'initial'].includes(inputSValue.value)) {
                             element.value = inputSValue.value;
-                            removeAllSelectedOptions.call(input)
+                            container.get(input).unselectAll();
                         }
                         else
                             // unconventional change
@@ -539,7 +541,7 @@ attributes.prototype.getInputValue = function getInputValue(input) {
 
         case 'cocreate-select':
             return this.packMultiValue({
-                inputs: input.querySelectorAll(":scope > [selected]"),
+                inputs: input.selectedOptions,
                 forceState: true
             });
 
