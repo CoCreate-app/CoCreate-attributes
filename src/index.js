@@ -282,6 +282,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
             parsedInt = parseInt(value)
 
             unit = (input.getAttribute('data-attributes_unit') || '');
+            inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
             computedStyles = this.getRealStaticCompStyle(element);
@@ -295,6 +296,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
         case 'style':
             unit = (input.getAttribute('data-attributes_unit') || '');
+             inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
             computedStyles = this.getRealStaticCompStyle(element);
@@ -306,6 +308,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                 return true;
             }
             else return false;
+        // default is setAttribute
         default:
             if (typeof inputValue == 'string') {
 
