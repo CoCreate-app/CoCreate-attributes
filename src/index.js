@@ -115,13 +115,14 @@ attributes.prototype.listen = async function listen({
     let input = this.initDocument.querySelector(
         selector
     );
+    if(!input) console.error('input can not be found')
     // if (selector.indexOf(';') !== -1)
     // let element
     let element = await this.complexSelector(elementSelector,
         (canvasDoc, selector) => canvasDoc.querySelector(selector));
     // else
     //     element = this.initDocument.querySelector(elementSelector)
-
+    if(!element) console.error('element can not be found')
     this.updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false })
 
 
