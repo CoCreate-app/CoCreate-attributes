@@ -320,7 +320,14 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                     if (inputSValue.checked) {
                         // unconventional change
                         if (type === 'data-attributes_unit' && ['auto', 'inherit', 'initial'].includes(inputSValue.value)) {
-                            element.value = inputSValue.value;
+                                        crdt.replaceText({
+                collection: 'aaaaa',
+                document_id: 'null',
+                name: inputSValue.getAttribute('name'),
+                value: inputSValue.value,
+                position: '0',
+            })
+                       
                             container.get(input).unselectAll();
                         }
                         else
