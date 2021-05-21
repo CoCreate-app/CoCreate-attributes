@@ -18,8 +18,8 @@ import observer from '@cocreate/observer'
 import crdt from '@cocreate/crdt'
 import pickr from '@cocreate/pickr'
 import message from '@cocreate/message-client';
-import {containerSelector as ccSelectSelector} from '@cocreate/select/src/config';
-import {container} from '@cocreate/select';
+import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
+import { container } from '@cocreate/select';
 
 // // dev start
 // import '@cocreate/select'
@@ -115,14 +115,14 @@ attributes.prototype.listen = async function listen({
     let input = this.initDocument.querySelector(
         selector
     );
-    if(!input) console.error('input can not be found')
+    if (!input) console.error('input can not be found')
     // if (selector.indexOf(';') !== -1)
     // let element
     let element = await this.complexSelector(elementSelector,
         (canvasDoc, selector) => canvasDoc.querySelector(selector));
     // else
     //     element = this.initDocument.querySelector(elementSelector)
-    if(!element) console.error('element can not be found')
+    if (!element) console.error('element can not be found')
     this.updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false })
 
 
@@ -236,13 +236,13 @@ attributes.prototype.watchInputChange = async function watchInputChange(mutation
 attributes.prototype.perInput = async function perInput(input, callback) {
 
 
- 
-        let inputMeta, element;
-        inputMeta = this.validateInput(input);
-        element = inputMeta && await this.getElementFromInput(input);
-        if (!element) return;
-        callback(inputMeta, element)
-  
+
+    let inputMeta, element;
+    inputMeta = this.validateInput(input);
+    element = inputMeta && await this.getElementFromInput(input);
+    if (!element) return;
+    callback(inputMeta, element)
+
 }
 
 
@@ -297,7 +297,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
         case 'style':
             unit = (input.getAttribute('data-attributes_unit') || '');
-             inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
+            inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
             computedStyles = this.getRealStaticCompStyle(element);
@@ -309,7 +309,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                 return true;
             }
             else return false;
-        // default is setAttribute
+            // default is setAttribute
         default:
             if (typeof inputValue == 'string') {
 
@@ -320,14 +320,14 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                     if (inputSValue.checked) {
                         // unconventional change
                         if (type === 'data-attributes_unit' && ['auto', 'inherit', 'initial'].includes(inputSValue.value)) {
-                                        crdt.replaceText({
-                collection: 'aaaaa',
-                document_id: 'null',
-                name: inputSValue.getAttribute('name'),
-                value: inputSValue.value,
-                position: '0',
-            })
-                       
+                            crdt.replaceText({
+                                collection: 'aaaaa',
+                                document_id: 'null',
+                                name: inputSValue.getAttribute('name'),
+                                value: inputSValue.value,
+                                position: '0',
+                            })
+
                             container.get(input).unselectAll();
                         }
                         else
@@ -484,8 +484,8 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
             })
             break;
         case 'cocreate-select':
-            
-            renderOptions(input, Array.isArray(value) ? value: [value])
+
+            renderOptions(input, Array.isArray(value) ? value : [value])
             break;
         case 'pickr':
             // todo: how to perform validation
@@ -524,9 +524,9 @@ attributes.prototype.packMultiValue = function packMultiValue({
 
 attributes.prototype.getInputValue = function getInputValue(input) {
     if (!input) return;
-    let inputType = input.classList.contains('.pickr') && 'pickr'
-        || input.matches(ccSelectSelector) && 'cocreate-select'
-        || input.tagName.toLowerCase();
+    let inputType = input.classList.contains('.pickr') && 'pickr' ||
+        input.matches(ccSelectSelector) && 'cocreate-select' ||
+        input.tagName.toLowerCase();
 
     switch (inputType) {
         case 'input':
