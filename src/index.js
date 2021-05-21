@@ -386,7 +386,7 @@ attributes.prototype.updateElement = function updateElement({ input, element, co
     hasUpdated &&
         isColl &&
         this.callback({
-            value: Array.isArray(inputValue) ? inputValue[0].value : inputValue,
+            value: Array.isArray(inputValue).length ? inputValue[0].value : inputValue,
             unit: input.getAttribute('data-attributes_unit'),
             input,
             element,
