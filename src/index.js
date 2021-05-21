@@ -280,8 +280,6 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
 
         case 'classstyle':
-            parsedInt = parseInt(value)
-
             unit = (input.getAttribute('data-attributes_unit') || '');
             inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
@@ -316,27 +314,16 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                 return setAttributeIfDif.call(element, type, inputValue)
             }
             else {
-                for (let inputSValue of inputValue) {
-                    if (inputSValue.checked) {
-                        // unconventional change
-                        if (type === 'data-attributes_unit' && ['auto', 'inherit', 'initial'].includes(inputSValue.value)) {
-                            crdt.replaceText({
-                                collection: 'aaaaa',
-                                document_id: 'null',
-                                name: inputSValue.getAttribute('name'),
-                                value: inputSValue.value,
-                                position: '0',
-                            })
-
-                            container.get(input).unselectAll();
-                        }
-                        else
-                            // unconventional change
+                if (!inputValue.length)
+                    return setAttributeIfDif.call(element, type, '')
+                else
+                    for (let inputSValue of inputValue) {
+                        if (inputSValue.checked) {
                             return setAttributeIfDif.call(element, type, inputSValue.value)
 
-                    }
+                        }
 
-                }
+                    }
 
 
             }
@@ -496,7 +483,7 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
 
         default:
             crdt.replaceText({
-                collection: 'aaaaa',
+                collection: 'builder',
                 document_id: 'null',
                 name: input.getAttribute('name'),
                 value: value + '',
