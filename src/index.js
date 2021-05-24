@@ -350,7 +350,8 @@ attributes.prototype.updateElement = function updateElement({ input, element, co
 
 
     let inputValue = collValue != undefined ? collValue : this.getInputValue(input);
-
+    if(!inputValue) return;
+    
     if (!Array.isArray(inputValue)) {
         inputValue = unit && inputValue ? inputValue + unit : inputValue;
         inputValue = this.removeZeros(inputValue)
@@ -557,6 +558,7 @@ attributes.prototype.getInputValue = function getInputValue(input) {
 
 
         default:
+            return false;
             console.warn('CoCreateStyle: unidentified input');
             break;
     }
