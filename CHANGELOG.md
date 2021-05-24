@@ -1,3 +1,10 @@
+## [1.0.16](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.15...v1.0.16) (2021-05-24)
+
+
+### Bug Fixes
+
+* avoid error by return failure ([bce2839](https://github.com/CoCreate-app/CoCreate-attributes/commit/bce28397bced0b7685242c9caddb5d70a7f2179b))
+
 ## [1.0.15](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.14...v1.0.15) (2021-05-08)
 
 
