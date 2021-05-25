@@ -316,6 +316,10 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
             else {
                 if (!inputValue.length)
                     return setAttributeIfDif.call(element, type, '')
+                else if (type === "class") {
+                    value = inputValue.map(o => o.value).join(' ')
+                    setAttributeIfDif.call(element, type, value)
+                }
                 else
                     for (let inputSValue of inputValue) {
                         if (inputSValue.checked) {
@@ -350,8 +354,8 @@ attributes.prototype.updateElement = function updateElement({ input, element, co
 
 
     let inputValue = collValue != undefined ? collValue : this.getInputValue(input);
-    if(!inputValue) return;
-    
+    if (!inputValue) return;
+
     if (!Array.isArray(inputValue)) {
         inputValue = unit && inputValue ? inputValue + unit : inputValue;
         inputValue = this.removeZeros(inputValue)
