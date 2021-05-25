@@ -110,7 +110,7 @@ attributes.prototype.listen = async function listen({
 }) {
 
 
-    let selector = property ? `[data-attributes=${type}][data-attributes_property=${property}]:not(${this.exclude})` : `[data-attributes=${type}]:not(${this.exclude})`;
+    let selector = property ? `[data-attributes="${type}"][data-attributes_property="${property}"]:not(${this.exclude})` : `[data-attributes="${type}"]:not(${this.exclude})`;
 
     let input = this.initDocument.querySelector(
         selector
@@ -185,9 +185,9 @@ attributes.prototype.observerElements = function observerElements(initWindow) {
 attributes.prototype.getInputFromElement = function getInputFromElement(element) {
 
 
-    let elId = element.getAttribute('data-element_id') || element.id && `"#${element.id }"`;
+    let elId = element.getAttribute('data-element_id') || element.id;
     if (elId)
-        return this.initDocument.querySelectorAll(`[data-attributes_target=${elId}]`)
+        return this.initDocument.querySelectorAll(`[data-attributes_target="${elId}"]`)
     return []
 
 }
