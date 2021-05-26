@@ -388,10 +388,21 @@ attributes.prototype.updateElement = function updateElement({ input, element, co
         type = 'attribute';
     }
 
+    let value;
+    if (Array.isArray(inputValue)) {
+        if (property === 'class')
+            value = inputValue.map(o => o.value).join(' ')
+        else
+            value = inputValue[0].value
+    }
+    else
+        value = inputValue;
+
+
     hasUpdated &&
         isColl &&
         this.callback({
-            value: Array.isArray(inputValue).length ? inputValue[0].value : inputValue,
+            value,
             unit: input.getAttribute('data-attributes_unit'),
             input,
             element,
