@@ -80,7 +80,7 @@ export function renderOptions(input, arrValue) {
         if (arrValue.length)
             arrValue.forEach(option => instance.selectOption(option))
         else
-            instance.unselectAll()
+            instance.unselectAll(false)
     }
 
 }
