@@ -318,7 +318,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                     return setAttributeIfDif.call(element, type, '')
                 else if (type === "class") {
                     value = inputValue.map(o => o.value).join(' ')
-                    setAttributeIfDif.call(element, type, value)
+                    return setAttributeIfDif.call(element, type, value)
                 }
                 else
                     for (let inputSValue of inputValue) {
