@@ -414,6 +414,9 @@ attributes.prototype.updateInput = function updateInput({ type, property, camelP
     let computedStyles, value, value2, styleValue, unit;
     if (!input) return console.error('CoCreate Attributes: input not found/dev')
     switch (type) {
+        case 'class':
+            value = Array.from(element.classList);
+            break;
         case 'classstyle':
             let ccStyle = getCoCreateStyle(element.classList);
             if (ccStyle[camelProperty])
@@ -479,8 +482,11 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
             })
             break;
         case 'cocreate-select':
-
-            renderOptions(input, Array.isArray(value) ? value : [value])
+            if (value)
+                value = Array.isArray(value) ? value : [value]
+            else
+                value = []
+            renderOptions(input, value)
             break;
         case 'pickr':
             // todo: how to perform validation

@@ -77,7 +77,7 @@ export function setStyleIfDif({ property, camelProperty, value, computedStyles }
 export function renderOptions(input, arrValue) {
     if (container.has(input)) {
         let instance = container.get(input);
-        if (arrValue && arrValue.length)
+        if (arrValue.length)
             arrValue.forEach(option => instance.selectOption(option))
         else
             instance.unselectAll()
