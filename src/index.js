@@ -467,7 +467,7 @@ attributes.prototype.updateInput = function updateInput({ type, property, camelP
 attributes.prototype.setInputValue = function setInputValue(input, value) {
     // console.log(input.getAttribute('name'))
 
-    let inputType = input.classList.contains('.pickr') && 'pickr' ||
+    let inputType = input.classList.contains('pickr') && 'pickr' ||
         input.matches(ccSelectSelector) && 'cocreate-select' ||
         input.tagName.toLowerCase();
 
@@ -536,7 +536,7 @@ attributes.prototype.packMultiValue = function packMultiValue({
 
 attributes.prototype.getInputValue = function getInputValue(input) {
     if (!input) return;
-    let inputType = input.classList.contains('.pickr') && 'pickr' ||
+    let inputType = input.classList.contains('pickr') && 'pickr' ||
         input.matches(ccSelectSelector) && 'cocreate-select' ||
         input.tagName.toLowerCase();
 
