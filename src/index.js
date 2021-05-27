@@ -651,7 +651,7 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
     }
     
     /*!canvas.contentWindow.observedByCCAttributes &&*/
-    if(!observerInit.has(canvas.contentWindow))
+    if(canvas.contentWindow.CoCreate.observer && !observerInit.has(canvas.contentWindow))
     {
         this.observerElements(canvas.contentWindow)
         observerInit.set(canvas.contentWindow)
