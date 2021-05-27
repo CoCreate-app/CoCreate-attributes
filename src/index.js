@@ -502,9 +502,9 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
         case 'pickr':
             // todo: how to perform validation
             let pickrIns = pickr.refs.get(input);
-            pickr.disabledEvent = true;
+
             pickrIns.setColor(value); // todo: style or value
-            pickr.disabledEvent = false;
+          
             break;
         default:
             crdt.replaceText({
@@ -574,7 +574,7 @@ attributes.prototype.getInputValue = function getInputValue(input) {
             // todo: how to perform validation
             // if (!CoCreate.pickr.refs.has(input)) return; 
             let pickrIns = pickr.refs.get(input);
-            return pickrIns ? pickrIns.getColor().toHEXA().toString() : '';
+            return pickrIns ? pickrIns.getColor() : '';
 
 
 
