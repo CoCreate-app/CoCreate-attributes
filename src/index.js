@@ -164,7 +164,7 @@ attributes.prototype.scanNewElement = function scanNewElement() {
 attributes.prototype.observerElements = function observerElements(initWindow) {
     // initWindow.CoCreate.observer.init({
     // let observer = initWindow.CoCreate.observer ?
-    observer.init({
+    initWindow.CoCreate.observer.init({
         name: 'ccAttribute',
         observe: ["attributes", "characterData"],
         callback: (mutation) => {
@@ -505,7 +505,7 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
             pickr.disabledEvent = true;
             pickrIns.setColor(value); // todo: style or value
             pickr.disabledEvent = false;
-
+            break;
         default:
             crdt.replaceText({
                 collection: 'builder',
@@ -628,6 +628,7 @@ attributes.prototype.getRealStaticCompStyle = function getRealStaticCompStyle(el
 }
 
 
+let observerInit = new Map();
 attributes.prototype.complexSelector = async function complexSelector(comSelector, callback) {
     let [canvasSelector, selector] = comSelector.split(';');
     let canvas = document.querySelector(canvasSelector);
@@ -636,7 +637,7 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
         return
     }
 
-    if ( /*!canvas.contentWindow.observedByCCAttributes &&*/ canvas.contentDocument.readyState === 'loading') {
+    if (  canvas.contentDocument.readyState === 'loading') {
         try {
             await new Promise((resolve, reject) => {
                 canvas.contentWindow.addEventListener('load', (e) => resolve())
@@ -648,7 +649,15 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
         // this.observerElements(canvas.contentWindow)
         // canvas.contentWindow.observedByCCAttributes = true;
     }
-
+    
+    /*!canvas.contentWindow.observedByCCAttributes &&*/
+    if(!observerInit.has(canvas.contentWindow))
+    {
+        this.observerElements(canvas.contentWindow)
+        observerInit.set(canvas.contentWindow)
+        
+    }
+    
     return callback(canvas.contentWindow.document, selector);
 }
 
