@@ -185,7 +185,7 @@ attributes.prototype.observerElements = function observerElements(initWindow) {
 attributes.prototype.getInputFromElement = function getInputFromElement(element) {
 
 
-    let elId = element.getAttribute('data-element_id') || element.id;
+    let elId = element.getAttribute('data-element_id') || element.id && '#'+element.id;
     if (elId)
         return this.initDocument.querySelectorAll(`[data-attributes_target="${elId}"]`)
     return []
