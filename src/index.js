@@ -79,7 +79,7 @@ attributes.prototype.init = function init() {
         observe: ["attributes"],
         attributes: ["data-attributes_target", "value", "data-attributes_unit"],
         include: "INPUT, .pickr, cocreate-select",
-        callback: async m => await this.watchInputChange(m),
+        callback: async m => !m.isRemoved && await this.watchInputChange(m),
     });
     this.initDocument.addEventListener("input", async(e) => {
         let input = e.target;
@@ -168,6 +168,8 @@ attributes.prototype.observerElements = function observerElements(initWindow) {
         name: 'ccAttribute',
         observe: ["attributes", "characterData"],
         callback: (mutation) => {
+            if(mutation.isRemoved) return;
+            
             let element = mutation.target;
             if (!element) return;
             this.getInputFromElement(mutation.target).forEach(input => {
