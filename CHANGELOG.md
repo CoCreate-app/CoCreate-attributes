@@ -1,3 +1,12 @@
+## [1.0.18](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.17...v1.0.18) (2021-06-06)
+
+
+### Bug Fixes
+
+* add hashtag for selector ([808d19c](https://github.com/CoCreate-app/CoCreate-attributes/commit/808d19cbc9edc590662bda3c00e68558b58f95c6))
+* observe canvas ([ff4b873](https://github.com/CoCreate-app/CoCreate-attributes/commit/ff4b873135c221b23b2a6f553f05ec4aec541bca))
+* update packages, add uuid, add data-parse to demos ([9adf27e](https://github.com/CoCreate-app/CoCreate-attributes/commit/9adf27e748cbe1ba12a181ec8ca21a24168afad0))
+
 ## [1.0.17](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.16...v1.0.17) (2021-05-24)
 
 
