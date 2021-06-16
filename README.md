@@ -1,6 +1,6 @@
 # CoCreate-attributes
 
-Simple HTML5 & JavaScript component operate add, update & remove values in element's attributes from input, select or js api. Easy configuration using class, style or any custom attribute. Highly customizable and styleable. Take it for a spin in our [playground!](https://cocreate.app/docs/attributes)
+Simple HTML5 & JavaScript component operate add, update & remove values in element's attributes from input, select or js api. Easy configuration using class, style or any custom attribute. Take it for a spin in our [playground!](https://cocreate.app/docs/attributes)
 
 ![GitHub file size in bytes](https://img.shields.io/github/size/CoCreate-app/CoCreate-attributes/dist/CoCreate-attributes.min.js?label=minified%20size&style=for-the-badge)
 ![GitHub latest release](https://img.shields.io/github/v/release/CoCreate-app/CoCreate-attributes?style=for-the-badge)
