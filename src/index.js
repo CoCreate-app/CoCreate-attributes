@@ -77,9 +77,8 @@ attributes.prototype.init = function init() {
     observer.init({
         name: "ccAttribute",
         observe: ["attributes"],
-        attributes: ["data-attributes_target", "value", "data-attributes_unit"],
-        include: "INPUT, .pickr, cocreate-select",
-        callback: async m => !m.isRemoved && await this.watchInputChange(m),
+        attributeFilter: ["data-attributes_target", "value", "data-attributes_unit"],
+        callback: async m => m.target.matches('INPUT, .pickr, cocreate-select') && await this.watchInputChange(m),
     });
     this.initDocument.addEventListener("input", async(e) => {
         let input = e.target;
@@ -166,13 +165,13 @@ attributes.prototype.observerElements = function observerElements(initWindow) {
     // let observer = initWindow.CoCreate.observer ?
     initWindow.CoCreate.observer.init({
         name: 'ccAttribute',
-        observe: ["attributes", "characterData"],
+        observe: ["attributes" ], // "characterData"
         callback: (mutation) => {
-            if(mutation.isRemoved) return;
+         
             
             let element = mutation.target;
-            if (!element) return;
-            this.getInputFromElement(mutation.target).forEach(input => {
+
+            this.getInputFromElement(element).forEach(input => {
                 let inputMeta = this.validateInput(input);
                 if (!inputMeta) return;
                 this.updateInput({ ...inputMeta, input, element });
