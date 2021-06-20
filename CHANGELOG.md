@@ -1,3 +1,10 @@
+## [1.0.20](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.19...v1.0.20) (2021-06-20)
+
+
+### Bug Fixes
+
+* new mutaionObserver init function ([4bd000f](https://github.com/CoCreate-app/CoCreate-attributes/commit/4bd000f00d0f61d4e05f79529e241fcba578fc17))
+
 ## [1.0.19](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.18...v1.0.19) (2021-06-16)
 
 
