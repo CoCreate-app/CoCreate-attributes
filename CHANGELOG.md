@@ -1,3 +1,10 @@
+## [1.0.24](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.23...v1.0.24) (2021-06-30)
+
+
+### Bug Fixes
+
+* automated and manual workflows ([bfd93b6](https://github.com/CoCreate-app/CoCreate-attributes/commit/bfd93b622c1aacaf2a02500f2ced68b8e92447d8))
+
 ## [1.0.23](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.22...v1.0.23) (2021-06-25)
 
 
