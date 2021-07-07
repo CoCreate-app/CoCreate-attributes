@@ -58,10 +58,10 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
-    "@cocreate/crdt": "^1.1.12",
-    "@cocreate/message-client": "^1.0.9",
-    "@cocreate/observer": "^1.2.4",
-    "@cocreate/pickr": "^1.1.17",
-    "@cocreate/select": "^1.0.17"
+    "@cocreate/crdt": "^1.1.17",
+    "@cocreate/message-client": "^1.0.12",
+    "@cocreate/observer": "^1.2.8",
+    "@cocreate/pickr": "^1.1.21",
+    "@cocreate/select": "^1.0.20"
   }
 }
