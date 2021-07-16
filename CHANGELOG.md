@@ -1,3 +1,18 @@
+## [1.0.29](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.28...v1.0.29) (2021-07-14)
+
+
+### Bug Fixes
+
+* upgrade all packages ([87efe74](https://github.com/CoCreate-app/CoCreate-attributes/commit/87efe744a667657cc4019881081e935de4379edf))
+
+## [1.0.28](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.27...v1.0.28) (2021-07-13)
+
+
+### Bug Fixes
+
+* add yarn lockfile to git ignore ([f9e862d](https://github.com/CoCreate-app/CoCreate-attributes/commit/f9e862dbc51947ef791c88c83a825dd761e7861e))
+* remove yarn.lock ([5c7efa8](https://github.com/CoCreate-app/CoCreate-attributes/commit/5c7efa8f14bb69b70e5d89712272dd1c3271d439))
+
 ## [1.0.27](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.26...v1.0.27) (2021-07-10)
 
 
