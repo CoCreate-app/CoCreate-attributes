@@ -77,8 +77,9 @@ attributes.prototype.init = function init() {
     observer.init({
         name: "ccAttribute",
         observe: ["attributes"],
-        attributesFilter: ["data-attributes_target", "value", "data-attributes_unit"],
-        callback: async m => m.target.matches('INPUT, .pickr, cocreate-select') && await this.watchInputChange(m),
+        target: "input, .pickr, cocreate-select",
+        attributeName: ["data-attributes_target", "value", "data-attributes_unit"],
+        callback: async m => await this.watchInputChange(m),
     });
     this.initDocument.addEventListener("input", async(e) => {
         let input = e.target;
