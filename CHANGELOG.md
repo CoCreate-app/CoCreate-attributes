@@ -1,3 +1,12 @@
+## [1.0.30](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.29...v1.0.30) (2021-07-17)
+
+
+### Bug Fixes
+
+* COCreate.text true or false ([ea4e23c](https://github.com/CoCreate-app/CoCreate-attributes/commit/ea4e23c6a97603d5a2a78d6a940ee7c6e9a772c1))
+* init and update demos scripts ([a4cc720](https://github.com/CoCreate-app/CoCreate-attributes/commit/a4cc7209687936d1f2ea0fc8ef1594f756ec4bf7))
+* workflows ([2e3a439](https://github.com/CoCreate-app/CoCreate-attributes/commit/2e3a43908a7dfb832f16b60fb3f152c0158fa963))
+
 ## [1.0.29](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.28...v1.0.29) (2021-07-14)
 
 
