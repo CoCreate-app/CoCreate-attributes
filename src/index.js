@@ -509,6 +509,7 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
           
             break;
         default:
+        if(window.CoCreate.text)
             crdt.replaceText({
                 collection: 'builder',
                 document_id: 'null',
@@ -516,6 +517,8 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
                 value: value + '',
                 position: '0',
             })
+            else
+            input.value = value + '';
             // console.warn('CoCreateStyle: unidentified input: ', inputType, 'input ', input)
     }
 }
