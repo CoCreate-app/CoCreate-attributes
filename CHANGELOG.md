@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.0...v1.1.1) (2021-07-28)
+
+
+### Bug Fixes
+
+* remove data- from fetch, pass and filter ([357407b](https://github.com/CoCreate-app/CoCreate-attributes/commit/357407bc8b9c11303ab48eebfe2e069fb5fbd413))
+
 # [1.1.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.0.30...v1.1.0) (2021-07-28)
 
 
