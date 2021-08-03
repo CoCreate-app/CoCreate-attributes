@@ -511,13 +511,13 @@ attributes.prototype.setInputValue = function setInputValue(input, value) {
         default:
         if(window.CoCreate.text)
             crdt.replaceText({
-                collection: 'builder',
-                document_id: 'null',
+                collection: input.getAttribute('collection'),
+                document_id: input.getAttribute('document_id'),
                 name: input.getAttribute('name'),
                 value: value + '',
-                position: '0',
+                // position: '0',
             })
-            else
+        else
             input.value = value + '';
             // console.warn('CoCreateStyle: unidentified input: ', inputType, 'input ', input)
     }
