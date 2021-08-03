@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.2...v1.1.3) (2021-08-03)
+
+
+### Bug Fixes
+
+* get crdt.replateText params from element ([4a6ed5c](https://github.com/CoCreate-app/CoCreate-attributes/commit/4a6ed5c90364a20877bc43145bbfc7f3a26f451f))
+
 ## [1.1.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.1...v1.1.2) (2021-08-02)
 
 
