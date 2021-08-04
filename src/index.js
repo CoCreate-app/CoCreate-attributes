@@ -61,7 +61,7 @@ let cache = new elStore();
 let types = ['attribute', 'classstyle', 'style', 'innerText']
 
 function attributes({ document: initDocument, exclude = "", callback = () => {} }) {
-    this.exclude = exclude;
+    this.exclude = exclude ? `:not(${exclude})` : '';
     // this.callback will be called by type which can be "attribute" "classstyle" "style" "innertext"
     this.callback = callback;
     this.initDocument = initDocument;
@@ -110,7 +110,7 @@ attributes.prototype.listen = async function listen({
 }) {
 
 
-    let selector = property ? `[data-attributes="${type}"][data-attributes_property="${property}"]:not(${this.exclude})` : `[data-attributes="${type}"]:not(${this.exclude})`;
+    let selector = property ? `[data-attributes="${type}"][data-attributes_property="${property}"]${this.exclude}` : `[data-attributes="${type}"]${this.exclude}`;
 
     let input = this.initDocument.querySelector(
         selector
@@ -156,7 +156,7 @@ attributes.prototype.collaborate = function collaborate({
 }
 
 attributes.prototype.scanNewElement = function scanNewElement() {
-    this.initDocument.querySelectorAll(`[data-attributes]:not(${this.exclude})`).forEach(async(input) => {
+    this.initDocument.querySelectorAll(`[data-attributes]${this.exclude}`).forEach(async(input) => {
         this.perInput(input, (inputMeta, element) =>
             this.updateInput({ ...inputMeta, input, element, isColl: true }))
     });
@@ -328,6 +328,11 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
                             return setAttributeIfDif.call(element, type, inputSValue.value)
 
                         }
+                        else if(element.hasAttribute(type))
+                        {   
+                            element.removeAttribute(type)
+                            return true; 
+                        }
 
                     }
 
@@ -341,6 +346,71 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
 }
 
+
+attributes.prototype.updateElementByValues = function updateElementByValues({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
+    let computedStyles, value, removeValue, hasUpdated, unit, parsedInt;
+    switch (type) {
+
+
+
+        case 'classstyle':
+            unit = (input.getAttribute('data-attributes_unit') || '');
+            inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
+            value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
+            value = value || '';
+            computedStyles = this.getRealStaticCompStyle(element);
+            return setStyleClassIfDif(element, {
+                property,
+                camelProperty,
+                value,
+                computedStyles
+            })
+
+
+        case 'style':
+            unit = (input.getAttribute('data-attributes_unit') || '');
+            inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
+            value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
+            value = value || '';
+            computedStyles = this.getRealStaticCompStyle(element);
+            return setStyleIfDif.call(element, { property, camelProperty, value, computedStyles })
+
+        case 'innerText':
+            if (element.innerText != inputValue) {
+                element.innerText = inputValue;
+                return true;
+            }
+            else return false;
+            // default is setAttribute
+        default:
+ 
+        
+                if (type === "class") {
+                    value = inputValue.filter(i => i.checked).map(o => o.value).join(' ')
+                    return setAttributeIfDif.call(element, type, value)
+                }
+                else
+                    for (let inputSValue of inputValue) {
+                        if (inputSValue.checked) {
+                            return setAttributeIfDif.call(element, type, inputSValue.value)
+
+                        }
+                        else if(element.hasAttribute(type))
+                        {   
+                            element.removeAttribute(type)
+                            return true; 
+                        }
+
+                    }
+
+                        return setAttributeIfDif.call(element, type, '')
+                    
+           
+            break;
+
+    }
+
+}
 
 attributes.prototype.removeZeros = function removeZeros(str) {
     let i = 0;
@@ -723,27 +793,10 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
 
 
 
-// window.addEventListener('load', () => {
-//     let attribute = new attributes({ document, exclude: '#ghostEffect,.vdom-item ',
-//       callback: ({
-//         value,
-//         type,
-//         property,
-//         element,
-//     }) => {
-//           if (document.contains(element))
-//         domToText.domToText({
-//           method: type == 'attribute' ? 'setAttribute' : type, 
-//           property: property,
-//           target: element.getAttribute("data-element_id"),
-//           tagName: element.tagName,
-//           value,
-//           ...crdtCon
-//         })
-
-//     },})
-//     attribute.init()
-// })
+window.addEventListener('load', () => {
+    let attribute = new attributes({ document})
+    attribute.init()
+})
 
 // let s = new attributes({
 //     document,
