@@ -31,9 +31,9 @@ import { container } from '@cocreate/select';
 //     srcDocument: document,
 //     destDocument: document,
 //     selector: "#container *",
-//     target: "[data-attributes]:not(.styleunit)",
+//     target: "[attribute]:not(.styleunit)",
 //     callback: (element, target) => {
-//         target.setAttribute('data-attributes_target', `[data-element_id=${element.getAttribute('data-element_id')}]`);
+//         target.setAttribute('attribute-target', `[data-element_id=${element.getAttribute('data-element_id')}]`);
 //         target.setAttribute('name', target.id + '-' + element.getAttribute('data-element_id'))
 //     }
 // });
@@ -78,7 +78,7 @@ attributes.prototype.init = function init() {
         name: "ccAttribute",
         observe: ["attributes"],
         target: "input, .pickr, cocreate-select",
-        attributeName: ["data-attributes_target", "value", "data-attributes_unit"],
+        attributeName: ["attribute-target", "value", "attribute-unit"],
         callback: async m => await this.watchInputChange(m),
     });
     this.initDocument.addEventListener("input", async(e) => {
@@ -110,7 +110,7 @@ attributes.prototype.listen = async function listen({
 }) {
 
 
-    let selector = property ? `[data-attributes="${type}"][data-attributes_property="${property}"]${this.exclude}` : `[data-attributes="${type}"]${this.exclude}`;
+    let selector = property ? `[attribute="${type}"][attribute-property="${property}"]${this.exclude}` : `[attribute="${type}"]${this.exclude}`;
 
     let input = this.initDocument.querySelector(
         selector
@@ -136,7 +136,7 @@ attributes.prototype.collaborate = function collaborate({
     let elementId = element.getAttribute('data-element_id');
     if (!elementId)
         return console.warn('no element id, collaboration skiped');
-    let elementSelector = rest.input.getAttribute('data-attributes_target');
+    let elementSelector = rest.input.getAttribute('attribute-target');
 
 
 
@@ -156,7 +156,7 @@ attributes.prototype.collaborate = function collaborate({
 }
 
 attributes.prototype.scanNewElement = function scanNewElement() {
-    this.initDocument.querySelectorAll(`[data-attributes]${this.exclude}`).forEach(async(input) => {
+    this.initDocument.querySelectorAll(`[attribute]${this.exclude}`).forEach(async(input) => {
         this.perInput(input, (inputMeta, element) =>
             this.updateInput({ ...inputMeta, input, element, isColl: true }))
     });
@@ -189,7 +189,7 @@ attributes.prototype.getInputFromElement = function getInputFromElement(element)
 
     let elId = element.getAttribute('data-element_id') || element.id && '#'+element.id;
     if (elId)
-        return this.initDocument.querySelectorAll(`[data-attributes_target="${elId}"]`)
+        return this.initDocument.querySelectorAll(`[attribute-target="${elId}"]`)
     return []
 
 }
@@ -202,7 +202,7 @@ attributes.prototype.getInputFromElement = function getInputFromElement(element)
 //     //todo: fix add textarea
 //     let elId = element.getAttribute('data-element_id');
 //     if(elId)
-//      this.initDocument.querySelectorAll(`[data-attributes_target]`).forEach
+//      this.initDocument.querySelectorAll(`[attribute-target]`).forEach
 
 // }
 
@@ -218,12 +218,12 @@ attributes.prototype.watchInputChange = async function watchInputChange(mutation
         if (!element) return
 
 
-        if (mutation.attributeName === "data-attributes_target") {
+        if (mutation.attributeName === "attribute-target") {
             // if (element) 
             this.updateInput({ ...inputMeta, input, element });
             // element.isFirst = element.isFirst === true ? false : true;
         }
-        else if (mutation.attributeName === "data-attributes_unit") {
+        else if (mutation.attributeName === "attribute-unit") {
             // if (element.isFirst) return;
             this.updateElement({ ...inputMeta, input, element, isColl: true })
         }
@@ -251,15 +251,15 @@ attributes.prototype.perInput = async function perInput(input, callback) {
 
 
 attributes.prototype.validateInput = function validateInput(input) {
-    let type = input.getAttribute("data-attributes");
+    let type = input.getAttribute("attribute");
     if (!type) {
-        // console.warn("cc-style: input doesn't have data-attributes")
+        // console.warn("cc-style: input doesn't have attribute")
         return;
     }
     type = type.toLowerCase();
 
 
-    let camelProperty, property = input.getAttribute("data-attributes_property");
+    let camelProperty, property = input.getAttribute("attribute-property");
     if (property) {
         camelProperty = toCamelCase(property);
         property = property.toLowerCase();
@@ -282,7 +282,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
 
         case 'classstyle':
-            unit = (input.getAttribute('data-attributes_unit') || '');
+            unit = (input.getAttribute('attribute-unit') || '');
             inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
@@ -296,7 +296,7 @@ attributes.prototype.updateElementByValue = function updateElementByValue({ type
 
 
         case 'style':
-            unit = (input.getAttribute('data-attributes_unit') || '');
+            unit = (input.getAttribute('attribute-unit') || '');
             inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
@@ -354,7 +354,7 @@ attributes.prototype.updateElementByValues = function updateElementByValues({ ty
 
 
         case 'classstyle':
-            unit = (input.getAttribute('data-attributes_unit') || '');
+            unit = (input.getAttribute('attribute-unit') || '');
             inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
@@ -368,7 +368,7 @@ attributes.prototype.updateElementByValues = function updateElementByValues({ ty
 
 
         case 'style':
-            unit = (input.getAttribute('data-attributes_unit') || '');
+            unit = (input.getAttribute('attribute-unit') || '');
             inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
             value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
             value = value || '';
@@ -447,7 +447,7 @@ attributes.prototype.updateElement = function updateElement({ input, element, co
         isColl &&
         this.collaborate({
             value: inputValue,
-            unit: input.getAttribute('data-attributes_unit'),
+            unit: input.getAttribute('attribute-unit'),
             input,
             element,
             type,
@@ -475,7 +475,7 @@ attributes.prototype.updateElement = function updateElement({ input, element, co
         isColl &&
         this.callback({
             value,
-            unit: input.getAttribute('data-attributes_unit'),
+            unit: input.getAttribute('attribute-unit'),
             input,
             element,
             type,
@@ -513,7 +513,7 @@ attributes.prototype.updateInput = function updateInput({ type, property, camelP
             }
             ([styleValue, unit] = parseUnit(value2));
             value = styleValue;
-            setAttributeIfDif.call(input, "data-attributes_unit", unit);
+            setAttributeIfDif.call(input, "attribute-unit", unit);
             break;
         case 'style':
             computedStyles = this.getRealStaticCompStyle(element);
@@ -523,7 +523,7 @@ attributes.prototype.updateInput = function updateInput({ type, property, camelP
             }
             ([styleValue, unit] = parseUnit(value2));
             value = styleValue;
-            setAttributeIfDif.call(input, "data-attributes_unit", unit);
+            setAttributeIfDif.call(input, "attribute-unit", unit);
         case 'innerText':
             value = element.innerText;
             break;
@@ -665,7 +665,7 @@ attributes.prototype.getInputValue = function getInputValue(input) {
 
 
 attributes.prototype.getElementFromInput = async function getElementFromInput(input) {
-    let id = input.getAttribute("data-attributes_target");
+    let id = input.getAttribute("attribute-target");
 
     if (id) {
         if (id.indexOf(';') !== -1) {
@@ -751,7 +751,7 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
 
 //         let allReferencedEl = allFrame((frame) =>
 //             frame.querySelectorAll(
-//                 inputMeta.input.getAttribute("data-attributes_target")
+//                 inputMeta.input.getAttribute("attribute-target")
 //             )
 //         );
 //         if (Array.from(allReferencedEl).includes(element)) {
@@ -761,7 +761,7 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
 //     return inputs;
 // }
 //attributes.prototype.perInput =  async function perInput(input, callback) {
-//     let inputMeta, element, group = input.getAttribute("data-attributes_group");
+//     let inputMeta, element, group = input.getAttribute("attribute-group");
 //     if (group) {
 //         [inputMeta, element] = getInputsMetaData(input);
 //     } else {
