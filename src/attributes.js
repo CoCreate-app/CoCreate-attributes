@@ -33,8 +33,8 @@ import { container } from '@cocreate/select';
 //     selector: "#container *",
 //     target: "[attribute]:not(.styleunit)",
 //     callback: (element, target) => {
-//         target.setAttribute('attribute-target', `[data-element_id=${element.getAttribute('data-element_id')}]`);
-//         target.setAttribute('name', target.id + '-' + element.getAttribute('data-element_id'))
+//         target.setAttribute('attribute-target', `[element_id=${element.getAttribute('element_id')}]`);
+//         target.setAttribute('name', target.id + '-' + element.getAttribute('element_id'))
 //     }
 // });
 
@@ -133,7 +133,7 @@ attributes.prototype.collaborate = function collaborate({
     ...rest
 }) {
     // if (value != input.value) return;
-    let elementId = element.getAttribute('data-element_id');
+    let elementId = element.getAttribute('element_id');
     if (!elementId)
         return console.warn('no element id, collaboration skiped');
     let elementSelector = rest.input.getAttribute('attribute-target');
@@ -187,7 +187,7 @@ attributes.prototype.observerElements = function observerElements(initWindow) {
 attributes.prototype.getInputFromElement = function getInputFromElement(element) {
 
 
-    let elId = element.getAttribute('data-element_id') || element.id && '#'+element.id;
+    let elId = element.getAttribute('element_id') || element.id && '#'+element.id;
     if (elId)
         return this.initDocument.querySelectorAll(`[attribute-target="${elId}"]`)
     return []
@@ -200,7 +200,7 @@ attributes.prototype.getInputFromElement = function getInputFromElement(element)
 //     // let inputs = [];
 
 //     //todo: fix add textarea
-//     let elId = element.getAttribute('data-element_id');
+//     let elId = element.getAttribute('element_id');
 //     if(elId)
 //      this.initDocument.querySelectorAll(`[attribute-target]`).forEach
 
@@ -807,7 +807,7 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
 //         domToText.domToText({
 //           method: type == 'attribute' ? 'setAttribute' : type, 
 //           property: property,
-//           target: element.getAttribute("data-element_id"),
+//           target: element.getAttribute("element_id"),
 //           tagName: element.tagName,
 //           value,
 //           ...crdtCon
