@@ -1,3 +1,14 @@
+## [1.1.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.3...v1.1.4) (2021-08-14)
+
+
+### Bug Fixes
+
+* removed data- from attribute ([4b84503](https://github.com/CoCreate-app/CoCreate-attributes/commit/4b84503f3187aa555a6d99cc23831ef9da578b0e))
+* rename data-element_id to element_id ([0c1c1f7](https://github.com/CoCreate-app/CoCreate-attributes/commit/0c1c1f7b6f0084ed997b8d6164dc19f50e453304))
+* temporary solution for multiple init issue with builder ([a556362](https://github.com/CoCreate-app/CoCreate-attributes/commit/a556362d644e5809e4b1dc3cd576c30206b50559))
+* temporary solution for multiple init issue with builder ([6dd7253](https://github.com/CoCreate-app/CoCreate-attributes/commit/6dd7253bbf0f08c081b53639ce00edf4dbb01b39))
+* update to  docs ([e9d8fd8](https://github.com/CoCreate-app/CoCreate-attributes/commit/e9d8fd861d3a8a0dbf8bfa6e63ba5aaeae0c3635))
+
 ## [1.1.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.2...v1.1.3) (2021-08-03)
 
 
