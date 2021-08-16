@@ -21,23 +21,6 @@ import message from '@cocreate/message-client';
 import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
 import { container } from '@cocreate/select';
 
-// // dev start
-// import '@cocreate/select'
-// import selected from '@cocreate/selected'
-// import domToText from '@cocreate/domToText'
-
-
-// selected.config({
-//     srcDocument: document,
-//     destDocument: document,
-//     selector: "#container *",
-//     target: "[attribute]:not(.styleunit)",
-//     callback: (element, target) => {
-//         target.setAttribute('attribute-target', `[element_id=${element.getAttribute('element_id')}]`);
-//         target.setAttribute('name', target.id + '-' + element.getAttribute('element_id'))
-//     }
-// });
-
 
 
 
@@ -161,6 +144,7 @@ attributes.prototype.scanNewElement = function scanNewElement() {
             this.updateInput({ ...inputMeta, input, element, isColl: true }))
     });
 }
+
 attributes.prototype.observerElements = function observerElements(initWindow) {
     // initWindow.CoCreate.observer.init({
     // let observer = initWindow.CoCreate.observer ?
@@ -185,7 +169,6 @@ attributes.prototype.observerElements = function observerElements(initWindow) {
 //convention based (all elements should use data-elememet_id and it's faster)
 // made it also support "id"
 attributes.prototype.getInputFromElement = function getInputFromElement(element) {
-
 
     let elId = element.getAttribute('element_id') || element.id && '#'+element.id;
     if (elId)
@@ -236,8 +219,6 @@ attributes.prototype.watchInputChange = async function watchInputChange(mutation
 
 
 attributes.prototype.perInput = async function perInput(input, callback) {
-
-
 
     let inputMeta, element;
     inputMeta = this.validateInput(input);
