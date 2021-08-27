@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.9...v1.1.10) (2021-08-27)
+
+
+### Bug Fixes
+
+* cocreate could not be found in canvas went to parent ([b6a8050](https://github.com/CoCreate-app/CoCreate-attributes/commit/b6a805001081fe4ba0b63e5cc675ece96dc9315b))
+
 ## [1.1.9](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.8...v1.1.9) (2021-08-23)
 
 
