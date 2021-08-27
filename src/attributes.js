@@ -148,7 +148,7 @@ attributes.prototype.scanNewElement = function scanNewElement() {
 attributes.prototype.observerElements = function observerElements(initWindow) {
     // initWindow.CoCreate.observer.init({
     // let observer = initWindow.CoCreate.observer ?
-    initWindow.CoCreate.observer.init({
+    initWindow.parent.CoCreate.observer.init({
         name: 'ccAttribute',
         observe: ["attributes" ], // "characterData"
         callback: (mutation) => {
@@ -707,12 +707,13 @@ attributes.prototype.complexSelector = async function complexSelector(comSelecto
     }
     
     /*!canvas.contentWindow.observedByCCAttributes &&*/
-    if(canvas.contentWindow.CoCreate.observer && !observerInit.has(canvas.contentWindow))
-    {
-        this.observerElements(canvas.contentWindow)
-        observerInit.set(canvas.contentWindow)
-        
-    }
+    // if(CoCreate.observer) {
+        if(canvas.contentWindow.parent.CoCreate.observer && !observerInit.has(canvas.contentWindow)) {
+            this.observerElements(canvas.contentWindow)
+            observerInit.set(canvas.contentWindow)
+            
+        }
+    // }
     
     return callback(canvas.contentWindow.document, selector);
 }
