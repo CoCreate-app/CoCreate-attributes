@@ -14,9 +14,9 @@ import {
 }
 from './common.js';
 
-import observer from '@cocreate/observer'
-import crdt from '@cocreate/crdt'
-import pickr from '@cocreate/pickr'
+import observer from '@cocreate/observer';
+import crdt from '@cocreate/crdt';
+import pickr from '@cocreate/pickr';
 import message from '@cocreate/message-client';
 import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
 import { container } from '@cocreate/select';
