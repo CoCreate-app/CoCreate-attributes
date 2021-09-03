@@ -1,6 +1,10 @@
 import attributes from './attributes.js';
 
-window.addEventListener('load', () => {
-    let attribute = new attributes({ document });
-    attribute.init();
+// window.addEventListener('load', () => {
+//     let attribute = new attributes({ document });
+//     attribute.init();
+// })
+
+attributes.init({
+	document
 })
