@@ -1,6 +1,6 @@
 /*global CoCreate*/
 
-import select, { container } from '@cocreate/select'
+import { container } from '@cocreate/select';
 
 export function parseClassRules(str) {
     return str.split(' ').filter(cln => cln);
@@ -190,10 +190,10 @@ export function toCamelCase(str) {
 export function elStore() {
     this.cache = new Map();
     this.spread = function set(key, object) {
-        this.cache.set(key, { ...this.cache.get(key), ...object })
+        this.cache.set(key, { ...this.cache.get(key), ...object });
     }
     this.set = function set(key, property, value) {
-        this.cache.set(key, { ...this.cache.get(key), [property]: value })
+        this.cache.set(key, { ...this.cache.get(key), [property]: value });
     }
     this.get = function get(key, property) {
         let value = this.cache.get(key)
