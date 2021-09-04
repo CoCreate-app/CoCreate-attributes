@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.11...v1.2.0) (2021-09-04)
+
+
+### Bug Fixes
+
+* webpack ([c19b17e](https://github.com/CoCreate-app/CoCreate-attributes/commit/c19b17e3a6b4eadc094606870869cc2592fc315d))
+
+
+### Features
+
+* dispatch attribute changes, support for iframes ([6796766](https://github.com/CoCreate-app/CoCreate-attributes/commit/6796766fa6f3d36404faf30bf33f873f4febb59e))
+
 ## [1.1.11](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.1.10...v1.1.11) (2021-08-27)
 
 
