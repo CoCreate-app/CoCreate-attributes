@@ -16,12 +16,12 @@ from './common.js';
 
 import observer from '@cocreate/observer';
 import crdt from '@cocreate/crdt';
-import pickr from '@cocreate/pickr';
 import message from '@cocreate/message-client';
+import action from '@cocreate/action';
+import pickr from '@cocreate/pickr';
 import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
 
 let cache = new elStore();
-let types = ['attribute', 'classstyle', 'style', 'innerText'];
 
 let initDocument = document;
 
@@ -150,7 +150,6 @@ function observerElements(initWindow) {
 	observerInit.set(initWindow);
 }
 
-
 function getInputFromElement(element) {
 	let elId = element.getAttribute('element_id') || element.id && '#' + element.id;
 	if(elId)
@@ -158,6 +157,82 @@ function getInputFromElement(element) {
 	return [];
 }
 
+function removeZeros(str) {
+	let i = 0;
+	for(let len = str.length; i < len; i++) {
+		if(str[i] !== '0')
+			break;
+	}
+	return str.substr(i) || str && '0';
+}
+
+async function updateElement({ input, element, collValue, isColl, unit, type, property, camelProperty, ...rest }) {
+	if (!element) {
+		 let parsed = await parseInput(input);
+		 element = parsed.element;
+		 type = parsed.type; 
+		 property = parsed.property;
+		 camelProperty = parsed.camelProperty;
+	}
+	let inputValue = collValue != undefined ? collValue : getInputValue(input);
+	if(!inputValue) return;
+
+	if(!Array.isArray(inputValue)) {
+		inputValue = unit && inputValue ? inputValue + unit : inputValue;
+		inputValue = removeZeros(inputValue);
+	}
+	else
+		inputValue.forEach(a => removeZeros(a.value));
+
+	let hasUpdated = updateElementValue({ ...rest, type, property, camelProperty, input, element, inputValue, hasCollValue: collValue != undefined });
+
+	cache.reset(element);
+
+	hasUpdated &&
+		isColl &&
+		collaborate({
+			value: inputValue,
+			unit: input.getAttribute('attribute-unit'),
+			input,
+			element,
+			type,
+			property,
+			...rest,
+
+		});
+	
+	let types = ['attribute', 'classstyle', 'style', 'innerText'];
+	if(!types.includes(type)) {
+		property = type;
+		type = 'attribute';
+	}
+
+	let value;
+	if(Array.isArray(inputValue)) {
+		if(property === 'class')
+			value = inputValue.map(o => o.value).join(' ');
+		else
+			value = inputValue[0].value;
+	}
+	else
+		value = inputValue;
+
+
+	hasUpdated &&
+		isColl &&
+		initDocument.dispatchEvent(new CustomEvent('attributes', {
+			detail: {
+				value,
+				unit: input.getAttribute('attribute-unit'),
+				input,
+				element,
+				type,
+				property,
+				...rest,
+			}
+		}));
+
+}
 
 function updateElementValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
 	let computedStyles, value, removeValue, hasUpdated, unit, parsedInt;
@@ -179,7 +254,6 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 				value,
 				computedStyles
 			})
-
 
 		case 'style':
 			unit = (input.getAttribute('attribute-unit') || '');
@@ -224,81 +298,9 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 			}
 
 			break;
-
 	}
-
-
 }
 
-
-function removeZeros(str) {
-	let i = 0;
-	for(let len = str.length; i < len; i++) {
-		if(str[i] !== '0')
-			break;
-	}
-	return str.substr(i) || str && '0';
-}
-
-function updateElement({ input, element, collValue, isColl, unit, type, property, ...rest }) {
-
-	let inputValue = collValue != undefined ? collValue : getInputValue(input);
-	if(!inputValue) return;
-
-	if(!Array.isArray(inputValue)) {
-		inputValue = unit && inputValue ? inputValue + unit : inputValue;
-		inputValue = removeZeros(inputValue);
-	}
-	else
-		inputValue.forEach(a => removeZeros(a.value));
-
-	let hasUpdated = updateElementValue({ ...rest, type, property, input, element, inputValue, hasCollValue: collValue != undefined });
-
-	cache.reset(element);
-
-	hasUpdated &&
-		isColl &&
-		collaborate({
-			value: inputValue,
-			unit: input.getAttribute('attribute-unit'),
-			input,
-			element,
-			type,
-			property,
-			...rest,
-
-		});
-	if(!types.includes(type)) {
-		property = type;
-		type = 'attribute';
-	}
-
-	let value;
-	if(Array.isArray(inputValue)) {
-		if(property === 'class')
-			value = inputValue.map(o => o.value).join(' ');
-		else
-			value = inputValue[0].value;
-	}
-	else
-		value = inputValue;
-
-
-	hasUpdated &&
-		isColl &&
-		initDocument.dispatchEvent(new CustomEvent('attributes', {
-			detail: {
-				value,
-				unit: input.getAttribute('attribute-unit'),
-				input,
-				element,
-				type,
-				property,
-				...rest,
-			}
-		}));
-
-}
 
 function updateInput({ type, property, camelProperty, element, input }) {
 	let computedStyles, value, value2, styleValue, unit;
@@ -316,7 +318,7 @@ function updateInput({ type, property, camelProperty, element, input }) {
 				value2 = computedStyles[camelProperty];
 			}
 			if(!value2) {
-				return console.warn(`"${property}" can not be found in style object`)
+				return console.warn(`"${property}" can not be found in style object`);
 			}
 			([styleValue, unit] = parseUnit(value2));
 			value = styleValue;
@@ -326,7 +328,7 @@ function updateInput({ type, property, camelProperty, element, input }) {
 			computedStyles = getRealStaticCompStyle(element);
 			value2 = computedStyles[camelProperty];
 			if(!value2) {
-				return console.warn(`"${property}" can not be found in style object`)
+				return console.warn(`"${property}" can not be found in style object`);
 			}
 			([styleValue, unit] = parseUnit(value2));
 			value = styleValue;
@@ -404,10 +406,7 @@ function setInputValue(input, value) {
 			else
 				input.value = value + '';
 	}
-};
-
-
-
+}
 
 function packMultiValue({
 	inputs,
@@ -417,8 +416,8 @@ function packMultiValue({
 }) {
 	let value = [];
 	Array.from(inputs).forEach(input => {
-		value.push({ checked: forceState || input[stateProperty], value: input[valueProperty] || input.getAttribute(valueProperty) })
-	})
+		value.push({ checked: forceState || input[stateProperty], value: input[valueProperty] || input.getAttribute(valueProperty) });
+	});
 	return value;
 }
 
@@ -464,9 +463,9 @@ function getInputValue(input) {
 			let pickrIns = pickr.refs.get(input);
 			return pickrIns ? pickrIns.getColor() : '';
 
-
-
 		default:
+			let value = input.getAttribute('value');
+			if (value) return value;
 			return false;
 	}
 }
@@ -519,17 +518,6 @@ async function complexSelector(comSelector, callback) {
 	return callback(canvas.contentWindow.document, selector);
 }
 
-async function attributeUnit(input) {
-	try {
-		let { element, type, property, camelProperty } = await parseInput(input);
-		if(!element) return;
-		updateElement({ input, element, type, property, camelProperty, isColl: true });
-	}
-	catch(err) {
-
-	}
-}
-
 init();
 
 observer.init({
@@ -547,8 +535,17 @@ observer.init({
 	// attributeName: ["attribute", "attribute-property", "attribute-unit", "value"],
 	attributeName: ["attribute-unit"],
 	callback: function(mutation) {
-		attributeUnit(mutation.target);
+		updateElement({ input: mutation.target, isColl: true });
 	}
 });
+
+action.init({
+	action: "attributes",
+	endEvent: "attributes",
+	callback: (btn, data) => {
+		updateElement({ input: btn, isColl: true });
+	}
+});
+
 
 export default { init };
