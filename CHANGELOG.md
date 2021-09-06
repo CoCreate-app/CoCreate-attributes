@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.1...v1.2.2) (2021-09-06)
+
+
+### Bug Fixes
+
+* setvalue ([1f4edba](https://github.com/CoCreate-app/CoCreate-attributes/commit/1f4edba5bcc6d8525c1129840d171012c68aa515))
+
 ## [1.2.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.0...v1.2.1) (2021-09-04)
 
 
