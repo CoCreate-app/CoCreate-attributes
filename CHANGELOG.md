@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.3...v1.2.4) (2021-09-09)
+
+
+### Bug Fixes
+
+* CoCreate.config directory, path, name and  public ([aa61379](https://github.com/CoCreate-app/CoCreate-attributes/commit/aa6137937820565190035882d78ed9c062e32e72))
+
 ## [1.2.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.2...v1.2.3) (2021-09-08)
 
 
