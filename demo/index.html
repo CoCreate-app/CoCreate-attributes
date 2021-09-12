@@ -16,7 +16,7 @@
 
 
         <!-- CoCreate SideNav Right -->
-        <div id="menuR" class="cocreate-sidenav sidenav-right background:gainsboro" data-main_content="canvas" sidenav-default_desktop="expanded" sidenav-default_tablet="expanded" sidenav-default_phone="expanded">
+        <sidenav id="menuR" class="position:fixed top:0px right:0px direction:rtl overflow:hidden background:gainsboro height:100vh width:300px" resizable resize-target="[content_id='content']" resize-property="margin-right" resize-value="width">        
             <h1 id="new" class="background:green">testing</h1>
             <div class="padding:5px height:100vh overflow:auto">
                 <form>
@@ -109,8 +109,8 @@
 
                 </form>
             </div>
-            <div class="resizeHandler"></div>
-        </div>
+            <div resize="left"></div>
+        </sidenav>
         <!-- End CoCreate SideNav Right -->
 
         <!-- end floating btn -->
