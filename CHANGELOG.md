@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.10...v1.2.11) (2021-09-16)
+
+
+### Bug Fixes
+
+* could not read value of an array of objects. and threw error if error legnth 0 ([93bbd28](https://github.com/CoCreate-app/CoCreate-attributes/commit/93bbd283daa7c168fd60031a0c30494c8833b349))
+
 ## [1.2.10](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.9...v1.2.10) (2021-09-14)
 
 
