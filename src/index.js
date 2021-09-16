@@ -208,11 +208,18 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 	}
 
 	let value;
+	let item;
 	if(Array.isArray(inputValue)) {
+		if (!inputValue.length) return;
 		if(property === 'class')
 			value = inputValue.map(o => o.value).join(' ');
 		else
-			value = inputValue[0].value;
+			try {
+				item = inputValue[0];
+				value = item.value;
+			} catch (err) {
+				console.error(err);
+			}
 	}
 	else
 		value = inputValue;
