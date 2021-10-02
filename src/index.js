@@ -1,4 +1,4 @@
-/*global CustomEvent*/
+/*global CoCreate, CustomEvent*/
 
 import {
 	elStore,
@@ -221,35 +221,36 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 	else
 		value = inputValue;
 	
-	let domTextEditor = element.closest('[contenteditable]');
-	if(domTextEditor && CoCreate.text) {
-		try {
-			let target = element.getAttribute("element_id");
-			unit = input.getAttribute('attribute-unit') || '';
-			switch(type) {
-				case 'attribute':
-					CoCreate.text.setAttribute({ domTextEditor, target, name: property, value });
-					break;
-				case 'classstyle':
-					CoCreate.text.setClassStyle({ domTextEditor, target, classname: property, value, unit });
-					break;
-				case 'style':
-					CoCreate.text.setStyle({ domTextEditor, target, styleName: property, value, unit });
-					break;
-				case 'innerText':
-					CoCreate.text.setInnerText({ domTextEditor, target, value });
-					break;
-				case 'class':
-					CoCreate.text.setClass({ domTextEditor, target, value });
-					break;
-
-				default:
-					console.error('ccAttribute to domText no action');
-			}
-		}
-		catch(err) { console.log('domText: dom-to-text: ' + err) }
-	}
+	if (hasUpdated && isColl){
+		let domTextEditor = element.closest('[contenteditable]')
+		if(domTextEditor && CoCreate.text) {
+			try {
+				let target = element.getAttribute("element_id");
+				unit = input.getAttribute('attribute-unit') || '';
+				switch(type) {
+					case 'attribute':
+						CoCreate.text.setAttribute({ domTextEditor, target, name: property, value });
+						break;
+					case 'classstyle':
+						CoCreate.text.setClassStyle({ domTextEditor, target, classname: property, value, unit });
+						break;
+					case 'style':
+						CoCreate.text.setStyle({ domTextEditor, target, styleName: property, value, unit });
+						break;
+					case 'innerText':
+						CoCreate.text.setInnerText({ domTextEditor, target, value });
+						break;
+					case 'class':
+						CoCreate.text.setClass({ domTextEditor, target, value });
+						break;
 	
+					default:
+						console.error('ccAttribute to domText no action');
+				}
+			}
+			catch(err) { console.log('domText: dom-to-text: ' + err) }
+		}
+	}
 	hasUpdated &&
 		isColl &&
 		initDocument.dispatchEvent(new CustomEvent('attributes', {
