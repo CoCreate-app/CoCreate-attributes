@@ -1,3 +1,10 @@
+## [1.2.17](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.16...v1.2.17) (2021-10-02)
+
+
+### Bug Fixes
+
+* if hasUpdated dont send change to domText ([9a0ad80](https://github.com/CoCreate-app/CoCreate-attributes/commit/9a0ad808d5577feeca77ad90ef65b038da244ac8))
+
 ## [1.2.16](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.15...v1.2.16) (2021-10-02)
 
 
