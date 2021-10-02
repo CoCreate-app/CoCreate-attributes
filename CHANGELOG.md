@@ -1,3 +1,10 @@
+## [1.2.16](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.15...v1.2.16) (2021-10-02)
+
+
+### Bug Fixes
+
+* if contentEditable update text ([30c6323](https://github.com/CoCreate-app/CoCreate-attributes/commit/30c6323a63a4b284f5954d39520e9530524a9e19))
+
 ## [1.2.15](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.14...v1.2.15) (2021-10-01)
 
 
