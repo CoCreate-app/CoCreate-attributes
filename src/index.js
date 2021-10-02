@@ -393,7 +393,7 @@ function setInputValue(input, value) {
 					input.checked = value == input.value ? true : false;
 					break;
 				default:
-					if(window.CoCreate.text)
+					if(input.getAttribute('crdt') == 'true')
 						crdt.replaceText({
 							collection: input.getAttribute('collection'),
 							document_id: input.getAttribute('document_id'),
@@ -429,7 +429,7 @@ function setInputValue(input, value) {
 
 			break;
 		default:
-			if(window.CoCreate.text)
+			if(input.getAttribute('crdt') == 'true')
 				crdt.replaceText({
 					collection: input.getAttribute('collection'),
 					document_id: input.getAttribute('document_id'),
