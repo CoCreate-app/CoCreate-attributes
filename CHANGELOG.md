@@ -1,3 +1,10 @@
+## [1.2.18](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.17...v1.2.18) (2021-10-02)
+
+
+### Bug Fixes
+
+* update input using crdt if input has crdt=true attribute ([ef7ccde](https://github.com/CoCreate-app/CoCreate-attributes/commit/ef7ccdeb76b5fb6c2cd8285e4a4ba3261ff7f74f))
+
 ## [1.2.17](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.16...v1.2.17) (2021-10-02)
 
 
