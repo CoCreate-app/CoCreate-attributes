@@ -1,3 +1,11 @@
+## [1.2.21](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.20...v1.2.21) (2021-10-05)
+
+
+### Bug Fixes
+
+* update dependencies ([286c8c1](https://github.com/CoCreate-app/CoCreate-attributes/commit/286c8c1d14b4d07fafdbd17119beb765cef97d97))
+* website_id in CoCreate.config ([e40b306](https://github.com/CoCreate-app/CoCreate-attributes/commit/e40b3067704dd1786ce857ead3e821d98fbe81dd))
+
 ## [1.2.20](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.19...v1.2.20) (2021-10-04)
 
 
