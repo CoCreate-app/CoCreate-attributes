@@ -1,3 +1,10 @@
+## [1.2.22](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.21...v1.2.22) (2021-10-06)
+
+
+### Bug Fixes
+
+* update crdt dependency ([5047858](https://github.com/CoCreate-app/CoCreate-attributes/commit/5047858620fd6d09a35f4a774678c89dd39088b0))
+
 ## [1.2.21](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.20...v1.2.21) (2021-10-05)
 
 
