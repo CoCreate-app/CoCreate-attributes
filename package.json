@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/attributes",
-  "version": "1.2.29",
+  "version": "1.2.30",
   "description": "Simple HTML5 & JavaScript component add, update & remove values in element's attributes from input, select or js api. Easily configured using HTML5 attributes and/or JavaScript API.",
   "keywords": [
     "cocreate",
