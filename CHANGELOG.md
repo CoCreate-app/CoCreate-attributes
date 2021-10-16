@@ -1,3 +1,10 @@
+## [1.2.31](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.30...v1.2.31) (2021-10-16)
+
+
+### Bug Fixes
+
+* update socket package to fix bug in docs ([bee7d44](https://github.com/CoCreate-app/CoCreate-attributes/commit/bee7d4466a8405a81a58029a55e088357c0a8535))
+
 ## [1.2.30](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.29...v1.2.30) (2021-10-15)
 
 
