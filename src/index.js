@@ -19,6 +19,7 @@ import crdt from '@cocreate/crdt';
 import message from '@cocreate/message-client';
 import action from '@cocreate/action';
 import pickr from '@cocreate/pickr';
+import {cssPath} from '@cocreate/utils';
 import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
 
 let cache = new elStore();
@@ -56,15 +57,25 @@ async function initElement(input, el) {
 async function parseInput(input, element) {
 	if(!element) {
 		let selector = input.getAttribute("attribute-target");
+		
 		if(selector.indexOf(';') !== -1) {
-			await complexSelector(selector,
-				(canvasDoc, selector) => element = canvasDoc.querySelector(selector));
+			let [frameSelector, target] = selector.split(';');
+			let frame = document.querySelector(frameSelector);
+			if (frame) {
+			 	let Document = frame.contentDocument;
+			 	element = Document.querySelector(target);
+			}
 		}
+		// if(selector.indexOf(';') !== -1) {
+		// 	await complexSelector(selector,
+		// 		(canvasDoc, selector) => element = canvasDoc.querySelector(selector));
+		// }
 		else
 			element = initDocument.querySelector(selector);
 	}
 
-	if(!element) return;
+	if(!element) 
+		return;
 
 	let type = input.getAttribute("attribute");
 	if(!type) type = 'class';
@@ -81,7 +92,7 @@ async function parseInput(input, element) {
 
 function initEvents() {
 	initDocument.addEventListener("input", inputEvent);
-	message.listen("ccStyle", (args) => listen(args));
+	// message.listen("ccStyle", (args) => listen(args));
 	observerElements(initDocument.defaultView);
 }
 
@@ -92,17 +103,7 @@ async function inputEvent(e) {
 }
 
 
-async function listen({
-	value,
-	unit,
-	type,
-	property,
-	camelProperty,
-	elementId,
-	elementSelector
-}) {
-
-
+async function listen({ value, unit, type, property, camelProperty, path, elementSelector }) {
 	let selector = property ? `[attribute="${type}"][attribute-property="${property}"]` : `[attribute="${type}"]`;
 
 	let input = initDocument.querySelector(selector);
@@ -113,28 +114,25 @@ async function listen({
 	updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false });
 }
 
-function collaborate({
-	element,
-	...rest
-}) {
-	let elementId = element.getAttribute('element_id');
-	if(!elementId)
-		return console.warn('no element id, collaboration skiped');
+function collaborate({element, ...rest}) {
+	let path = cssPath(element);
+	if(!path)
+		return console.warn('cssPath not generated, collaboration skiped');
 	let elementSelector = rest.input.getAttribute('attribute-target');
 
-	message.send({
-		broadcast_sender: false,
-		rooms: "",
-		emit: {
-			message: "ccStyle",
-			data: {
-				...rest,
-				elementId,
-				elementSelector
-			},
+	// message.send({
+	// 	broadcast_sender: false,
+	// 	rooms: "",
+	// 	emit: {
+	// 		message: "ccStyle",
+	// 		data: {
+	// 			...rest,
+	// 			path,
+	// 			elementSelector
+	// 		},
 
-		},
-	});
+	// 	},
+	// });
 }
 
 function observerElements(initWindow) {
@@ -143,17 +141,23 @@ function observerElements(initWindow) {
 		observe: ["attributes"], // "characterData"
 		callback: (mutation) => {
 			if (mutation.attributeName != "attribute-unit") return;
-			let inputs = getInputFromElement(mutation.target);
+			let inputs = getInputFromElement(mutation.target, mutation.attributeName);
 			initElements(inputs, mutation.target);
 		},
 	});
 	observerInit.set(initWindow);
 }
 
-function getInputFromElement(element) {
-	let elId = element.getAttribute('element_id') || element.id && '#' + element.id;
-	if(elId)
-		return initDocument.querySelectorAll(`[attribute-target="${elId}"]`);
+function getInputFromElement(element, attribute) {
+	let inputs = initDocument.querySelectorAll(`[attribute="${attribute}"]`);
+	for (let input of inputs){
+		let selector = input.getAttribute('attribute-target');
+		if (selector && !element.matches(selector))
+			inputs.shift();
+	}
+	if(inputs) {
+		return inputs;
+	}
 	return [];
 }
 
@@ -188,15 +192,15 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 
 	cache.reset(element);
 
-	hasUpdated && isColl && collaborate({
-		value: inputValue,
-		unit: input.getAttribute('attribute-unit'),
-		input,
-		element,
-		type,
-		property,
-		...rest
-	});
+	// hasUpdated && isColl && collaborate({
+	// 	value: inputValue,
+	// 	unit: input.getAttribute('attribute-unit'),
+	// 	input,
+	// 	element,
+	// 	type,
+	// 	property,
+	// 	...rest
+	// });
 	
 	let types = ['attribute', 'classstyle', 'style', 'innerText'];
 	if(!types.includes(type)) {
@@ -222,10 +226,10 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 		value = inputValue;
 	
 	if (hasUpdated && isColl){
-		let domTextEditor = element.closest('[contenteditable]')
+		let domTextEditor = element.closest('[contenteditable]');
 		if(domTextEditor && CoCreate.text) {
 			try {
-				let target = element.getAttribute("element_id");
+				let target = element;
 				unit = input.getAttribute('attribute-unit') || '';
 				switch(type) {
 					case 'attribute':
