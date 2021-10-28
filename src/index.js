@@ -16,10 +16,10 @@ from './common.js';
 
 import observer from '@cocreate/observer';
 import crdt from '@cocreate/crdt';
-import message from '@cocreate/message-client';
+// import message from '@cocreate/message-client';
 import action from '@cocreate/action';
 import pickr from '@cocreate/pickr';
-import {cssPath} from '@cocreate/utils';
+// import {cssPath} from '@cocreate/utils';
 import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
 
 let cache = new elStore();
@@ -39,6 +39,8 @@ function initElements(inputs, el) {
 
 async function initElement(input, el) {
 	try {
+		if (input.hasAttribute('actions')) 
+			return;
 		// let value = getInputValue(input);
 		let { element, type, property, camelProperty } = await parseInput(input, el);
 		if(!element) return;
@@ -114,26 +116,26 @@ async function listen({ value, unit, type, property, camelProperty, path, elemen
 	updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false });
 }
 
-function collaborate({element, ...rest}) {
-	let path = cssPath(element);
-	if(!path)
-		return console.warn('cssPath not generated, collaboration skiped');
-	let elementSelector = rest.input.getAttribute('attribute-target');
+// function collaborate({element, ...rest}) {
+// 	let path = cssPath(element);
+// 	if(!path)
+// 		return console.warn('cssPath not generated, collaboration skiped');
+// 	let elementSelector = rest.input.getAttribute('attribute-target');
 
-	// message.send({
-	// 	broadcast_sender: false,
-	// 	rooms: "",
-	// 	emit: {
-	// 		message: "ccStyle",
-	// 		data: {
-	// 			...rest,
-	// 			path,
-	// 			elementSelector
-	// 		},
+// 	message.send({
+// 		broadcast_sender: false,
+// 		rooms: "",
+// 		emit: {
+// 			message: "ccStyle",
+// 			data: {
+// 				...rest,
+// 				path,
+// 				elementSelector
+// 			},
 
-	// 	},
-	// });
-}
+// 		},
+// 	});
+// }
 
 function observerElements(initWindow) {
 	initWindow.parent.CoCreate.observer.init({
