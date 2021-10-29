@@ -1,3 +1,11 @@
+## [1.2.33](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.32...v1.2.33) (2021-10-29)
+
+
+### Bug Fixes
+
+* commented message and related functions. thinking that collaboration can be handled by crud or crdt ([8f524ed](https://github.com/CoCreate-app/CoCreate-attributes/commit/8f524edc34e3fe1068b2365f90741538e88dfc24))
+* commented message functions ([52caa66](https://github.com/CoCreate-app/CoCreate-attributes/commit/52caa66184f13ac70a877bc57cc1e45d4fbaaaf1))
+
 ## [1.2.32](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.31...v1.2.32) (2021-10-17)
 
 
