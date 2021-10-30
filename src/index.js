@@ -68,10 +68,7 @@ async function parseInput(input, element) {
 			 	element = Document.querySelector(target);
 			}
 		}
-		// if(selector.indexOf(';') !== -1) {
-		// 	await complexSelector(selector,
-		// 		(canvasDoc, selector) => element = canvasDoc.querySelector(selector));
-		// }
+
 		else
 			element = initDocument.querySelector(selector);
 	}
@@ -105,16 +102,16 @@ async function inputEvent(e) {
 }
 
 
-async function listen({ value, unit, type, property, camelProperty, path, elementSelector }) {
-	let selector = property ? `[attribute="${type}"][attribute-property="${property}"]` : `[attribute="${type}"]`;
+// async function listen({ value, unit, type, property, camelProperty, path, elementSelector }) {
+// 	let selector = property ? `[attribute="${type}"][attribute-property="${property}"]` : `[attribute="${type}"]`;
 
-	let input = initDocument.querySelector(selector);
-	if(!input) console.error('input can not be found');
-	let element = await complexSelector(elementSelector,
-		(canvasDoc, selector) => canvasDoc.querySelector(selector));
-	if(!element) console.error('element can not be found');
-	updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false });
-}
+// 	let input = initDocument.querySelector(selector);
+// 	if(!input) console.error('input can not be found');
+// 	let element = await complexSelector(elementSelector,
+// 		(canvasDoc, selector) => canvasDoc.querySelector(selector));
+// 	if(!element) console.error('element can not be found');
+// 	updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false });
+// }
 
 // function collaborate({element, ...rest}) {
 // 	let path = cssPath(element);
@@ -136,6 +133,7 @@ async function listen({ value, unit, type, property, camelProperty, path, elemen
 // 		},
 // 	});
 // }
+let observerInit = new Map();
 
 function observerElements(initWindow) {
 	initWindow.parent.CoCreate.observer.init({
@@ -274,7 +272,7 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 }
 
 function updateElementValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
-	let computedStyles, value, removeValue, hasUpdated, unit, parsedInt;
+	let computedStyles, value, removeValue, hasUpdated, unit;
 	switch(type) {
 
 		case 'classstyle':
@@ -392,27 +390,6 @@ function setInputValue(input, value) {
 		input.tagName.toLowerCase();
 
 	switch(inputType) {
-		case 'input':
-			switch(input.type) {
-				case 'checkbox':
-				case 'radio':
-					input.checked = value == input.value ? true : false;
-					break;
-				default:
-					if(input.getAttribute('crdt') == 'true')
-						crdt.replaceText({
-							collection: input.getAttribute('collection'),
-							document_id: input.getAttribute('document_id'),
-							name: input.getAttribute('name'),
-							value: value + '',
-						});
-					else
-						input.value = value + '';
-			}
-			break;
-			// case "textarea":
-			//     input.value = value;
-			//     break;
 		case 'select':
 			let options = Array.from(input.options);
 			options.forEach(option => {
@@ -428,31 +405,35 @@ function setInputValue(input, value) {
 			renderOptions(input, value);
 			break;
 		case 'pickr':
-			// todo: how to perform validation
 			let pickrIns = pickr.refs.get(input);
 
-			pickrIns.setColor(value); // todo: style or value
+			pickrIns.setColor(value);
 
 			break;
 		default:
-			if(input.getAttribute('crdt') == 'true')
-				crdt.replaceText({
-					collection: input.getAttribute('collection'),
-					document_id: input.getAttribute('document_id'),
-					name: input.getAttribute('name'),
-					value: value + '',
-				});
-			else
-				input.value = value + '';
+			switch(input.type) {
+				case 'checkbox':
+				case 'radio':
+					input.checked = value == input.value ? true : false;
+					break;
+				default:
+					if(input.getAttribute('crdt') == 'true')
+						crdt.replaceText({
+							collection: input.getAttribute('collection'),
+							document_id: input.getAttribute('document_id'),
+							name: input.getAttribute('name'),
+							value: value + '',
+							save: input.getAttribute('save'),
+							crud: input.getAttribute('crud')
+						});
+					else
+						input.value = value + '';
+
+			}
 	}
 }
 
-function packMultiValue({
-	inputs,
-	stateProperty,
-	valueProperty = "value",
-	forceState,
-}) {
+function packMultiValue({ inputs, stateProperty, valueProperty = "value", forceState }) {
 	let value = [];
 	Array.from(inputs).forEach(input => {
 		value.push({ checked: forceState || input[stateProperty], value: input[valueProperty] || input.getAttribute(valueProperty) });
@@ -528,34 +509,6 @@ function getRealStaticCompStyle(element) {
 	return computedStyles;
 }
 
-
-let observerInit = new Map();
-
-async function complexSelector(comSelector, callback) {
-	let [canvasSelector, selector] = comSelector.split(';');
-	let canvas = document.querySelector(canvasSelector);
-	if(!canvas) {
-		console.warn('complex selector canvas now found for', comSelector);
-		return;
-	}
-
-	if(canvas.contentDocument.readyState === 'loading') {
-		try {
-			await new Promise((resolve, reject) => {
-				canvas.contentWindow.addEventListener('load', (e) => resolve());
-			});
-		}
-		catch(err) {
-			console.error('iframe can not be loaded');
-		}
-	}
-
-	if(canvas.contentWindow.parent.CoCreate.observer && !observerInit.has(canvas.contentWindow)) {
-		observerElements(canvas.contentWindow);
-	}
-
-	return callback(canvas.contentWindow.document, selector);
-}
 
 init();
 
