@@ -1,3 +1,10 @@
+## [1.2.35](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.34...v1.2.35) (2021-10-30)
+
+
+### Bug Fixes
+
+* removed complex selector, refactored swith cases so that default includes input, textarea ([990e95b](https://github.com/CoCreate-app/CoCreate-attributes/commit/990e95bc5ed1abb72a19cfd64f47684a65e83ca4))
+
 ## [1.2.34](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.33...v1.2.34) (2021-10-29)
 
 
