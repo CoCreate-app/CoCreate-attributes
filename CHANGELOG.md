@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.3.1...v1.3.2) (2021-11-01)
+
+
+### Bug Fixes
+
+* if input.type file return ([59243ff](https://github.com/CoCreate-app/CoCreate-attributes/commit/59243ffea4cb60714d45f036f9836a8b07880f9e))
+
 ## [1.3.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.3.0...v1.3.1) (2021-11-01)
 
 
