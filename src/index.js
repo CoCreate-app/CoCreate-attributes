@@ -469,7 +469,7 @@ function updateInput({ type, property, camelProperty, element, input }) {
 }
 
 function setInputValue(input, value) {
-
+	if (input.type == 'file') return;
 	let inputType = input.classList.contains('pickr') && 'pickr' ||
 		input.matches(ccSelectSelector) && 'cocreate-select' ||
 		input.tagName.toLowerCase();
