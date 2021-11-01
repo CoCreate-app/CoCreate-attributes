@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.35...v1.3.0) (2021-11-01)
+
+
+### Features
+
+* attribute-target can now target a container in same document or in another document. creating websitebuilders or richtexteditors just became a lot simpler ([29bdb9a](https://github.com/CoCreate-app/CoCreate-attributes/commit/29bdb9a435bba08e8bd86898db04565a879f12ed))
+
 ## [1.2.35](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.2.34...v1.2.35) (2021-10-30)
 
 
