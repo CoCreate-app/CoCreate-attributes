@@ -16,15 +16,18 @@ from './common.js';
 
 import observer from '@cocreate/observer';
 import crdt from '@cocreate/crdt';
+import uuid from '@cocreate/uuid';
 // import message from '@cocreate/message-client';
 import action from '@cocreate/action';
 import pickr from '@cocreate/pickr';
-// import {cssPath} from '@cocreate/utils';
+import {cssPath} from '@cocreate/utils';
+
 import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
 
 let cache = new elStore();
 
 let initDocument = document;
+let containers = new Map();
 
 function init() {
 	let inputs = document.querySelectorAll(`[attribute-target]`);
@@ -42,17 +45,93 @@ async function initElement(input, el) {
 		if (input.hasAttribute('actions')) 
 			return;
 		// let value = getInputValue(input);
-		let { element, type, property, camelProperty } = await parseInput(input, el);
-		if(!element) return;
-		updateInput({ input, element, type, property, camelProperty, isColl: true });
-
-		// ToDo: if input has a value updateElement, need to be catious with observer target update input may have previousvalue
-		if(!el && value) {
-			updateElement({ input, element, type, property, camelProperty, isColl: true });
+		
+		let selector = input.getAttribute("attribute-target");
+		if(selector.indexOf('*') !== -1) {
+			let sel = selector.replace('*', '')
+			addClickEvent(input, sel)
+		}
+		else{
+			let { element, type, property, camelProperty } = await parseInput(input, el);
+			if(!element) return;
+			updateInput({ input, element, type, property, camelProperty, isColl: true });
+	
+			// ToDo: if input has a value updateElement, need to be catious with observer target update input may have previousvalue
+			if(!el && value) {
+				updateElement({ input, element, type, property, camelProperty, isColl: true });
+			}
 		}
 	}
 	catch(err) {
 
+	}
+}
+
+function addClickEvent(input, selector) {
+	let container;
+	let Document;
+	if(selector.indexOf(';') !== -1) {
+		let [frameSelector, target] = selector.split(';');
+		let frame = document.querySelector(frameSelector);
+		Document = frame.contentDocument;
+		if (target && target != ' ' && frame){
+			container = Document.querySelector(target)
+	 	}
+	 	else if (frame){
+	 		container = Document
+	 	}
+	}
+	else 
+		container = document.querySelector(selector)
+		
+	if(!containers.has(container)){
+		let inputs = new Map()
+		container.addEventListener('click', elClicked)
+		containers.set(container, inputs)
+	}
+	containers.get(container).set(input, '')
+}
+
+async function elClicked(e) {
+	let inputs = containers.get(e.currentTarget);
+	for (let [input] of inputs) {
+		input.targetElement = e.target;
+		input.targetContainer = e.currentTarget;
+		let eid = e.target.getAttribute('eid');
+
+		if(e.target.id){
+			eid = e.target.id
+		}
+		else if (!eid) {
+			eid = uuid.generate(6);
+			let domTextEditor;
+			if(e.currentTarget.nodeName == '#document') {
+				let documentElement = e.currentTarget.documentElement;
+				if (documentElement.hasAttribute('contenteditable'))
+					domTextEditor = documentElement;
+			}
+			else if (e.currentTarget.hasAttribute('contenteditable'))
+				domTextEditor = e.currentTarget
+			if (domTextEditor) 	
+				CoCreate.text.setAttribute({ domTextEditor, target: e.target, name: 'eid', value: eid });
+		}
+		
+		input.value = '';
+		
+		let attribute;
+		if (input.id) 
+			attribute = input.id
+		else 
+			attribute = input.getAttribute('attribute-property')
+		if (!attribute)
+			attribute = input.getAttribute('attribute')
+		
+		input.setAttribute('name', attribute + '-' + eid);
+		e.target.setAttribute('eid', eid);
+		input.targetPath = cssPath(e.target)
+		let { element, type, property, camelProperty } = await parseInput(input, e.target);
+		if(!element) return;
+		updateInput({ input, element, type, property, camelProperty, isColl: true });
 	}
 }
 
@@ -97,7 +176,12 @@ function initEvents() {
 
 async function inputEvent(e) {
 	let input = e.target;
-	let { element, type, property, camelProperty } = await parseInput(input);
+	let container = input.targetContainer;
+	let path = input.targetPath;
+	let el;
+	if (container && path)
+		el = container.querySelector(path);
+	let { element, type, property, camelProperty } = await parseInput(input, el);
 	updateElement({ input, element, type, property, camelProperty, isColl: true });
 }
 
@@ -150,15 +234,13 @@ function observerElements(initWindow) {
 
 function getInputFromElement(element, attribute) {
 	let inputs = initDocument.querySelectorAll(`[attribute="${attribute}"]`);
+	let matching = [];
 	for (let input of inputs){
 		let selector = input.getAttribute('attribute-target');
-		if (selector && !element.matches(selector))
-			inputs.shift();
+		if (selector && element.matches(selector))
+			matching.push(input);
 	}
-	if(inputs) {
-		return inputs;
-	}
-	return [];
+	return matching;
 }
 
 function removeZeros(str) {
@@ -172,11 +254,14 @@ function removeZeros(str) {
 
 async function updateElement({ input, element, collValue, isColl, unit, type, property, camelProperty, ...rest }) {
 	if (!element) {
-		 let parsed = await parseInput(input);
-		 element = parsed.element;
-		 type = parsed.type; 
-		 property = parsed.property;
-		 camelProperty = parsed.camelProperty;
+		let e = {target: input};
+		inputEvent(e);
+		return;	
+		//  let parsed = await parseInput(input);
+		//  element = parsed.element;
+		//  type = parsed.type; 
+		//  property = parsed.property;
+		//  camelProperty = parsed.camelProperty;
 	}
 	let inputValue = collValue != undefined ? collValue : getInputValue(input);
 	if(!inputValue) return;
@@ -477,14 +562,14 @@ function getInputValue(input) {
 				forceState: true
 			});
 
-		case 'pickr':
-			// todo: how to perform validation
-			// if (!CoCreate.pickr.refs.has(input)) return; 
-			let pickrIns = pickr.refs.get(input);
-			return pickrIns ? pickrIns.getColor() : '';
+		// case 'pickr':
+		// 	// todo: how to perform validation
+		// 	// if (!CoCreate.pickr.refs.has(input)) return; 
+		// 	let pickrIns = pickr.refs.get(input);
+		// 	return pickrIns ? pickrIns.getColor() : '';
 
 		default:
-			let value = input.getAttribute('value');
+			let value = input.value || input.getAttribute('value');
 			if (value) return value;
 			return false;
 	}
@@ -511,6 +596,15 @@ function getRealStaticCompStyle(element) {
 
 
 init();
+
+observer.init({
+	name: "ccAttribute",
+	observe: ["childList"],
+	target: '[attribute]',
+	callback: function(mutation) {
+		initElements(mutation.addedNodes);
+	}
+});
 
 observer.init({
 	name: "ccAttribute",
