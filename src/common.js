@@ -1,6 +1,3 @@
-/*global CoCreate*/
-
-import { container } from '@cocreate/select';
 
 export function parseClassRules(str) {
     return str.split(' ').filter(cln => cln);
@@ -72,18 +69,6 @@ export function setStyleIfDif({ property, camelProperty, value, computedStyles }
     else return false;
 }
 
-
-
-export function renderOptions(input, arrValue) {
-    if (container.has(input)) {
-        let instance = container.get(input);
-        if (arrValue.length)
-            arrValue.forEach(option => instance.selectOption(option))
-        else
-            instance.unselectAll(false)
-    }
-
-}
 // CoCreate Select helper end  
 export function parseCssRules(str) {
     let styleObject = {};
@@ -97,17 +82,6 @@ export function parseCssRules(str) {
 
     return styleObject;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 export function rgba2hex(orig) {
     let a, isPercent,
@@ -180,9 +154,6 @@ export function toCamelCase(str) {
 //     } else
 //         return false;
 // }
-
-
-
 
 
 

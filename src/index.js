@@ -2,32 +2,24 @@
 
 import {
 	elStore,
-	// parseCssRules,
-	renderOptions,
 	setStyleIfDif,
 	setAttributeIfDif,
 	setStyleClassIfDif,
 	getCoCreateStyle,
 	toCamelCase,
-	parseUnit,
-	// rgba2hex
+	parseUnit
 }
 from './common.js';
 
 import observer from '@cocreate/observer';
 import crdt from '@cocreate/crdt';
 import uuid from '@cocreate/uuid';
-// import message from '@cocreate/message-client';
 import action from '@cocreate/action';
-import pickr from '@cocreate/pickr';
 import {cssPath} from '@cocreate/utils';
 
-import { containerSelector as ccSelectSelector } from '@cocreate/select/src/config';
-
 let cache = new elStore();
-
-let initDocument = document;
 let containers = new Map();
+let initDocument = document;
 
 function init() {
 	let inputs = document.querySelectorAll(`[attribute-target]`);
@@ -48,8 +40,8 @@ async function initElement(input, el) {
 		
 		let selector = input.getAttribute("attribute-target");
 		if(selector.indexOf('*') !== -1) {
-			let sel = selector.replace('*', '')
-			addClickEvent(input, sel)
+			let sel = selector.replace('*', '');
+			addClickEvent(input, sel);
 		}
 		else{
 			let { element, type, property, camelProperty } = await parseInput(input, el);
@@ -75,21 +67,30 @@ function addClickEvent(input, selector) {
 		let frame = document.querySelector(frameSelector);
 		Document = frame.contentDocument;
 		if (target && target != ' ' && frame){
-			container = Document.querySelector(target)
+			container = Document.querySelector(target);
 	 	}
 	 	else if (frame){
-	 		container = Document
+	 		container = Document;
 	 	}
 	}
 	else 
-		container = document.querySelector(selector)
+		container = document.querySelector(selector);
 		
 	if(!containers.has(container)){
-		let inputs = new Map()
-		container.addEventListener('click', elClicked)
-		containers.set(container, inputs)
+		let inputs = new Map();
+		container.addEventListener('click', elClicked);
+		containers.set(container, inputs);
 	}
-	containers.get(container).set(input, '')
+	if (input.classList.contains('color-picker'))
+		getPickr(container);
+	else
+	containers.get(container).set(input, '');
+}
+
+function getPickr(container){
+	let inputs = document.queryselectorAll('.pickr[attribute][attribute-target]');
+	for(let input of inputs) 
+		container.set(input, '');
 }
 
 async function elClicked(e) {
@@ -111,7 +112,7 @@ async function elClicked(e) {
 					domTextEditor = documentElement;
 			}
 			else if (e.currentTarget.hasAttribute('contenteditable'))
-				domTextEditor = e.currentTarget
+				domTextEditor = e.currentTarget;
 			if (domTextEditor) 	
 				CoCreate.text.setAttribute({ domTextEditor, target: e.target, name: 'eid', value: eid });
 		}
@@ -120,15 +121,15 @@ async function elClicked(e) {
 		
 		let attribute;
 		if (input.id) 
-			attribute = input.id
+			attribute = input.id;
 		else 
-			attribute = input.getAttribute('attribute-property')
+			attribute = input.getAttribute('attribute-property');
 		if (!attribute)
-			attribute = input.getAttribute('attribute')
+			attribute = input.getAttribute('attribute');
 		
 		input.setAttribute('name', attribute + '-' + eid);
 		e.target.setAttribute('eid', eid);
-		input.targetPath = cssPath(e.target)
+		input.targetPath = cssPath(e.target);
 		let { element, type, property, camelProperty } = await parseInput(input, e.target);
 		if(!element) return;
 		updateInput({ input, element, type, property, camelProperty, isColl: true });
@@ -138,7 +139,7 @@ async function elClicked(e) {
 async function parseInput(input, element) {
 	if(!element) {
 		let selector = input.getAttribute("attribute-target");
-		
+		if(!selector) return false;
 		if(selector.indexOf(';') !== -1) {
 			let [frameSelector, target] = selector.split(';');
 			let frame = document.querySelector(frameSelector);
@@ -170,7 +171,6 @@ async function parseInput(input, element) {
 
 function initEvents() {
 	initDocument.addEventListener("input", inputEvent);
-	// message.listen("ccStyle", (args) => listen(args));
 	observerElements(initDocument.defaultView);
 }
 
@@ -185,38 +185,6 @@ async function inputEvent(e) {
 	updateElement({ input, element, type, property, camelProperty, isColl: true });
 }
 
-
-// async function listen({ value, unit, type, property, camelProperty, path, elementSelector }) {
-// 	let selector = property ? `[attribute="${type}"][attribute-property="${property}"]` : `[attribute="${type}"]`;
-
-// 	let input = initDocument.querySelector(selector);
-// 	if(!input) console.error('input can not be found');
-// 	let element = await complexSelector(elementSelector,
-// 		(canvasDoc, selector) => canvasDoc.querySelector(selector));
-// 	if(!element) console.error('element can not be found');
-// 	updateElement({ type, property, camelProperty, input, element, collValue: value, unit, isColl: false });
-// }
-
-// function collaborate({element, ...rest}) {
-// 	let path = cssPath(element);
-// 	if(!path)
-// 		return console.warn('cssPath not generated, collaboration skiped');
-// 	let elementSelector = rest.input.getAttribute('attribute-target');
-
-// 	message.send({
-// 		broadcast_sender: false,
-// 		rooms: "",
-// 		emit: {
-// 			message: "ccStyle",
-// 			data: {
-// 				...rest,
-// 				path,
-// 				elementSelector
-// 			},
-
-// 		},
-// 	});
-// }
 let observerInit = new Map();
 
 function observerElements(initWindow) {
@@ -257,11 +225,6 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 		let e = {target: input};
 		inputEvent(e);
 		return;	
-		//  let parsed = await parseInput(input);
-		//  element = parsed.element;
-		//  type = parsed.type; 
-		//  property = parsed.property;
-		//  camelProperty = parsed.camelProperty;
 	}
 	let inputValue = collValue != undefined ? collValue : getInputValue(input);
 	if(!inputValue) return;
@@ -277,16 +240,6 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 
 	cache.reset(element);
 
-	// hasUpdated && isColl && collaborate({
-	// 	value: inputValue,
-	// 	unit: input.getAttribute('attribute-unit'),
-	// 	input,
-	// 	element,
-	// 	type,
-	// 	property,
-	// 	...rest
-	// });
-	
 	let types = ['attribute', 'classstyle', 'style', 'innerText'];
 	if(!types.includes(type)) {
 		property = type;
@@ -340,24 +293,21 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 			catch(err) { console.log('domText: dom-to-text: ' + err) }
 		}
 	}
-	hasUpdated &&
-		isColl &&
-		initDocument.dispatchEvent(new CustomEvent('attributes', {
-			detail: {
-				value,
-				unit: input.getAttribute('attribute-unit'),
-				input,
-				element,
-				type,
-				property,
-				...rest,
-			}
-		}));
-
+	hasUpdated && isColl && initDocument.dispatchEvent(new CustomEvent('attributes', {
+		detail: {
+			value,
+			unit: input.getAttribute('attribute-unit'),
+			input,
+			element,
+			type,
+			property,
+			...rest,
+		}
+	}));
 }
 
 function updateElementValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
-	let computedStyles, value, removeValue, hasUpdated, unit;
+	let computedStyles, value, unit;
 	switch(type) {
 
 		case 'classstyle':
@@ -375,7 +325,7 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 				camelProperty,
 				value,
 				computedStyles
-			})
+			});
 
 		case 'style':
 			unit = (input.getAttribute('attribute-unit') || '');
@@ -383,7 +333,7 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 			value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
 			value = value || '';
 			computedStyles = getRealStaticCompStyle(element);
-			return setStyleIfDif.call(element, { property, camelProperty, value, computedStyles })
+			return setStyleIfDif.call(element, { property, camelProperty, value, computedStyles });
 
 		case 'innerText':
 			if(element.innerText != inputValue) {
@@ -395,23 +345,23 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 		default:
 			if(typeof inputValue == 'string') {
 
-				return setAttributeIfDif.call(element, type, inputValue)
+				return setAttributeIfDif.call(element, type, inputValue);
 			}
 			else {
 				if(!inputValue.length)
-					return setAttributeIfDif.call(element, type, '')
+					return setAttributeIfDif.call(element, type, '');
 				else if(type === "class") {
-					value = inputValue.map(o => o.value).join(' ')
-					return setAttributeIfDif.call(element, type, value)
+					value = inputValue.map(o => o.value).join(' ');
+					return setAttributeIfDif.call(element, type, value);
 				}
 				else
 					for(let inputSValue of inputValue) {
 						if(inputSValue.checked) {
-							return setAttributeIfDif.call(element, type, inputSValue.value)
+							return setAttributeIfDif.call(element, type, inputSValue.value);
 
 						}
 						else if(element.hasAttribute(type)) {
-							element.removeAttribute(type)
+							element.removeAttribute(type);
 							return true;
 						}
 
@@ -423,10 +373,9 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 	}
 }
 
-
 function updateInput({ type, property, camelProperty, element, input }) {
 	let computedStyles, value, value2, styleValue, unit;
-	if(!input) return console.error('CoCreate Attributes: input not found/dev')
+	if(!input) return console.error('CoCreate Attributes: input not found');
 	switch(type) {
 		case 'class':
 			value = Array.from(element.classList);
@@ -469,110 +418,26 @@ function updateInput({ type, property, camelProperty, element, input }) {
 }
 
 function setInputValue(input, value) {
-	if (input.type == 'file') return;
-	let inputType = input.classList.contains('pickr') && 'pickr' ||
-		input.matches(ccSelectSelector) && 'cocreate-select' ||
-		input.tagName.toLowerCase();
-
-	switch(inputType) {
-		case 'select':
-			let options = Array.from(input.options);
-			options.forEach(option => {
-				if(value == option.value)
-					input.selectedIndex = options.indexOf(option);
-			});
-			break;
-		case 'cocreate-select':
-			if(value)
-				value = Array.isArray(value) ? value : [value];
-			else
-				value = [];
-			renderOptions(input, value);
-			break;
-		case 'pickr':
-			let pickrIns = pickr.refs.get(input);
-
-			pickrIns.setColor(value);
-
-			break;
-		default:
-			switch(input.type) {
-				case 'checkbox':
-				case 'radio':
-					input.checked = value == input.value ? true : false;
-					break;
-				default:
-					if(input.getAttribute('crdt') == 'true')
-						crdt.replaceText({
-							collection: input.getAttribute('collection'),
-							document_id: input.getAttribute('document_id'),
-							name: input.getAttribute('name'),
-							value: value + '',
-							save: input.getAttribute('save'),
-							crud: input.getAttribute('crud')
-						});
-					else
-						input.value = value + '';
-
-			}
-	}
-}
-
-function packMultiValue({ inputs, stateProperty, valueProperty = "value", forceState }) {
-	let value = [];
-	Array.from(inputs).forEach(input => {
-		value.push({ checked: forceState || input[stateProperty], value: input[valueProperty] || input.getAttribute(valueProperty) });
-	});
-	return value;
+	if (input.type == 'file') 
+		return;
+	if(input.getAttribute('crdt') == 'true')
+		crdt.replaceText({
+			collection: input.getAttribute('collection'),
+			document_id: input.getAttribute('document_id'),
+			name: input.getAttribute('name'),
+			value: value + '',
+			save: input.getAttribute('save'),
+			crud: input.getAttribute('crud')
+		});
+	else
+		input.setValue(input, value);
 }
 
 function getInputValue(input) {
 	if(!input) return;
-	let inputType = input.classList.contains('pickr') && 'pickr' ||
-		input.matches(ccSelectSelector) && 'cocreate-select' ||
-		input.tagName.toLowerCase();
-
-	switch(inputType) {
-		case 'input':
-			switch(input.type) {
-				case 'checkbox':
-				case 'radio':
-					return packMultiValue({
-						inputs: initDocument.getElementsByName(input.name),
-						stateProperty: 'checked',
-					});
-
-				default:
-					return input.value;
-
-			}
-
-		case "textarea":
-			return input.value;
-
-		case 'select':
-			return packMultiValue({
-				inputs: input.options,
-				stateProperty: 'selected'
-			});
-
-		case 'cocreate-select':
-			return packMultiValue({
-				inputs: input.selectedOptions,
-				forceState: true
-			});
-
-		// case 'pickr':
-		// 	// todo: how to perform validation
-		// 	// if (!CoCreate.pickr.refs.has(input)) return; 
-		// 	let pickrIns = pickr.refs.get(input);
-		// 	return pickrIns ? pickrIns.getColor() : '';
-
-		default:
-			let value = input.value || input.getAttribute('value');
-			if (value) return value;
-			return false;
-	}
+	let value = input.getValue(input) || input.getAttribute('value');
+	if (value) return value;
+	return false;
 }
 
 function getRealStaticCompStyle(element) {
@@ -632,6 +497,5 @@ action.init({
 		updateElement({ input: btn, isColl: true });
 	}
 });
-
 
 export default { init };
