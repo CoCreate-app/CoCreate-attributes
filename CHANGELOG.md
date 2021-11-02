@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.4.0...v1.4.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* removed @cocreate/pickr and @cocreate/select ([cd265c4](https://github.com/CoCreate-app/CoCreate-attributes/commit/cd265c4dc2d510cc357ee38ad3d7cfea93d4d6c8))
+
 # [1.4.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.3.2...v1.4.0) (2021-11-02)
 
 
