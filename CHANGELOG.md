@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.4.1...v1.4.2) (2021-11-03)
+
+
+### Bug Fixes
+
+* setting values on element during attributes intialization ([a6c78a7](https://github.com/CoCreate-app/CoCreate-attributes/commit/a6c78a75914dbd11ddce95077e1f8974d4d6ea1b))
+
 ## [1.4.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.4.0...v1.4.1) (2021-11-02)
 
 
