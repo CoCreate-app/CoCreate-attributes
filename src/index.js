@@ -20,6 +20,8 @@ import {cssPath} from '@cocreate/utils';
 let cache = new elStore();
 let containers = new Map();
 let initDocument = document;
+let initializing;
+let activeElement;
 
 function init() {
 	let inputs = document.querySelectorAll(`[attribute-target]`);
@@ -84,7 +86,7 @@ function addClickEvent(input, selector) {
 	if (input.classList.contains('color-picker'))
 		getPickr(container);
 	else
-	containers.get(container).set(input, '');
+		containers.get(container).set(input, '');
 }
 
 function getPickr(container){
@@ -95,6 +97,9 @@ function getPickr(container){
 
 async function elClicked(e) {
 	let inputs = containers.get(e.currentTarget);
+	if (activeElement == e.target) return;
+	initializing = e.target;
+	activeElement = e.target;
 	for (let [input] of inputs) {
 		input.targetElement = e.target;
 		input.targetContainer = e.currentTarget;
@@ -132,8 +137,9 @@ async function elClicked(e) {
 		input.targetPath = cssPath(e.target);
 		let { element, type, property, camelProperty } = await parseInput(input, e.target);
 		if(!element) return;
-		updateInput({ input, element, type, property, camelProperty, isColl: true });
+		updateInput({ input, element, type, property, camelProperty, isColl: false });
 	}
+	initializing = '';
 }
 
 async function parseInput(input, element) {
@@ -221,6 +227,7 @@ function removeZeros(str) {
 }
 
 async function updateElement({ input, element, collValue, isColl, unit, type, property, camelProperty, ...rest }) {
+	if (initializing == element) return;
 	if (!element) {
 		let e = {target: input};
 		inputEvent(e);
@@ -307,6 +314,8 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 }
 
 function updateElementValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
+	let domTextEditor = element.closest('[contenteditable]');
+	if(domTextEditor && CoCreate.text) return true;
 	let computedStyles, value, unit;
 	switch(type) {
 
@@ -487,6 +496,9 @@ observer.init({
 	attributeName: ["attribute-unit"],
 	callback: function(mutation) {
 		updateElement({ input: mutation.target, isColl: true });
+		if (mutation.attributeName != "attribute-unit") return;
+			let inputs = getInputFromElement(mutation.target, mutation.attributeName);
+		initElements(inputs, mutation.target);
 	}
 });
 
