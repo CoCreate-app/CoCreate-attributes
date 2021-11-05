@@ -21,7 +21,7 @@ let cache = new elStore();
 let containers = new Map();
 let initDocument = document;
 let initializing;
-let activeElement;
+// let activeElement;
 
 function init() {
 	let inputs = document.querySelectorAll(`[attribute-target]`);
@@ -36,16 +36,16 @@ function initElements(inputs, el) {
 
 async function initElement(input, el) {
 	try {
-		if (input.hasAttribute('actions')) 
-			return;
 		// let value = getInputValue(input);
-		
+
 		let selector = input.getAttribute("attribute-target");
 		if(selector.indexOf('*') !== -1) {
 			let sel = selector.replace('*', '');
 			addClickEvent(input, sel);
 		}
 		else{
+			if (input.hasAttribute('actions')) 
+				return;
 			let { element, type, property, camelProperty } = await parseInput(input, el);
 			if(!element) return;
 			updateInput({ input, element, type, property, camelProperty, isColl: true });
@@ -80,29 +80,37 @@ function addClickEvent(input, selector) {
 		
 	if(!containers.has(container)){
 		let inputs = new Map();
+		// let activeElement = new Map();
+		let containrMap = new Map();
 		container.addEventListener('click', elClicked);
-		containers.set(container, inputs);
+		containrMap.set('inputs', inputs);
+		containrMap.set('activeElement', '');
+		containers.set(container, containrMap);
 	}
 	if (input.classList.contains('color-picker'))
 		getPickr(container);
-	else
-		containers.get(container).set(input, '');
+	else {
+		let activeElement = containers.get(container).get('activeElement');
+		// if (activeElement)
+		input.targetElement = activeElement;
+		containers.get(container).get('inputs').set(input, '');
+	}
 }
 
 function getPickr(container){
 	let inputs = document.queryselectorAll('.pickr[attribute][attribute-target]');
 	for(let input of inputs) 
-		container.set(input, '');
+		containers.get(container).get('inputs').set(input, '');
 }
 
 async function elClicked(e) {
-	let inputs = containers.get(e.currentTarget);
+	let inputs = containers.get(e.currentTarget).get('inputs');
+	let activeElement = containers.get(e.currentTarget).get('activeElement');
 	if (activeElement == e.target) return;
 	initializing = e.target;
-	activeElement = e.target;
+	containers.get(e.currentTarget).set('activeElement', e.target);
 	for (let [input] of inputs) {
 		input.targetElement = e.target;
-		input.targetContainer = e.currentTarget;
 		let eid = e.target.getAttribute('eid');
 
 		if(e.target.id){
@@ -134,10 +142,10 @@ async function elClicked(e) {
 		
 		input.setAttribute('name', attribute + '-' + eid);
 		e.target.setAttribute('eid', eid);
-		input.targetPath = cssPath(e.target);
 		let { element, type, property, camelProperty } = await parseInput(input, e.target);
-		if(!element) return;
-		updateInput({ input, element, type, property, camelProperty, isColl: false });
+		if(element && !input.hasAttribute('actions')) {
+			updateInput({ input, element, type, property, camelProperty, isColl: false });
+		}
 	}
 	initializing = '';
 }
@@ -182,11 +190,7 @@ function initEvents() {
 
 async function inputEvent(e) {
 	let input = e.target;
-	let container = input.targetContainer;
-	let path = input.targetPath;
-	let el;
-	if (container && path)
-		el = container.querySelector(path);
+	let el = input.targetElement;
 	let { element, type, property, camelProperty } = await parseInput(input, el);
 	updateElement({ input, element, type, property, camelProperty, isColl: true });
 }
@@ -444,7 +448,7 @@ function setInputValue(input, value) {
 
 function getInputValue(input) {
 	if(!input) return;
-	let value = input.getValue(input) || input.getAttribute('value');
+	let value = input.getAttribute('value') || input.getValue(input);
 	if (value) return value;
 	return false;
 }
