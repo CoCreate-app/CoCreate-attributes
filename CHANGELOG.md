@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.4.5...v1.4.6) (2021-11-05)
+
+
+### Bug Fixes
+
+* elements with attribte action and if new elements added after el has been clicked the will still resolve to the active element ([5d9d1b6](https://github.com/CoCreate-app/CoCreate-attributes/commit/5d9d1b6346f121196ba8d501f5d9d457b3157a21))
+
 ## [1.4.5](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.4.4...v1.4.5) (2021-11-04)
 
 
