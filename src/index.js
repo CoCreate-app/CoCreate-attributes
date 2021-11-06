@@ -37,7 +37,7 @@ function initElements(inputs, el) {
 async function initElement(input, el) {
 	try {
 		// let value = getInputValue(input);
-
+		
 		let selector = input.getAttribute("attribute-target");
 		if(selector.indexOf('*') !== -1) {
 			let sel = selector.replace('*', '');
@@ -48,8 +48,12 @@ async function initElement(input, el) {
 				return;
 			let { element, type, property, camelProperty } = await parseInput(input, el);
 			if(!element) return;
-			updateInput({ input, element, type, property, camelProperty, isColl: true });
-	
+			
+			if (input.hasAttribute('attribute-trigger'))
+				attributeTrigger({input, element, type, property, camelProperty, isColl: false});
+			else
+				updateInput({ input, element, type, property, camelProperty, isColl: true });
+			
 			// ToDo: if input has a value updateElement, need to be catious with observer target update input may have previousvalue
 			if(!el && value) {
 				updateElement({ input, element, type, property, camelProperty, isColl: true });
@@ -60,6 +64,37 @@ async function initElement(input, el) {
 
 	}
 }
+
+const triggers = new Map();
+function attributeTrigger({input, element, type, property, camelProperty, isColl}){
+	let trigger = input.getAttribute('attribute-trigger');
+	if (trigger) {
+		if (trigger.includes('@')){
+			trigger = trigger.replace('@','');
+			var [from, to] = trigger.split('-');
+			from = parseFloat(from);
+			to = parseFloat(to);
+		}
+	}
+	triggers.set(input,  { element, type, property, camelProperty, isColl, from, to});
+	let width = document.documentElement.clientWidth;
+	if(width >= from && width <= to)
+		updateElement({ input, element, type, property, camelProperty, isColl});
+	
+	const resizeObserver = new ResizeObserver((e) => {
+		// let element = e.target;
+		for (let [input, { element, type, property, camelProperty, isColl, from, to}] of triggers){
+			let width = e[0].contentRect.width
+			if(width >= from && width <= to)
+				updateElement({ input, element, type, property, camelProperty, isColl});
+			}
+		}
+	);
+	resizeObserver.observe(document.documentElement);
+	
+}
+
+	
 
 function addClickEvent(input, selector) {
 	let container;
@@ -247,7 +282,7 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 	else
 		inputValue.forEach(a => removeZeros(a.value));
 
-	let hasUpdated = updateElementValue({ ...rest, type, property, camelProperty, input, element, inputValue, hasCollValue: collValue != undefined });
+	let hasUpdated = updateElementValue({ ...rest, type, property, camelProperty, input, element, inputValue, isColl, hasCollValue: collValue != undefined });
 
 	cache.reset(element);
 
@@ -317,9 +352,9 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 	}));
 }
 
-function updateElementValue({ type, property, camelProperty, input, element, inputValue, hasCollValue }) {
+function updateElementValue({ type, property, camelProperty, input, element, inputValue, isColl, hasCollValue }) {
 	let domTextEditor = element.closest('[contenteditable]');
-	if(domTextEditor && CoCreate.text) return true;
+	if(isColl && domTextEditor && CoCreate.text) return true;
 	let computedStyles, value, unit;
 	switch(type) {
 
