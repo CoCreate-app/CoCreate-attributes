@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.4.6...v1.5.0) (2021-11-06)
+
+
+### Features
+
+* attributeTrigger function to run attributes using a trigger... currently only media query is the supported trigger. attribute-trigger=[@0px-768px](https://github.com/0px-768px) ([f514546](https://github.com/CoCreate-app/CoCreate-attributes/commit/f514546cf522fb65707f19e8615777d0fc0d01a0))
+
 ## [1.4.6](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.4.5...v1.4.6) (2021-11-05)
 
 
