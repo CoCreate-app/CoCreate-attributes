@@ -1,3 +1,10 @@
+## [1.5.6](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.5...v1.5.6) (2021-11-16)
+
+
+### Bug Fixes
+
+* if input event skip: true... return ([fcebc3f](https://github.com/CoCreate-app/CoCreate-attributes/commit/fcebc3f302901691383342b439e79bd929a87278))
+
 ## [1.5.5](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.4...v1.5.5) (2021-11-16)
 
 
