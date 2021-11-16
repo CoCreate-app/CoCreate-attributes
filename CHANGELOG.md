@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.3...v1.5.4) (2021-11-16)
+
+
+### Bug Fixes
+
+* improve how eid is added ([60b1243](https://github.com/CoCreate-app/CoCreate-attributes/commit/60b12434be0cadadb14ce038f4464060063e3d4d))
+
 ## [1.5.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.2...v1.5.3) (2021-11-15)
 
 
