@@ -144,27 +144,28 @@ async function elClicked(e) {
 	if (activeElement == e.target) return;
 	initializing = e.target;
 	containers.get(e.currentTarget).set('activeElement', e.target);
+	let eid = e.target.getAttribute('eid');
 	for (let [input] of inputs) {
 		input.targetElement = e.target;
-		let eid = e.target.getAttribute('eid');
-
-		if(e.target.id){
-			eid = e.target.id
-		}
-		else if (!eid) {
-			eid = uuid.generate(6);
-			let domTextEditor;
-			if(e.currentTarget.nodeName == '#document') {
-				let documentElement = e.currentTarget.documentElement;
-				if (documentElement.hasAttribute('contenteditable'))
-					domTextEditor = documentElement;
+		if(!eid){
+			if(e.target.id){
+				eid = e.target.id;
 			}
-			else if (e.currentTarget.hasAttribute('contenteditable'))
-				domTextEditor = e.currentTarget;
-			if (domTextEditor) 	
-				CoCreate.text.setAttribute({ domTextEditor, target: e.target, name: 'eid', value: eid });
+			else {
+				eid = uuid.generate(6);
+				let domTextEditor;
+				if(e.currentTarget.nodeName == '#document') {
+					let documentElement = e.currentTarget.documentElement;
+					if (documentElement.hasAttribute('contenteditable'))
+						domTextEditor = documentElement;
+				}
+				else if (e.currentTarget.hasAttribute('contenteditable'))
+					domTextEditor = e.currentTarget;
+				if (domTextEditor) 	
+					CoCreate.text.setAttribute({ domTextEditor, target: e.target, name: 'eid', value: eid });
+			}
+			e.target.setAttribute('eid', eid);
 		}
-		
 		input.value = '';
 		
 		let attribute;
@@ -176,7 +177,7 @@ async function elClicked(e) {
 			attribute = input.getAttribute('attribute');
 		
 		input.setAttribute('name', attribute + '-' + eid);
-		e.target.setAttribute('eid', eid);
+
 		let { element, type, property, camelProperty } = await parseInput(input, e.target);
 		if(element && !input.hasAttribute('actions')) {
 			updateInput({ input, element, type, property, camelProperty, isColl: false });
@@ -224,6 +225,7 @@ function initEvents() {
 }
 
 async function inputEvent(e) {
+    if(e.stopCCText) return;
 	let input = e.target;
 	let el = input.targetElement;
 	let { element, type, property, camelProperty } = await parseInput(input, el);
