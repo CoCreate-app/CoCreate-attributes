@@ -225,9 +225,10 @@ function initEvents() {
 }
 
 async function inputEvent(e) {
-    if(e.stopCCText) return;
+    if(e.detail && e.detail.skip === true) return;
 	let input = e.target;
 	let el = input.targetElement;
+	if (initializing == el) return;
 	let { element, type, property, camelProperty } = await parseInput(input, el);
 	updateElement({ input, element, type, property, camelProperty, isColl: true });
 }
