@@ -1,3 +1,10 @@
+## [1.5.10](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.9...v1.5.10) (2021-11-20)
+
+
+### Bug Fixes
+
+* update dependencies ([8829333](https://github.com/CoCreate-app/CoCreate-attributes/commit/8829333d52c66a2ef96552106262a37bf0ed90a3))
+
 ## [1.5.9](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.8...v1.5.9) (2021-11-19)
 
 
