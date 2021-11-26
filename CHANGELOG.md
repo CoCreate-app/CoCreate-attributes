@@ -1,3 +1,10 @@
+## [1.5.13](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.12...v1.5.13) (2021-11-26)
+
+
+### Bug Fixes
+
+* docs sidenav width ([f08c5b0](https://github.com/CoCreate-app/CoCreate-attributes/commit/f08c5b09cb1b80837a148a6c4608ef400f5d463d))
+
 ## [1.5.12](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.11...v1.5.12) (2021-11-26)
 
 
