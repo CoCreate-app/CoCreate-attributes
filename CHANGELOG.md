@@ -1,3 +1,11 @@
+## [1.5.16](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.15...v1.5.16) (2021-11-27)
+
+
+### Bug Fixes
+
+* actions import typo ([5bc15dc](https://github.com/CoCreate-app/CoCreate-attributes/commit/5bc15dc605077d097024ad79dc833ccbba4c9a2e))
+* update dependencies ([79d7229](https://github.com/CoCreate-app/CoCreate-attributes/commit/79d7229953d403c03ceb0d19ea81bbac4ffd7bf9))
+
 ## [1.5.15](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.14...v1.5.15) (2021-11-27)
 
 
