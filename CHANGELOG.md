@@ -1,3 +1,10 @@
+## [1.5.14](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.13...v1.5.14) (2021-11-27)
+
+
+### Bug Fixes
+
+* update docs api and cocreateJS script ([7054a25](https://github.com/CoCreate-app/CoCreate-attributes/commit/7054a25cc2ae796073d6b79da8d9781671e783a8))
+
 ## [1.5.13](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.12...v1.5.13) (2021-11-26)
 
 
