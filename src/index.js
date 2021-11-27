@@ -14,7 +14,7 @@ from './common.js';
 import observer from '@cocreate/observer';
 import crdt from '@cocreate/crdt';
 import uuid from '@cocreate/uuid';
-import action from '@cocreate/action';
+import action from '@cocreate/actions';
 import {cssPath} from '@cocreate/utils';
 
 let cache = new elStore();
