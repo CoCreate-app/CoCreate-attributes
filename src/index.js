@@ -227,6 +227,7 @@ function initEvents() {
 async function inputEvent(e) {
     if(e.detail && e.detail.skip === true) return;
 	let input = e.target;
+	if (!input.hasAttribute('attribute')) return;
 	let el = input.targetElement;
 	if (initializing == el) return;
 	let { element, type, property, camelProperty } = await parseInput(input, el);
