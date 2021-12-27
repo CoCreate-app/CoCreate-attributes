@@ -1,3 +1,10 @@
+## [1.5.19](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.18...v1.5.19) (2021-12-27)
+
+
+### Bug Fixes
+
+* return if input does not have attribute attribute ([5ad3e98](https://github.com/CoCreate-app/CoCreate-attributes/commit/5ad3e986a0f47996e816d82d49726635c786e543))
+
 ## [1.5.18](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.17...v1.5.18) (2021-12-15)
 
 
