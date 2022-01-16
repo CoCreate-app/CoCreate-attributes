@@ -1,3 +1,10 @@
+## [1.5.21](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.20...v1.5.21) (2022-01-16)
+
+
+### Bug Fixes
+
+* update class overflow:overlay to overflow:auto ([bcb065f](https://github.com/CoCreate-app/CoCreate-attributes/commit/bcb065fcbd9008a3f598b3c87acdac5922e3bcf7))
+
 ## [1.5.20](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.19...v1.5.20) (2022-01-01)
 
 
