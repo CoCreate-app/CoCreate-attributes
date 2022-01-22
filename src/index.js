@@ -324,10 +324,10 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 						CoCreate.text.setAttribute({ domTextEditor, target, name: property, value });
 						break;
 					case 'classstyle':
-						CoCreate.text.setClassStyle({ domTextEditor, target, classname: property, value, unit });
+						CoCreate.text.setClass({ domTextEditor, target, value: `${property}:${value}${unit}` });
 						break;
 					case 'style':
-						CoCreate.text.setStyle({ domTextEditor, target, styleName: property, value, unit });
+						CoCreate.text.setStyle({ domTextEditor, target, property, value: `${value}${unit}`});
 						break;
 					case 'innerText':
 						CoCreate.text.setInnerText({ domTextEditor, target, value });
