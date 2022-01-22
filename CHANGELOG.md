@@ -1,3 +1,10 @@
+## [1.5.22](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.21...v1.5.22) (2022-01-22)
+
+
+### Bug Fixes
+
+* update text.setClass ([559829e](https://github.com/CoCreate-app/CoCreate-attributes/commit/559829eb727f3fa15309b884fe3a334436b1fbf0))
+
 ## [1.5.21](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.20...v1.5.21) (2022-01-16)
 
 
