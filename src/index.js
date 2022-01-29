@@ -39,9 +39,8 @@ async function initElement(input, el) {
 		// let value = getInputValue(input);
 		
 		let selector = input.getAttribute("attribute-target");
-		if(selector.indexOf('*') !== -1) {
-			let sel = selector.replace('*', '');
-			addClickEvent(input, sel);
+		if(selector.trim().endsWith(';')){
+			addClickEvent(input, selector);
 		}
 		else{
 			if (input.hasAttribute('actions')) 
@@ -115,7 +114,6 @@ function addClickEvent(input, selector) {
 		
 	if(!containers.has(container)){
 		let inputs = new Map();
-		// let activeElement = new Map();
 		let containrMap = new Map();
 		container.addEventListener('click', elClicked);
 		containrMap.set('inputs', inputs);
