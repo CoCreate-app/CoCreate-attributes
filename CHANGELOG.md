@@ -1,3 +1,10 @@
+## [1.5.23](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.22...v1.5.23) (2022-01-29)
+
+
+### Bug Fixes
+
+* update click event to be applied if target endsWith ; ([9205872](https://github.com/CoCreate-app/CoCreate-attributes/commit/920587283b313c24f917f6761cae4e80c31328db))
+
 ## [1.5.22](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.21...v1.5.22) (2022-01-22)
 
 
