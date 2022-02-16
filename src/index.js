@@ -544,7 +544,7 @@ observer.init({
 });
 
 action.init({
-	action: "attributes",
+	name: "attributes",
 	endEvent: "attributes",
 	callback: (btn, data) => {
 		updateElement({ input: btn, isColl: true });
