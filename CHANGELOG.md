@@ -1,3 +1,10 @@
+## [1.5.28](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.27...v1.5.28) (2022-02-16)
+
+
+### Bug Fixes
+
+* update action param to name ([9c152b7](https://github.com/CoCreate-app/CoCreate-attributes/commit/9c152b7ce5b27ee7b28a72d0e29126764ae4ccb3))
+
 ## [1.5.27](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.26...v1.5.27) (2022-02-10)
 
 
