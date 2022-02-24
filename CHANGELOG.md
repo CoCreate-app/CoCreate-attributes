@@ -1,3 +1,10 @@
+## [1.5.30](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.29...v1.5.30) (2022-02-24)
+
+
+### Bug Fixes
+
+* CoCreate.config replace CoCreate.app with * ([6760804](https://github.com/CoCreate-app/CoCreate-attributes/commit/676080488bfbd812a4f8febb6115f28fcf0922ea))
+
 ## [1.5.29](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.28...v1.5.29) (2022-02-16)
 
 
