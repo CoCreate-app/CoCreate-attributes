@@ -1,3 +1,10 @@
+## [1.5.32](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.31...v1.5.32) (2022-05-06)
+
+
+### Bug Fixes
+
+* update config organization_Id to organization_id ([03283be](https://github.com/CoCreate-app/CoCreate-attributes/commit/03283bec320a96d249f125dd09208c7ac247e647))
+
 ## [1.5.31](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.30...v1.5.31) (2022-03-21)
 
 
