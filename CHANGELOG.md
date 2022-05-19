@@ -1,3 +1,10 @@
+## [1.5.33](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.32...v1.5.33) (2022-05-19)
+
+
+### Bug Fixes
+
+* update document_id on link index.css ([c1b8a66](https://github.com/CoCreate-app/CoCreate-attributes/commit/c1b8a66a5befa04bc0937287f8dd82aa73c9d8ee))
+
 ## [1.5.32](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.31...v1.5.32) (2022-05-06)
 
 
