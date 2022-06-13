@@ -58,6 +58,7 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
+    "@cocreate/actions": "^1.4.3",
     "@cocreate/crdt": "^1.11.0",
     "@cocreate/message-client": "^1.1.70",
     "@cocreate/observer": "^1.5.2"
