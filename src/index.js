@@ -199,11 +199,12 @@ async function parseInput(input, element) {
 
 		else
 			element = initDocument.querySelector(selector);
+		input.targetElement = element;
 	}
 
 	if(!element) 
 		return;
-
+	
 	let type = input.getAttribute("attribute");
 	if(!type) type = 'class';
 	type = type.toLowerCase();
