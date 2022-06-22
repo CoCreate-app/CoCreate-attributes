@@ -1,3 +1,10 @@
+## [1.5.38](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.37...v1.5.38) (2022-06-22)
+
+
+### Bug Fixes
+
+* apply targetElement to input ([b81ca89](https://github.com/CoCreate-app/CoCreate-attributes/commit/b81ca8907fdf78573e988579f48137f230561971))
+
 ## [1.5.37](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.36...v1.5.37) (2022-06-18)
 
 
