@@ -228,7 +228,7 @@ async function inputEvent(e) {
 	let input = e.target;
 	if (!input.hasAttribute('attribute')) return;
 	let el = input.targetElement;
-	if (initializing == el) return;
+	if (el && el == initializing) return;
 	let { element, type, property, camelProperty } = await parseInput(input, el);
 	updateElement({ input, element, type, property, camelProperty, isColl: true });
 }
@@ -269,7 +269,7 @@ function removeZeros(str) {
 }
 
 async function updateElement({ input, element, collValue, isColl, unit, type, property, camelProperty, ...rest }) {
-	if (initializing == element) return;
+	if (element && element == initializing) return;
 	if (!element) {
 		let e = {target: input};
 		inputEvent(e);
