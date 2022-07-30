@@ -1,3 +1,10 @@
+## [1.5.39](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.38...v1.5.39) (2022-07-30)
+
+
+### Bug Fixes
+
+* element == intializing are equal if undfined. updated to element && element == intializing ([e1aa6c3](https://github.com/CoCreate-app/CoCreate-attributes/commit/e1aa6c3bb36747f48915a9954e9f2b18b3022653))
+
 ## [1.5.38](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.37...v1.5.38) (2022-06-22)
 
 
