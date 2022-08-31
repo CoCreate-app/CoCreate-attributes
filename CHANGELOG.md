@@ -1,3 +1,10 @@
+## [1.5.40](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.39...v1.5.40) (2022-08-31)
+
+
+### Bug Fixes
+
+* getValue and setValue using HTMLElement.prototype ([5cbe978](https://github.com/CoCreate-app/CoCreate-attributes/commit/5cbe9789de7e9028138893c8915c81060e8084f4))
+
 ## [1.5.39](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.38...v1.5.39) (2022-07-30)
 
 
