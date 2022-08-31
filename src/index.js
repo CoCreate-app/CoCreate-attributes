@@ -481,12 +481,12 @@ function setInputValue(input, value) {
 			crud: input.getAttribute('crud')
 		});
 	else
-		input.setValue(input, value);
+		input.setValue(value);
 }
 
 function getInputValue(input) {
 	if(!input) return;
-	let value = input.getAttribute('value') || input.getValue(input);
+	let value = input.getValue();
 	if (value) return value;
 	return false;
 }
