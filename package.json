@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/attributes",
-  "version": "1.5.44",
+  "version": "1.5.45",
   "description": "Simple HTML5 & JavaScript component add, update & remove values in element's attributes from input, select or js api. Easily configured using HTML5 attributes and/or JavaScript API.",
   "keywords": [
     "cocreate",
@@ -18,7 +18,9 @@
     "html5-framework",
     "javascript-framework"
   ],
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "npx webpack --config webpack.config.js",
     "build": "NODE_ENV=production npx webpack --config webpack.config.js",
