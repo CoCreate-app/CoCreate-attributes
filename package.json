@@ -62,6 +62,6 @@
     "@cocreate/crdt": "^1.13.5",
     "@cocreate/message-client": "^1.1.77",
     "@cocreate/observer": "^1.5.6",
-    "@cocreate/utils": "^1.10.3"
+    "@cocreate/utils": "^1.10.4"
   }
 }
