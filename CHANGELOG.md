@@ -1,3 +1,10 @@
+## [1.5.52](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.51...v1.5.52) (2022-11-21)
+
+
+### Bug Fixes
+
+* replaced document_id with document._id ([c96f738](https://github.com/CoCreate-app/CoCreate-attributes/commit/c96f7388ad46536b4201c1e9a102581ed6b0a543))
+
 ## [1.5.51](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.50...v1.5.51) (2022-11-21)
 
 
