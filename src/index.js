@@ -39,14 +39,14 @@ async function initElement(input, el) {
 		// let value = getInputValue(input);
 		
 		let selector = input.getAttribute("attribute-target");
-		if(selector.trim().endsWith(';')){
+		if (selector.trim().endsWith(';')){
 			addClickEvent(input, selector);
 		}
 		else{
 			if (input.hasAttribute('actions')) 
 				return;
 			let { element, type, property, camelProperty } = await parseInput(input, el);
-			if(!element) return;
+			if (!element) return;
 			
 			if (input.hasAttribute('attribute-trigger'))
 				attributeTrigger({input, element, type, property, camelProperty, isColl: false});
@@ -54,7 +54,7 @@ async function initElement(input, el) {
 				updateInput({ input, element, type, property, camelProperty, isColl: true });
 			
 			// ToDo: if input has a value updateElement, need to be catious with observer target update input may have previousvalue
-			if(!el && value) {
+			if (!el && value) {
 				updateElement({ input, element, type, property, camelProperty, isColl: true });
 			}
 		}
@@ -77,14 +77,14 @@ function attributeTrigger({input, element, type, property, camelProperty, isColl
 	}
 	triggers.set(input,  { element, type, property, camelProperty, isColl, from, to});
 	let width = document.documentElement.clientWidth;
-	if(width >= from && width <= to)
+	if (width >= from && width <= to)
 		updateElement({ input, element, type, property, camelProperty, isColl});
 	
 	const resizeObserver = new ResizeObserver((e) => {
 		// let element = e.target;
 		for (let [input, { element, type, property, camelProperty, isColl, from, to}] of triggers){
 			let width = e[0].contentRect.width
-			if(width >= from && width <= to)
+			if (width >= from && width <= to)
 				updateElement({ input, element, type, property, camelProperty, isColl});
 			}
 		}
@@ -98,7 +98,7 @@ function attributeTrigger({input, element, type, property, camelProperty, isColl
 function addClickEvent(input, selector) {
 	let container;
 	let Document;
-	if(selector.indexOf(';') !== -1) {
+	if (selector.indexOf(';') !== -1) {
 		let [frameSelector, target] = selector.split(';');
 		let frame = document.querySelector(frameSelector);
 		Document = frame.contentDocument;
@@ -112,7 +112,7 @@ function addClickEvent(input, selector) {
 	else 
 		container = document.querySelector(selector);
 		
-	if(!containers.has(container)){
+	if (!containers.has(container)){
 		let inputs = new Map();
 		let containrMap = new Map();
 		container.addEventListener('click', elClicked);
@@ -145,14 +145,14 @@ async function elClicked(e) {
 	let eid = e.target.getAttribute('eid');
 	for (let [input] of inputs) {
 		input.targetElement = e.target;
-		if(!eid){
-			if(e.target.id){
+		if (!eid){
+			if (e.target.id){
 				eid = e.target.id;
 			}
 			else {
 				eid = uuid.generate(6);
 				let domTextEditor;
-				if(e.currentTarget.nodeName == '#document') {
+				if (e.currentTarget.nodeName == '#document') {
 					let documentElement = e.currentTarget.documentElement;
 					if (documentElement.hasAttribute('contenteditable'))
 						domTextEditor = documentElement;
@@ -177,7 +177,7 @@ async function elClicked(e) {
 		input.setAttribute('name', attribute + '-' + eid);
 
 		let { element, type, property, camelProperty } = await parseInput(input, e.target);
-		if(element && !input.hasAttribute('actions')) {
+		if (element && !input.hasAttribute('actions')) {
 			updateInput({ input, element, type, property, camelProperty, isColl: false });
 		}
 	}
@@ -185,10 +185,10 @@ async function elClicked(e) {
 }
 
 async function parseInput(input, element) {
-	if(!element) {
+	if (!element) {
 		let selector = input.getAttribute("attribute-target");
-		if(!selector) return false;
-		if(selector.indexOf(';') !== -1) {
+		if (!selector) return false;
+		if (selector.indexOf(';') !== -1) {
 			let [frameSelector, target] = selector.split(';');
 			let frame = document.querySelector(frameSelector);
 			if (frame) {
@@ -202,15 +202,15 @@ async function parseInput(input, element) {
 		input.targetElement = element;
 	}
 
-	if(!element) 
+	if (!element) 
 		return;
 	
 	let type = input.getAttribute("attribute");
-	if(!type) type = 'class';
+	if (!type) type = 'class';
 	type = type.toLowerCase();
 
 	let camelProperty, property = input.getAttribute("attribute-property");
-	if(property) {
+	if (property) {
 		camelProperty = toCamelCase(property);
 		property = property.toLowerCase();
 	}
@@ -224,7 +224,7 @@ function initEvents() {
 }
 
 async function inputEvent(e) {
-    if(e.detail && e.detail.skip === true) return;
+    if (e.detail && e.detail.skip === true) return;
 	let input = e.target;
 	if (!input.hasAttribute('attribute')) return;
 	let el = input.targetElement;
@@ -262,7 +262,7 @@ function getInputFromElement(element, attribute) {
 function removeZeros(str) {
 	let i = 0;
 	for(let len = str.length; i < len; i++) {
-		if(str[i] !== '0')
+		if (str[i] !== '0')
 			break;
 	}
 	return str.substr(i) || str && '0';
@@ -276,9 +276,9 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 		return;	
 	}
 	let inputValue = collValue != undefined ? collValue : getInputValue(input);
-	if(!inputValue) return;
+	if (!inputValue) return;
 
-	if(!Array.isArray(inputValue)) {
+	if (!Array.isArray(inputValue)) {
 		inputValue = unit && inputValue ? inputValue + unit : inputValue;
 		inputValue = removeZeros(inputValue);
 	}
@@ -290,16 +290,16 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 	cache.reset(element);
 
 	let types = ['attribute', 'classstyle', 'style', 'innerText'];
-	if(!types.includes(type)) {
+	if (!types.includes(type)) {
 		property = type;
 		type = 'attribute';
 	}
 
 	let value;
 	let item;
-	if(Array.isArray(inputValue)) {
+	if (Array.isArray(inputValue)) {
 		if (!inputValue.length) return;
-		if(property === 'class')
+		if (property === 'class')
 			value = inputValue.map(o => o.value).join(' ');
 		else
 			try {
@@ -314,7 +314,7 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 	
 	if (hasUpdated && isColl){
 		let domTextEditor = element.closest('[contenteditable]');
-		if(domTextEditor && CoCreate.text) {
+		if (domTextEditor && CoCreate.text) {
 			try {
 				let target = element;
 				unit = input.getAttribute('attribute-unit') || '';
@@ -357,7 +357,7 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
 
 function updateElementValue({ type, property, camelProperty, input, element, inputValue, isColl, hasCollValue }) {
 	let domTextEditor = element.closest('[contenteditable]');
-	if(isColl && domTextEditor && CoCreate.text) return true;
+	if (isColl && domTextEditor && CoCreate.text) return true;
 	let computedStyles, value, unit;
 	switch(type) {
 
@@ -371,7 +371,7 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 			value = inputValue && !hasCollValue ? inputValue + unit : inputValue;
 			value = value || '';
 			computedStyles = getRealStaticCompStyle(element);
-			return setStyleClassIfDif(element, {
+			return setStyleClassIfDif (element, {
 				property,
 				camelProperty,
 				value,
@@ -387,31 +387,31 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 			return setStyleIfDif.call(element, { property, camelProperty, value, computedStyles });
 
 		case 'innerText':
-			if(element.innerText != inputValue) {
+			if (element.innerText != inputValue) {
 				element.innerText = inputValue;
 				return true;
 			}
 			else return false;
 			// default is setAttribute
 		default:
-			if(typeof inputValue == 'string') {
+			if (typeof inputValue == 'string') {
 
 				return setAttributeIfDif.call(element, type, inputValue);
 			}
 			else {
-				if(!inputValue.length)
+				if (!inputValue.length)
 					return setAttributeIfDif.call(element, type, '');
-				else if(type === "class") {
+				else if (type === "class") {
 					value = inputValue.map(o => o.value).join(' ');
 					return setAttributeIfDif.call(element, type, value);
 				}
 				else
 					for(let inputSValue of inputValue) {
-						if(inputSValue.checked) {
+						if (inputSValue.checked) {
 							return setAttributeIfDif.call(element, type, inputSValue.value);
 
 						}
-						else if(element.hasAttribute(type)) {
+						else if (element.hasAttribute(type)) {
 							element.removeAttribute(type);
 							return true;
 						}
@@ -426,20 +426,20 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 
 function updateInput({ type, property, camelProperty, element, input }) {
 	let computedStyles, value, value2, styleValue, unit;
-	if(!input) return console.error('CoCreate Attributes: input not found');
+	if (!input) return console.error('CoCreate Attributes: input not found');
 	switch(type) {
 		case 'class':
 			value = Array.from(element.classList);
 			break;
 		case 'classstyle':
 			let ccStyle = getCoCreateStyle(element.classList);
-			if(ccStyle[camelProperty])
+			if (ccStyle[camelProperty])
 				value2 = ccStyle[camelProperty];
 			else {
 				computedStyles = getRealStaticCompStyle(element);
 				value2 = computedStyles[camelProperty];
 			}
-			if(!value2) {
+			if (!value2) {
 				return console.warn(`"${property}" can not be found in style object`);
 			}
 			([styleValue, unit] = parseUnit(value2));
@@ -449,7 +449,7 @@ function updateInput({ type, property, camelProperty, element, input }) {
 		case 'style':
 			computedStyles = getRealStaticCompStyle(element);
 			value2 = computedStyles[camelProperty];
-			if(!value2) {
+			if (!value2) {
 				return console.warn(`"${property}" can not be found in style object`);
 			}
 			([styleValue, unit] = parseUnit(value2));
@@ -471,7 +471,7 @@ function updateInput({ type, property, camelProperty, element, input }) {
 function setInputValue(input, value) {
 	if (input.type == 'file') 
 		return;
-	if(input.getAttribute('crdt') == 'true')
+	if (input.getAttribute('crdt') == 'true')
 		crdt.replaceText({
 			collection: input.getAttribute('collection'),
 			document_id: input.getAttribute('document_id'),
@@ -485,14 +485,14 @@ function setInputValue(input, value) {
 }
 
 function getInputValue(input) {
-	if(!input) return;
+	if (!input) return;
 	let value = input.getValue();
 	if (value) return value;
 	return false;
 }
 
 function getRealStaticCompStyle(element) {
-	if(cache.get(element, 'valid'))
+	if (cache.get(element, 'valid'))
 		return cache.get(element, 'computedStyles');
 	setTimeout(() => {
 		cache.reset(element);
@@ -504,7 +504,7 @@ function getRealStaticCompStyle(element) {
 	computedStyles.display = oldDispaly;
 
 	element.style.display = oldDispaly;
-	if(element.getAttribute("style") == "") element.removeAttribute("style");
+	if (element.getAttribute("style") == "") element.removeAttribute("style");
 	element.removeAttribute('no-observe');
 	cache.spread(element, { computedStyles, valid: true });
 	return computedStyles;

@@ -17,7 +17,7 @@ export function getCoCreateStyle(classList) {
 
 
 
-export function setStyleClassIfDif(element, { property, camelProperty, value, computedStyles }) {
+export function setStyleClassIfDif (element, { property, camelProperty, value, computedStyles }) {
     let classList = element.classList;
     let styleList = new Map();
     classList.forEach((classname) => {
@@ -50,7 +50,7 @@ export function setStyleClassIfDif(element, { property, camelProperty, value, co
 }
 
 
-export function setAttributeIfDif(property, value) {
+export function setAttributeIfDif (property, value) {
     if (this.getAttribute(property) !== value) {
         if (value)
             this.setAttribute(property, value);
@@ -61,7 +61,7 @@ export function setAttributeIfDif(property, value) {
     return false;
 }
 
-export function setStyleIfDif({ property, camelProperty, value, computedStyles }) {
+export function setStyleIfDif ({ property, camelProperty, value, computedStyles }) {
     if (computedStyles[camelProperty] && computedStyles[camelProperty] !== value) {
         this.style[property] = value;
         return true;
