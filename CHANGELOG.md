@@ -1,3 +1,10 @@
+## [1.5.72](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.71...v1.5.72) (2022-12-13)
+
+
+### Bug Fixes
+
+* removed un used devDependencies ([3c97ea7](https://github.com/CoCreate-app/CoCreate-attributes/commit/3c97ea7ca7b5bbb6ec77f6b305a29e87080ca7cd))
+
 ## [1.5.71](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.70...v1.5.71) (2022-12-13)
 
 
