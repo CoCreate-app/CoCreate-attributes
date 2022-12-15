@@ -1,3 +1,10 @@
+## [1.5.73](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.72...v1.5.73) (2022-12-15)
+
+
+### Bug Fixes
+
+* add missing dev dependency style-loader ([ee2e527](https://github.com/CoCreate-app/CoCreate-attributes/commit/ee2e5270e0b9ee75ecb0455abd9cf0753ad27e74))
+
 ## [1.5.72](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.71...v1.5.72) (2022-12-13)
 
 
