@@ -1,3 +1,11 @@
+## [1.5.86](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.85...v1.5.86) (2023-01-06)
+
+
+### Bug Fixes
+
+* bump dependencies, worklow [@v3](https://github.com/v3) ([bb2e6f5](https://github.com/CoCreate-app/CoCreate-attributes/commit/bb2e6f55bac5357948fb9a1b73b52b6be835fe53))
+* edit in github btn styles ([de9e279](https://github.com/CoCreate-app/CoCreate-attributes/commit/de9e2790a3f11f4591991a4bb8eb259efe842100))
+
 ## [1.5.85](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.5.84...v1.5.85) (2023-01-05)
 
 
