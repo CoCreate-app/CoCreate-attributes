@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.2...v1.6.3) (2023-03-30)
+
+
+### Bug Fixes
+
+* bump [@cocreate](https://github.com/cocreate) dependencies' ([3e1b460](https://github.com/CoCreate-app/CoCreate-attributes/commit/3e1b460312b52ca5f465c22f6b0638beaa06aed3))
+
 ## [1.6.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.1...v1.6.2) (2023-03-16)
 
 
