@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.3...v1.6.4) (2023-04-11)
+
+
+### Bug Fixes
+
+* renamed domains to hosts ([f48674e](https://github.com/CoCreate-app/CoCreate-attributes/commit/f48674eb225611047ae42a4e5a6fe3f4c87ab0b9))
+
 ## [1.6.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.2...v1.6.3) (2023-03-30)
 
 
