@@ -1,3 +1,10 @@
+## [1.6.7](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.6...v1.6.7) (2023-04-13)
+
+
+### Bug Fixes
+
+* replaced substr with substring ([39a2266](https://github.com/CoCreate-app/CoCreate-attributes/commit/39a22664f167ea0b8b30419575a625e758420e23))
+
 ## [1.6.6](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.5...v1.6.6) (2023-04-11)
 
 
