@@ -113,7 +113,7 @@ export function parseUnit(style) {
         return [style, '']
     else {
         let valueLength = (value + "").length;
-        return [value, style.substr(valueLength)];
+        return [value, style.substring(valueLength)];
 
     }
 }
@@ -126,7 +126,7 @@ export function toCamelCase(str) {
         if (index !== -1) {
             let t = str.substring(0, index);
             t += String.fromCharCode(str.charCodeAt(index + 1) - 32);
-            t += str.substr(index + 2);
+            t += str.substring(index + 2);
             str = t;
         }
         else break;

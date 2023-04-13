@@ -265,7 +265,7 @@ function removeZeros(str) {
 		if (str[i] !== '0')
 			break;
 	}
-	return str.substr(i) || str && '0';
+	return str.substring(i) || str && '0';
 }
 
 async function updateElement({ input, element, collValue, isColl, unit, type, property, camelProperty, ...rest }) {
