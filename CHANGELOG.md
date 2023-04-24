@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.1...v1.7.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* workflow node version updated  16 ([5e4db54](https://github.com/CoCreate-app/CoCreate-attributes/commit/5e4db54c053d69d663ecac59b3dc5268a3e05fc7))
+
 ## [1.7.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.0...v1.7.1) (2023-04-24)
 
 
