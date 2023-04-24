@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.7...v1.7.0) (2023-04-24)
+
+
+### Features
+
+* added pwa manifest ([23ed770](https://github.com/CoCreate-app/CoCreate-attributes/commit/23ed7705bd17fc67d632b3e042a59498af2f87cc))
+
 ## [1.6.7](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.6.6...v1.6.7) (2023-04-13)
 
 
