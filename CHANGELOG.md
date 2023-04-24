@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.2...v1.7.3) (2023-04-24)
+
+
+### Bug Fixes
+
+* updated worrkflows to v3 and node version 16 ([596298d](https://github.com/CoCreate-app/CoCreate-attributes/commit/596298d59e53f309a49a8ad08296bb3e3e0cb0d3))
+
 ## [1.7.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.1...v1.7.2) (2023-04-24)
 
 
