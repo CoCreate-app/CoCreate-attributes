@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.4...v1.7.5) (2023-05-01)
+
+
+### Bug Fixes
+
+* replace fontawesome with svg ([f6d72a7](https://github.com/CoCreate-app/CoCreate-attributes/commit/f6d72a73fd2a6f9092e729cb3640f1202b3913ff))
+
 ## [1.7.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.3...v1.7.4) (2023-04-30)
 
 
