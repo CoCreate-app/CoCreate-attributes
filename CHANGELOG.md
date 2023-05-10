@@ -1,3 +1,10 @@
+## [1.7.8](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.7...v1.7.8) (2023-05-10)
+
+
+### Bug Fixes
+
+* apikey renamed to key ([ec319a6](https://github.com/CoCreate-app/CoCreate-attributes/commit/ec319a618e8ab28d922c687bcb715ccae6d4188a))
+
 ## [1.7.7](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.6...v1.7.7) (2023-05-06)
 
 
