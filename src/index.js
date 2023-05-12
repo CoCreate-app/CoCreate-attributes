@@ -53,7 +53,7 @@ async function initElement(input, el) {
 			else
 				updateInput({ input, element, type, property, camelProperty, isColl: true });
 			
-			// ToDo: if input has a value updateElement, need to be catious with observer target update input may have previousvalue
+			// TODO: if input has a value updateElement, need to be catious with observer target update input may have previousvalue
 			if (!el && value) {
 				updateElement({ input, element, type, property, camelProperty, isColl: true });
 			}
@@ -364,7 +364,7 @@ function updateElementValue({ type, property, camelProperty, input, element, inp
 		case 'classstyle':
 			unit = (input.getAttribute('attribute-unit') || '');
 			inputValue = Array.isArray(inputValue) ? inputValue.value : inputValue;
-			// ToDo: process the inputValue array to return a string array of values
+			// TODO: process the inputValue array to return a string array of values
 			// if (Array.isArray(inputValue)){
 			//     inputValue = ;
 			// }
