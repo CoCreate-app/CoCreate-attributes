@@ -1,3 +1,10 @@
+## [1.7.9](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.8...v1.7.9) (2023-05-19)
+
+
+### Bug Fixes
+
+* update packages to latest version. This commit updates various packages in the dependencies section of the package.json file to their latest published versions, thereby fixing multiple bugs and improving overall performance. ([6f4ca62](https://github.com/CoCreate-app/CoCreate-attributes/commit/6f4ca625e7cbc4d4fc7745d66c608fb114978ae3))
+
 ## [1.7.8](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.7...v1.7.8) (2023-05-10)
 
 
