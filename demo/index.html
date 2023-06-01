@@ -1,53 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <title>Attributes | CoCreateJS</title>
         <!-- CoCreate Favicon -->
-        <link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
-		<link rel="manifest" href="/manifest.webmanifest" />
-	</head>
+        <link
+            rel="icon"
+            href="https://cdn.cocreate.app/favicon.ico"
+            type="image/ico"
+            sizes="16x16" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+    </head>
 
     <body>
-
         <!-- Main Container -->
         <div main-content_id="canvas" class="height:100vh overflow:scroll">
-            <iframe id="canvas" src="./iframe.html" frameborder="0" width="100%" height="100%"></iframe>
+            <iframe
+                id="canvas"
+                src="./iframe.html"
+                frameborder="0"
+                width="100%"
+                height="100%"></iframe>
         </div>
 
-
         <!-- CoCreate SideNav Right -->
-        <sidenav id="menuR" class="position:fixed top:0px right:0px overflow:hidden background:gainsboro height:100vh width:300px" resizable resize-target="[content_id='content']" resize-property="margin-right" resize-value="width">        
+        <sidenav
+            id="menuR"
+            class="position:fixed top:0px right:0px overflow:hidden background:gainsboro height:100vh width:300px"
+            resizable
+            resize-target="[content_id='content']"
+            resize-property="margin-right"
+            resize-value="width">
             <h1 id="new" class="background:green">testing</h1>
             <div class="padding:5px height:100vh overflow:auto">
                 <form class="width:250px">
-                    
-                    <input attribute="myAttribute" type="text" class="floating-label attr" placeholder="Draggable" attribute-target="iframe; .rrr">
-                    <input attribute="myAttribute" type="text" class="floating-label attr" placeholder="Draggable" attribute-target="iframe;">
-                    <input id="margin-left" class="floating-label z-index:0 text_color" placeholder="margin-left" attribute="classstyle" attribute-property="margin-left" attribute-target="iframe;" active>
+                    <input
+                        attribute="myAttribute"
+                        type="text"
+                        class="floating-label attr"
+                        placeholder="Draggable"
+                        attribute-target="iframe; .rrr" />
+                    <input
+                        attribute="myAttribute"
+                        type="text"
+                        class="floating-label attr"
+                        placeholder="Draggable"
+                        attribute-target="iframe;" />
+                    <input
+                        id="margin-left"
+                        class="floating-label z-index:0 text_color"
+                        placeholder="margin-left"
+                        attribute="classstyle"
+                        attribute-property="margin-left"
+                        attribute-target="iframe;"
+                        active />
 
-                    <input class="floating-label z-index:0 text_color" placeholder="background" attribute="style" attribute-property="background" attribute-target="#new" active>
-                    
-                    <a actions="attributes" attribute="class" attribute-target="#new" value="woohoo" active>click</a>
+                    <input
+                        class="floating-label z-index:0 text_color"
+                        placeholder="background"
+                        attribute="style"
+                        attribute-property="background"
+                        attribute-target="#new"
+                        active />
 
+                    <a
+                        actions="attributes"
+                        attribute="class"
+                        attribute-target="#new"
+                        value="woohoo"
+                        active
+                        >click</a
+                    >
 
                     <p>Set Attribute:</p>
-                    <input type="checkbox" id="vehicle11" name="vehicle1" value="1" attribute="someAttr" attribute-target="#new"><label for="vehicle1">value1</label><br>
-                    <input type="checkbox" id="vehicle21" name="vehicle1" value="2" attribute="someAttr" attribute-target="#new"><label for="vehicle2">value1</label></br>
-
+                    <input
+                        type="checkbox"
+                        id="vehicle11"
+                        name="vehicle1"
+                        value="1"
+                        attribute="someAttr"
+                        attribute-target="#new" /><label for="vehicle1"
+                        >value1</label
+                    ><br />
+                    <input
+                        type="checkbox"
+                        id="vehicle21"
+                        name="vehicle1"
+                        value="2"
+                        attribute="someAttr"
+                        attribute-target="#new" /><label for="vehicle2"
+                        >value1</label
+                    ><br />
 
                     <p>different name:</p>
-                    <input type="radio" id="vehicle11" name="vehicleb" value="green" attribute="classstyle" attribute-target="#new" attribute-property="background"><label for="vehicle1">background:green</label><br>
-                    <input type="radio" id="vehicle21" name="vehicleb" value="blue" attribute="classstyle" attribute-target="#new" attribute-property="color"><label for="vehicle2">color:blue</label></br>
+                    <input
+                        type="radio"
+                        id="vehicle12"
+                        name="vehicleb"
+                        value="green"
+                        attribute="classstyle"
+                        attribute-target="#new"
+                        attribute-property="background" /><label for="vehicle1"
+                        >background:green</label
+                    ><br />
+                    <input
+                        type="radio"
+                        id="vehicle214"
+                        name="vehicleb"
+                        value="blue"
+                        attribute="classstyle"
+                        attribute-target="#new"
+                        attribute-property="color" /><label for="vehicle2"
+                        >color:blue</label
+                    ><br />
 
                     <!--<p>same name:</p>-->
                     <!--<input type="checkbox" id="vehicle31" name="sameee" value="background:green;" attribute="style" attribute-target="#new"><label for="vehicle3">background:green</label><br>-->
-                    <!--<input type="checkbox" id="vehicle41" name="sameee" value="color:blue;" attribute="style" attribute-target="#new"><label for="vehicle4">color:blue</label></br>-->
+                    <!--<input type="checkbox" id="vehicle41" name="sameee" value="color:blue;" attribute="style" attribute-target="#new"><label for="vehicle4">color:blue</label><br/>-->
                     <!--<input id="radio1" type="radio" name="radiotest" value="background:green;" attribute="style" attribute-target="#new">-->
                     <!--<label for="radio1">background:green</label>-->
                     <!--<input id="radio2" type="radio" name="radiotest" value="color:blue;" attribute="style" attribute-target="#new">-->
                     <!--<label for="radio2">color:blue</label>-->
-
 
                     <!--<select name="cars" id="cars" attribute="style" attribute-target="#new">-->
                     <!--    <option value="background:green;">background:green;</option>-->
@@ -63,14 +135,14 @@
                     <!--    <option value="class3">class3</option>-->
                     <!--    <option value="class4">class4</option>-->
                     <!--</select>-->
-                    
+
                     <!--<select name="cars" id="cars" attribute="myAttribute" attribute-target="#new" multiple>-->
                     <!--    <option value="class1">myAttribute </option>-->
                     <!--    <option value="class2">myAttribute class2</option>-->
                     <!--    <option value="class3">myAttribute class3</option>-->
                     <!--    <option value="class4">myAttribute class4</option>-->
                     <!--</select>-->
-                    
+
                     <!--<input type="checkbox" id="classxxx" name="classxxx" value="classxxx" attribute="class" attribute-target="#new" checked><label for="classxxx">add class: classxxx</label><br>-->
 
                     <!--<cocreate-select sortable class="floating-label" attribute="style" attribute-target="#new" name="selectField4" placeholder="Single Options">-->
@@ -107,8 +179,6 @@
                     <!--        </cc-option>-->
                     <!--    </ul>-->
                     <!--</cocreate-select>-->
-
-
                 </form>
             </div>
             <div resize="left"></div>
@@ -118,7 +188,5 @@
         <!-- end floating btn -->
         <!--<script src="../dist/CoCreate-attributes.js"></script>-->
         <script src="https://cdn.cocreate.app/latest/CoCreate.min.js"></script>
-
     </body>
-
 </html>
