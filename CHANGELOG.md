@@ -1,3 +1,11 @@
+## [1.7.11](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.10...v1.7.11) (2023-06-02)
+
+
+### Bug Fixes
+
+* format demo html ([f50dfc6](https://github.com/CoCreate-app/CoCreate-attributes/commit/f50dfc6d61b905097cf9b4284967f469ae4a6e6a))
+* Update dependencies versions for [@cocreate](https://github.com/cocreate) libraries ([e2d2ee9](https://github.com/CoCreate-app/CoCreate-attributes/commit/e2d2ee96907c67fc695267bf9f13976ba1cd98ed))
+
 ## [1.7.10](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.9...v1.7.10) (2023-05-21)
 
 
