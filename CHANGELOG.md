@@ -1,3 +1,10 @@
+## [1.7.12](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.11...v1.7.12) (2023-06-04)
+
+
+### Bug Fixes
+
+* **semantic-release:** worklow error solved by running node version 14 ([f3abd4b](https://github.com/CoCreate-app/CoCreate-attributes/commit/f3abd4bef666ee22d1d89fc982ef9295364dcc7a))
+
 ## [1.7.11](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.10...v1.7.11) (2023-06-02)
 
 
