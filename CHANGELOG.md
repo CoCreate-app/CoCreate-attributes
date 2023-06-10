@@ -1,3 +1,10 @@
+## [1.7.15](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.14...v1.7.15) (2023-06-10)
+
+
+### Bug Fixes
+
+* Update dependencies versions for [@cocreate](https://github.com/cocreate) libraries ([b6bd4e3](https://github.com/CoCreate-app/CoCreate-attributes/commit/b6bd4e35984e13b2361acb13ab3c86de9baa8176))
+
 ## [1.7.14](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.13...v1.7.14) (2023-06-04)
 
 
