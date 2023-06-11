@@ -1,3 +1,10 @@
+## [1.7.23](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.22...v1.7.23) (2023-06-11)
+
+
+### Bug Fixes
+
+* testing workflow ([b634daf](https://github.com/CoCreate-app/CoCreate-attributes/commit/b634daf96bc0fac950a0c35030ef87a2d9a01451))
+
 ## [1.7.22](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.21...v1.7.22) (2023-06-11)
 
 
