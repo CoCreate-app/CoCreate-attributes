@@ -1,3 +1,10 @@
+## [1.7.18](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.17...v1.7.18) (2023-06-11)
+
+
+### Bug Fixes
+
+* @cocreate/cli moved to dependencies ([61a5102](https://github.com/CoCreate-app/CoCreate-attributes/commit/61a510294243170e0417d4a5a0e9be460c073f0c))
+
 ## [1.7.17](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.16...v1.7.17) (2023-06-11)
 
 
