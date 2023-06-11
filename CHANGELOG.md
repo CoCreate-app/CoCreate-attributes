@@ -1,3 +1,10 @@
+## [1.7.19](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.18...v1.7.19) (2023-06-11)
+
+
+### Bug Fixes
+
+* postintall error ([8186726](https://github.com/CoCreate-app/CoCreate-attributes/commit/8186726c6ff6194ab955529b33370907237c7ada))
+
 ## [1.7.18](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.17...v1.7.18) (2023-06-11)
 
 
