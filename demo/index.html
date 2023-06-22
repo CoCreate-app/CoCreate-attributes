@@ -27,7 +27,7 @@
             id="menuR"
             class="position:fixed top:0px right:0px overflow:hidden background:gainsboro height:100vh width:300px"
             resizable
-            resize-target="[content_id='content']"
+            resize-selector="[content_id='content']"
             resize-property="margin-right"
             resize-value="width">
             <h1 id="new" class="background:green">testing</h1>
@@ -38,20 +38,20 @@
                         type="text"
                         class="floating-label attr"
                         placeholder="Draggable"
-                        attribute-target="iframe; .rrr" />
+                        attribute-selector="iframe; .rrr" />
                     <input
                         attribute="myAttribute"
                         type="text"
                         class="floating-label attr"
                         placeholder="Draggable"
-                        attribute-target="iframe;" />
+                        attribute-selector="iframe;" />
                     <input
                         id="margin-left"
                         class="floating-label z-index:0 text_color"
                         placeholder="margin-left"
                         attribute="classstyle"
                         attribute-property="margin-left"
-                        attribute-target="iframe;"
+                        attribute-selector="iframe;"
                         active />
 
                     <input
@@ -59,13 +59,13 @@
                         placeholder="background"
                         attribute="style"
                         attribute-property="background"
-                        attribute-target="#new"
+                        attribute-selector="#new"
                         active />
 
                     <a
                         actions="attributes"
                         attribute="class"
-                        attribute-target="#new"
+                        attribute-selector="#new"
                         value="woohoo"
                         active
                         >click</a
@@ -78,7 +78,7 @@
                         name="vehicle1"
                         value="1"
                         attribute="someAttr"
-                        attribute-target="#new" /><label for="vehicle1"
+                        attribute-selector="#new" /><label for="vehicle1"
                         >value1</label
                     ><br />
                     <input
@@ -87,7 +87,7 @@
                         name="vehicle1"
                         value="2"
                         attribute="someAttr"
-                        attribute-target="#new" /><label for="vehicle2"
+                        attribute-selector="#new" /><label for="vehicle2"
                         >value1</label
                     ><br />
 
@@ -98,7 +98,7 @@
                         name="vehicleb"
                         value="green"
                         attribute="classstyle"
-                        attribute-target="#new"
+                        attribute-selector="#new"
                         attribute-property="background" /><label for="vehicle1"
                         >background:green</label
                     ><br />
@@ -108,20 +108,20 @@
                         name="vehicleb"
                         value="blue"
                         attribute="classstyle"
-                        attribute-target="#new"
+                        attribute-selector="#new"
                         attribute-property="color" /><label for="vehicle2"
                         >color:blue</label
                     ><br />
 
                     <!--<p>same name:</p>-->
-                    <!--<input type="checkbox" id="vehicle31" name="sameee" value="background:green;" attribute="style" attribute-target="#new"><label for="vehicle3">background:green</label><br>-->
-                    <!--<input type="checkbox" id="vehicle41" name="sameee" value="color:blue;" attribute="style" attribute-target="#new"><label for="vehicle4">color:blue</label><br/>-->
-                    <!--<input id="radio1" type="radio" name="radiotest" value="background:green;" attribute="style" attribute-target="#new">-->
+                    <!--<input type="checkbox" id="vehicle31" name="sameee" value="background:green;" attribute="style" attribute-selector="#new"><label for="vehicle3">background:green</label><br>-->
+                    <!--<input type="checkbox" id="vehicle41" name="sameee" value="color:blue;" attribute="style" attribute-selector="#new"><label for="vehicle4">color:blue</label><br/>-->
+                    <!--<input id="radio1" type="radio" name="radiotest" value="background:green;" attribute="style" attribute-selector="#new">-->
                     <!--<label for="radio1">background:green</label>-->
-                    <!--<input id="radio2" type="radio" name="radiotest" value="color:blue;" attribute="style" attribute-target="#new">-->
+                    <!--<input id="radio2" type="radio" name="radiotest" value="color:blue;" attribute="style" attribute-selector="#new">-->
                     <!--<label for="radio2">color:blue</label>-->
 
-                    <!--<select name="cars" id="cars" attribute="style" attribute-target="#new">-->
+                    <!--<select name="cars" id="cars" attribute="style" attribute-selector="#new">-->
                     <!--    <option value="background:green;">background:green;</option>-->
                     <!--    <option value="color:blue;">color:blue;</option>-->
                     <!--    <option value="mercedes">Mercedes</option>-->
@@ -129,23 +129,23 @@
                     <!--</select>-->
                     <!--<br>-->
 
-                    <!--<select name="cars" id="cars" attribute="class" attribute-target="#new" multiple>-->
+                    <!--<select name="cars" id="cars" attribute="class" attribute-selector="#new" multiple>-->
                     <!--    <option value="class1">class1</option>-->
                     <!--    <option value="class2">class2</option>-->
                     <!--    <option value="class3">class3</option>-->
                     <!--    <option value="class4">class4</option>-->
                     <!--</select>-->
 
-                    <!--<select name="cars" id="cars" attribute="myAttribute" attribute-target="#new" multiple>-->
+                    <!--<select name="cars" id="cars" attribute="myAttribute" attribute-selector="#new" multiple>-->
                     <!--    <option value="class1">myAttribute </option>-->
                     <!--    <option value="class2">myAttribute class2</option>-->
                     <!--    <option value="class3">myAttribute class3</option>-->
                     <!--    <option value="class4">myAttribute class4</option>-->
                     <!--</select>-->
 
-                    <!--<input type="checkbox" id="classxxx" name="classxxx" value="classxxx" attribute="class" attribute-target="#new" checked><label for="classxxx">add class: classxxx</label><br>-->
+                    <!--<input type="checkbox" id="classxxx" name="classxxx" value="classxxx" attribute="class" attribute-selector="#new" checked><label for="classxxx">add class: classxxx</label><br>-->
 
-                    <!--<cocreate-select sortable class="floating-label" attribute="style" attribute-target="#new" name="selectField4" placeholder="Single Options">-->
+                    <!--<cocreate-select sortable class="floating-label" attribute="style" attribute-selector="#new" name="selectField4" placeholder="Single Options">-->
                     <!--    <input class="option-search" placeholder="Search">-->
                     <!--    <ul class="options  overflow:auto">-->
                     <!--        <cc-option class="option" value="background:green;">-->
@@ -162,7 +162,7 @@
                     <!--        </cc-option>-->
                     <!--    </ul>-->
                     <!--</cocreate-select>-->
-                    <!--<cocreate-select class="floating-label" attribute="style" attribute-target="#new" name="selectField4" multiple placeholder="Single Options">-->
+                    <!--<cocreate-select class="floating-label" attribute="style" attribute-selector="#new" name="selectField4" multiple placeholder="Single Options">-->
                     <!--    <input class="option-search" placeholder="Search">-->
                     <!--    <ul class="options overflow:auto">-->
                     <!--        <cc-option class="option" value="background:green;">-->

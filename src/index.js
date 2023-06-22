@@ -24,7 +24,7 @@ let initializing;
 // let activeElement;
 
 function init() {
-    let inputs = document.querySelectorAll(`[attribute-target]`);
+    let inputs = document.querySelectorAll(`[attribute-selector]`);
     initElements(inputs);
     initEvents();
 }
@@ -38,7 +38,7 @@ async function initElement(input, el) {
     try {
         // let value = getInputValue(input);
 
-        let selector = input.getAttribute("attribute-target");
+        let selector = input.getAttribute("attribute-selector");
         if (selector.trim().endsWith(';')) {
             addClickEvent(input, selector);
         }
@@ -131,7 +131,7 @@ function addClickEvent(input, selector) {
 }
 
 function getPickr(container) {
-    let inputs = document.queryselectorAll('.pickr[attribute][attribute-target]');
+    let inputs = document.queryselectorAll('.pickr[attribute][attribute-selector]');
     for (let input of inputs)
         containers.get(container).get('inputs').set(input, '');
 }
@@ -186,7 +186,7 @@ async function elClicked(e) {
 
 async function parseInput(input, element) {
     if (!element) {
-        let selector = input.getAttribute("attribute-target");
+        let selector = input.getAttribute("attribute-selector");
         if (!selector) return false;
         if (selector.indexOf(';') !== -1) {
             let [frameSelector, target] = selector.split(';');
@@ -252,7 +252,7 @@ function getInputFromElement(element, attribute) {
     let inputs = initDocument.querySelectorAll(`[attribute="${attribute}"]`);
     let matching = [];
     for (let input of inputs) {
-        let selector = input.getAttribute('attribute-target');
+        let selector = input.getAttribute('attribute-selector');
         if (selector && element.matches(selector))
             matching.push(input);
     }
@@ -525,7 +525,7 @@ observer.init({
 observer.init({
     name: "ccAttribute",
     observe: ["attributes"],
-    attributeName: ["attribute-target"],
+    attributeName: ["attribute-selector"],
     callback: function (mutation) {
         initElement(mutation.target);
     }
