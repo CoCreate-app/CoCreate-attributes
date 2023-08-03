@@ -473,8 +473,8 @@ function setInputValue(input, value) {
         return;
     if (input.getAttribute('crdt') == 'true')
         crdt.replaceText({
-            collection: input.getAttribute('collection'),
-            document_id: input.getAttribute('document_id'),
+            array: input.getAttribute('array'),
+            object: input.getAttribute('object'),
             name: input.getAttribute('name'),
             value: value + '',
             save: input.getAttribute('save'),
