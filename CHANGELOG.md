@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.27...v1.8.0) (2023-08-16)
+
+
+### Bug Fixes
+
+* crud attributes renamed ([8ef1b3b](https://github.com/CoCreate-app/CoCreate-attributes/commit/8ef1b3bfee8fffc7ebe8a183bbf3b9df42bd76d7))
+* replace -target -selector ([f82fb07](https://github.com/CoCreate-app/CoCreate-attributes/commit/f82fb07c12c4c70d4519c9a661a0381f40c0159b))
+* updated actions callback data object ([6049e39](https://github.com/CoCreate-app/CoCreate-attributes/commit/6049e398d3b88818134199c0b8b780ce9b927c77))
+* webpack.config and package.json make use of mode=production instead of process.env ([6d153fe](https://github.com/CoCreate-app/CoCreate-attributes/commit/6d153fe3bdbf963eb675adbabd7f0eb166d033b3))
+
+
+### Features
+
+* name attribute and variable renamed to key ([abc6bf8](https://github.com/CoCreate-app/CoCreate-attributes/commit/abc6bf864c99c1c49e45af17a0cfb3131435ba3d))
+
 ## [1.7.27](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.7.26...v1.7.27) (2023-06-14)
 
 
