@@ -1,3 +1,12 @@
+## [1.9.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.9.0...v1.9.1) (2023-08-21)
+
+
+### Bug Fixes
+
+* /dist/CoCreate.js updated to https://CoCreate.app/dist/CoCreate.js ([195d0d5](https://github.com/CoCreate-app/CoCreate-attributes/commit/195d0d5b028ef044d4dd59b3ce7468b236cf12f0))
+* replace cdn with /dist ([77b8ff8](https://github.com/CoCreate-app/CoCreate-attributes/commit/77b8ff80460b790cc2d8c3a01ddc087fbe24a56a))
+* update file uploader ([94381f9](https://github.com/CoCreate-app/CoCreate-attributes/commit/94381f91b8812b391392029379c1295598bb0357))
+
 # [1.9.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.8.0...v1.9.0) (2023-08-17)
 
 
