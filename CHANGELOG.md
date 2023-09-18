@@ -1,3 +1,11 @@
+## [1.10.2](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.10.1...v1.10.2) (2023-09-18)
+
+
+### Bug Fixes
+
+*  Add path and pathname ([34cd690](https://github.com/CoCreate-app/CoCreate-attributes/commit/34cd69094c8a50004b8dafff4b413927dcd25cc1))
+* Update CoCreate depndencies to latest versions ([d424ba6](https://github.com/CoCreate-app/CoCreate-attributes/commit/d424ba66a20db1b7675b30452fdfb663c87ccc0d))
+
 ## [1.10.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.10.0...v1.10.1) (2023-09-07)
 
 
