@@ -36,7 +36,7 @@ function initElements(inputs, el) {
 
 async function initElement(input, el) {
     try {
-        // let value = getInputValue(input);
+        // let value = await getInputValue(input);
 
         let selector = input.getAttribute("attribute-selector");
         if (selector.trim().endsWith(';')) {
@@ -275,7 +275,7 @@ async function updateElement({ input, element, collValue, isColl, unit, type, pr
         inputEvent(e);
         return;
     }
-    let inputValue = collValue != undefined ? collValue : getInputValue(input);
+    let inputValue = collValue != undefined ? collValue : await getInputValue(input);
     if (!inputValue) return;
 
     if (!Array.isArray(inputValue)) {
@@ -484,9 +484,9 @@ function setInputValue(input, value) {
         input.setValue(value);
 }
 
-function getInputValue(input) {
+async function getInputValue(input) {
     if (!input) return;
-    let value = input.getValue();
+    let value = await input.getValue();
     if (value) return value;
     return false;
 }
