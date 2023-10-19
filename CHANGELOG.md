@@ -1,3 +1,10 @@
+## [1.11.6](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.11.5...v1.11.6) (2023-10-19)
+
+
+### Bug Fixes
+
+* removed @cocreate/message-client ([07ca52e](https://github.com/CoCreate-app/CoCreate-attributes/commit/07ca52e9826cf99f4f3fde13c9c191a44d4d21ad))
+
 ## [1.11.5](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.11.4...v1.11.5) (2023-10-17)
 
 
