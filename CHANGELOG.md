@@ -1,3 +1,11 @@
+## [1.11.9](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.11.8...v1.11.9) (2023-11-09)
+
+
+### Bug Fixes
+
+* meta name typo ([cea4375](https://github.com/CoCreate-app/CoCreate-attributes/commit/cea437571c35a7f2ae530729bb26b7c1ee82f3f7))
+* update host ([ff01acd](https://github.com/CoCreate-app/CoCreate-attributes/commit/ff01acd319ef1a48fa4c8d38d7046f50cdd4ada9))
+
 ## [1.11.8](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.11.7...v1.11.8) (2023-11-03)
 
 
