@@ -1,3 +1,10 @@
+## [1.14.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.14.3...v1.14.4) (2024-08-24)
+
+
+### Bug Fixes
+
+* update doc ([d174074](https://github.com/CoCreate-app/CoCreate-attributes/commit/d174074c6e89710d4fa3a8665bbcba31d380a574))
+
 ## [1.14.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.14.2...v1.14.3) (2024-06-12)
 
 
