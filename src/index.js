@@ -191,7 +191,7 @@ async function parseInput(input, element) {
         if (selector.indexOf(';') !== -1) {
             let [frameSelector, target] = selector.split(';');
             let frame = document.querySelector(frameSelector);
-            if (frame) {
+            if (frame && target) {
                 let Document = frame.contentDocument;
                 element = Document.querySelector(target);
             }
