@@ -516,7 +516,7 @@ init();
 observer.init({
     name: "ccAttribute",
     observe: ["childList"],
-    target: '[attribute]',
+    selector: '[attribute]',
     callback: function (mutation) {
         initElements(mutation.addedNodes);
     }
