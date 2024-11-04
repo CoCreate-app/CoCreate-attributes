@@ -1,3 +1,18 @@
+# [1.15.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.14.4...v1.15.0) (2024-11-04)
+
+
+### Bug Fixes
+
+* check target before querying ([ab39d6f](https://github.com/CoCreate-app/CoCreate-attributes/commit/ab39d6f7aade3e7d9ad639e7b0330c1eddf006ee))
+* formating ([d63db50](https://github.com/CoCreate-app/CoCreate-attributes/commit/d63db502bbc30bb90d4f4e67840bff86872b12ed))
+* observer taget has been renamed to selector ([5e6c34a](https://github.com/CoCreate-app/CoCreate-attributes/commit/5e6c34a8b3cef5981e9ed31cd551b6004b8c813f))
+* pretier.config.js and file formating ([d041a13](https://github.com/CoCreate-app/CoCreate-attributes/commit/d041a138df4fb8cdf4e144c6f840d991df240b9c))
+
+
+### Features
+
+* add prettier.config.js and format files ([f7de120](https://github.com/CoCreate-app/CoCreate-attributes/commit/f7de120a9823763915b1a7b26c766266e407d4a2))
+
 ## [1.14.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.14.3...v1.14.4) (2024-08-24)
 
 
