@@ -298,7 +298,7 @@ let observerInit = new Map();
 function observerElements(initWindow) {
 	initWindow.parent.CoCreate.observer.init({
 		name: "ccAttribute",
-		observe: ["attributes"], // "characterData"
+		types: ["attributes"], // "characterData"
 		callback: (mutation) => {
 			if (mutation.attributeName != "attribute-unit") return;
 			let inputs = getInputFromElement(
@@ -635,17 +635,8 @@ init();
 
 observer.init({
 	name: "ccAttribute",
-	observe: ["childList"],
+	types: ["addedNodes"],
 	selector: "[attribute]",
-	callback: function (mutation) {
-		initElements(mutation.addedNodes);
-	}
-});
-
-observer.init({
-	name: "ccAttribute",
-	observe: ["attributes"],
-	attributeName: ["attribute-selector"],
 	callback: function (mutation) {
 		initElement(mutation.target);
 	}
@@ -653,9 +644,18 @@ observer.init({
 
 observer.init({
 	name: "ccAttribute",
-	observe: ["attributes"],
-	// attributeName: ["attribute", "attribute-property", "attribute-unit", "value"],
-	attributeName: ["attribute-unit"],
+	types: ["attributes"],
+	attributeFilter: ["attribute-selector"],
+	callback: function (mutation) {
+		initElement(mutation.target);
+	}
+});
+
+observer.init({
+	name: "ccAttribute",
+	types: ["attributes"],
+	// attributeFilter: ["attribute", "attribute-property", "attribute-unit", "value"],
+	attributeFilter: ["attribute-unit"],
 	callback: function (mutation) {
 		updateElement({ input: mutation.target, isColl: true });
 		if (mutation.attributeName != "attribute-unit") return;
