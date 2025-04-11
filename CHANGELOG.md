@@ -1,3 +1,11 @@
+## [1.15.1](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.15.0...v1.15.1) (2025-04-11)
+
+
+### Bug Fixes
+
+* dispatch end event on action element rather than document ([0b63805](https://github.com/CoCreate-app/CoCreate-attributes/commit/0b63805c9832d40143bd84a5c6ab80937d6f4988))
+* update observer obseve parame to type and and attribute name to attributeFilter ([cebf76d](https://github.com/CoCreate-app/CoCreate-attributes/commit/cebf76d10a6a911112bd3605924b6a2c27eadc14))
+
 # [1.15.0](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.14.4...v1.15.0) (2024-11-04)
 
 
