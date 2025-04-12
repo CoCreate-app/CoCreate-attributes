@@ -1,192 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Attributes | CoCreateJS</title>
-        <!-- CoCreate Favicon -->
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="../assets/favicon.ico" />
-        <link rel="manifest" href="/manifest.webmanifest" />
-    </head>
+	<head>
+		<title>Attributes | CoCreateJS</title>
+		<!-- CoCreate Favicon -->
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="../assets/favicon.ico" />
+		<link rel="manifest" href="/manifest.webmanifest" />
+	</head>
 
-    <body>
-        <!-- Main Container -->
-        <div main-content_id="canvas" class="height:100vh overflow:scroll">
-            <iframe
-                id="canvas"
-                src="./iframe.html"
-                frameborder="0"
-                width="100%"
-                height="100%"></iframe>
-        </div>
+	<body>
+		<!-- Main Container -->
+		<div main-content_id="canvas" class="height:100vh overflow:scroll">
+			<iframe
+				id="canvas"
+				src="./iframe.html"
+				frameborder="0"
+				width="100%"
+				height="100%"></iframe>
+		</div>
 
-        <!-- CoCreate SideNav Right -->
-        <sidenav
-            id="menuR"
-            class="position:fixed top:0px right:0px overflow:hidden background:gainsboro height:100vh width:300px"
-            resizable
-            resize-selector="[content_id='content']"
-            resize-property="margin-right"
-            resize-value="width">
-            <h1 id="new" class="background:green">testing</h1>
-            <div class="padding:5px height:100vh overflow:auto">
-                <form class="width:250px">
-                    <input
-                        attribute="myAttribute"
-                        type="text"
-                        class="floating-label attr"
-                        placeholder="Draggable"
-                        attribute-selector="iframe; .rrr" />
-                    <input
-                        attribute="myAttribute"
-                        type="text"
-                        class="floating-label attr"
-                        placeholder="Draggable"
-                        attribute-selector="iframe;" />
-                    <input
-                        id="margin-left"
-                        class="floating-label z-index:0 text_color"
-                        placeholder="margin-left"
-                        attribute="classstyle"
-                        attribute-property="margin-left"
-                        attribute-selector="iframe;"
-                        active />
+		<!-- CoCreate SideNav Right -->
+		<sidenav
+			id="menuR"
+			class="position:fixed top:0px right:0px overflow:hidden background:gainsboro height:100vh width:300px"
+			resizable
+			resize-query="[content_id='content']"
+			resize-property="margin-right"
+			resize-value="width">
+			<h1 id="new" class="background:green">testing</h1>
+			<div class="padding:5px height:100vh overflow:auto">
+				<form class="width:250px">
+					<input
+						attribute="myAttribute"
+						type="text"
+						class="floating-label attr"
+						placeholder="Draggable"
+						attribute-query="iframe; .rrr" />
+					<input
+						attribute="myAttribute"
+						type="text"
+						class="floating-label attr"
+						placeholder="Draggable"
+						attribute-query="iframe;" />
+					<input
+						id="margin-left"
+						class="floating-label z-index:0 text_color"
+						placeholder="margin-left"
+						attribute="classstyle"
+						attribute-property="margin-left"
+						attribute-query="iframe;"
+						active />
 
-                    <input
-                        class="floating-label z-index:0 text_color"
-                        placeholder="background"
-                        attribute="style"
-                        attribute-property="background"
-                        attribute-selector="#new"
-                        active />
+					<input
+						class="floating-label z-index:0 text_color"
+						placeholder="background"
+						attribute="style"
+						attribute-property="background"
+						attribute-query="#new"
+						active />
 
-                    <a
-                        actions="attributes"
-                        attribute="class"
-                        attribute-selector="#new"
-                        value="woohoo"
-                        active
-                        >click</a
-                    >
+					<a
+						actions="attributes"
+						attribute="class"
+						attribute-query="#new"
+						value="woohoo"
+						active
+						>click</a
+					>
 
-                    <p>Set Attribute:</p>
-                    <input
-                        type="checkbox"
-                        id="vehicle11"
-                        key="vehicle1"
-                        value="1"
-                        attribute="someAttr"
-                        attribute-selector="#new" /><label for="vehicle1"
-                        >value1</label
-                    ><br />
-                    <input
-                        type="checkbox"
-                        id="vehicle21"
-                        key="vehicle1"
-                        value="2"
-                        attribute="someAttr"
-                        attribute-selector="#new" /><label for="vehicle2"
-                        >value1</label
-                    ><br />
+					<p>Set Attribute:</p>
+					<input
+						type="checkbox"
+						id="vehicle11"
+						key="vehicle1"
+						value="1"
+						attribute="someAttr"
+						attribute-query="#new" /><label for="vehicle1"
+						>value1</label
+					><br />
+					<input
+						type="checkbox"
+						id="vehicle21"
+						key="vehicle1"
+						value="2"
+						attribute="someAttr"
+						attribute-query="#new" /><label for="vehicle2"
+						>value1</label
+					><br />
 
-                    <p>different name:</p>
-                    <input
-                        type="radio"
-                        id="vehicle12"
-                        key="vehicleb"
-                        value="green"
-                        attribute="classstyle"
-                        attribute-selector="#new"
-                        attribute-property="background" /><label for="vehicle1"
-                        >background:green</label
-                    ><br />
-                    <input
-                        type="radio"
-                        id="vehicle214"
-                        key="vehicleb"
-                        value="blue"
-                        attribute="classstyle"
-                        attribute-selector="#new"
-                        attribute-property="color" /><label for="vehicle2"
-                        >color:blue</label
-                    ><br />
+					<p>different name:</p>
+					<input
+						type="radio"
+						id="vehicle12"
+						key="vehicleb"
+						value="green"
+						attribute="classstyle"
+						attribute-query="#new"
+						attribute-property="background" /><label for="vehicle1"
+						>background:green</label
+					><br />
+					<input
+						type="radio"
+						id="vehicle214"
+						key="vehicleb"
+						value="blue"
+						attribute="classstyle"
+						attribute-query="#new"
+						attribute-property="color" /><label for="vehicle2"
+						>color:blue</label
+					><br />
 
-                    <!--<p>same name:</p>-->
-                    <!--<input type="checkbox" id="vehicle31" key="sameee" value="background:green;" attribute="style" attribute-selector="#new"><label for="vehicle3">background:green</label><br>-->
-                    <!--<input type="checkbox" id="vehicle41" key="sameee" value="color:blue;" attribute="style" attribute-selector="#new"><label for="vehicle4">color:blue</label><br/>-->
-                    <!--<input id="radio1" type="radio" key="radiotest" value="background:green;" attribute="style" attribute-selector="#new">-->
-                    <!--<label for="radio1">background:green</label>-->
-                    <!--<input id="radio2" type="radio" key="radiotest" value="color:blue;" attribute="style" attribute-selector="#new">-->
-                    <!--<label for="radio2">color:blue</label>-->
+					<!--<p>same name:</p>-->
+					<!--<input type="checkbox" id="vehicle31" key="sameee" value="background:green;" attribute="style" attribute-query="#new"><label for="vehicle3">background:green</label><br>-->
+					<!--<input type="checkbox" id="vehicle41" key="sameee" value="color:blue;" attribute="style" attribute-query="#new"><label for="vehicle4">color:blue</label><br/>-->
+					<!--<input id="radio1" type="radio" key="radiotest" value="background:green;" attribute="style" attribute-query="#new">-->
+					<!--<label for="radio1">background:green</label>-->
+					<!--<input id="radio2" type="radio" key="radiotest" value="color:blue;" attribute="style" attribute-query="#new">-->
+					<!--<label for="radio2">color:blue</label>-->
 
-                    <!--<select key="cars" id="cars" attribute="style" attribute-selector="#new">-->
-                    <!--    <option value="background:green;">background:green;</option>-->
-                    <!--    <option value="color:blue;">color:blue;</option>-->
-                    <!--    <option value="mercedes">Mercedes</option>-->
-                    <!--    <option value="audi">Audi</option>-->
-                    <!--</select>-->
-                    <!--<br>-->
+					<!--<select key="cars" id="cars" attribute="style" attribute-query="#new">-->
+					<!--    <option value="background:green;">background:green;</option>-->
+					<!--    <option value="color:blue;">color:blue;</option>-->
+					<!--    <option value="mercedes">Mercedes</option>-->
+					<!--    <option value="audi">Audi</option>-->
+					<!--</select>-->
+					<!--<br>-->
 
-                    <!--<select key="cars" id="cars" attribute="class" attribute-selector="#new" multiple>-->
-                    <!--    <option value="class1">class1</option>-->
-                    <!--    <option value="class2">class2</option>-->
-                    <!--    <option value="class3">class3</option>-->
-                    <!--    <option value="class4">class4</option>-->
-                    <!--</select>-->
+					<!--<select key="cars" id="cars" attribute="class" attribute-query="#new" multiple>-->
+					<!--    <option value="class1">class1</option>-->
+					<!--    <option value="class2">class2</option>-->
+					<!--    <option value="class3">class3</option>-->
+					<!--    <option value="class4">class4</option>-->
+					<!--</select>-->
 
-                    <!--<select key="cars" id="cars" attribute="myAttribute" attribute-selector="#new" multiple>-->
-                    <!--    <option value="class1">myAttribute </option>-->
-                    <!--    <option value="class2">myAttribute class2</option>-->
-                    <!--    <option value="class3">myAttribute class3</option>-->
-                    <!--    <option value="class4">myAttribute class4</option>-->
-                    <!--</select>-->
+					<!--<select key="cars" id="cars" attribute="myAttribute" attribute-query="#new" multiple>-->
+					<!--    <option value="class1">myAttribute </option>-->
+					<!--    <option value="class2">myAttribute class2</option>-->
+					<!--    <option value="class3">myAttribute class3</option>-->
+					<!--    <option value="class4">myAttribute class4</option>-->
+					<!--</select>-->
 
-                    <!--<input type="checkbox" id="classxxx" key="classxxx" value="classxxx" attribute="class" attribute-selector="#new" checked><label for="classxxx">add class: classxxx</label><br>-->
+					<!--<input type="checkbox" id="classxxx" key="classxxx" value="classxxx" attribute="class" attribute-query="#new" checked><label for="classxxx">add class: classxxx</label><br>-->
 
-                    <!--<cocreate-select sortable class="floating-label" attribute="style" attribute-selector="#new" key="selectField4" placeholder="Single Options">-->
-                    <!--    <input class="option-search" placeholder="Search">-->
-                    <!--    <ul class="options  overflow:auto">-->
-                    <!--        <cc-option class="option" value="background:green;">-->
-                    <!--            <h3>background:green;</h3>-->
-                    <!--        </cc-option>-->
-                    <!--        <cc-option class="option" value="color:blue;">-->
-                    <!--            <h3>color:blue;</h3>-->
-                    <!--        </cc-option>-->
-                    <!--        <cc-option class="option" value="value 3">-->
-                    <!--            <h3>sss</h3>-->
-                    <!--        </cc-option>-->
-                    <!--        <cc-option class="option" value="value 3">-->
-                    <!--            <h3>value 3</h3>-->
-                    <!--        </cc-option>-->
-                    <!--    </ul>-->
-                    <!--</cocreate-select>-->
-                    <!--<cocreate-select class="floating-label" attribute="style" attribute-selector="#new" key="selectField4" multiple placeholder="Single Options">-->
-                    <!--    <input class="option-search" placeholder="Search">-->
-                    <!--    <ul class="options overflow:auto">-->
-                    <!--        <cc-option class="option" value="background:green;">-->
-                    <!--            <h3>background:green;</h3>-->
-                    <!--        </cc-option>-->
-                    <!--        <cc-option class="option" value="color:blue;">-->
-                    <!--            <h3>color:blue;</h3>-->
-                    <!--        </cc-option>-->
-                    <!--        <cc-option class="option" value="value 3">-->
-                    <!--            <h3>sss</h3>-->
-                    <!--        </cc-option>-->
-                    <!--        <cc-option class="option" value="value 3">-->
-                    <!--            <h3>value 3</h3>-->
-                    <!--        </cc-option>-->
-                    <!--    </ul>-->
-                    <!--</cocreate-select>-->
-                </form>
-            </div>
-            <div resize="left"></div>
-        </sidenav>
-        <!-- End CoCreate SideNav Right -->
+					<!--<cocreate-select sortable class="floating-label" attribute="style" attribute-query="#new" key="selectField4" placeholder="Single Options">-->
+					<!--    <input class="option-search" placeholder="Search">-->
+					<!--    <ul class="options  overflow:auto">-->
+					<!--        <cc-option class="option" value="background:green;">-->
+					<!--            <h3>background:green;</h3>-->
+					<!--        </cc-option>-->
+					<!--        <cc-option class="option" value="color:blue;">-->
+					<!--            <h3>color:blue;</h3>-->
+					<!--        </cc-option>-->
+					<!--        <cc-option class="option" value="value 3">-->
+					<!--            <h3>sss</h3>-->
+					<!--        </cc-option>-->
+					<!--        <cc-option class="option" value="value 3">-->
+					<!--            <h3>value 3</h3>-->
+					<!--        </cc-option>-->
+					<!--    </ul>-->
+					<!--</cocreate-select>-->
+					<!--<cocreate-select class="floating-label" attribute="style" attribute-query="#new" key="selectField4" multiple placeholder="Single Options">-->
+					<!--    <input class="option-search" placeholder="Search">-->
+					<!--    <ul class="options overflow:auto">-->
+					<!--        <cc-option class="option" value="background:green;">-->
+					<!--            <h3>background:green;</h3>-->
+					<!--        </cc-option>-->
+					<!--        <cc-option class="option" value="color:blue;">-->
+					<!--            <h3>color:blue;</h3>-->
+					<!--        </cc-option>-->
+					<!--        <cc-option class="option" value="value 3">-->
+					<!--            <h3>sss</h3>-->
+					<!--        </cc-option>-->
+					<!--        <cc-option class="option" value="value 3">-->
+					<!--            <h3>value 3</h3>-->
+					<!--        </cc-option>-->
+					<!--    </ul>-->
+					<!--</cocreate-select>-->
+				</form>
+			</div>
+			<div resize="left"></div>
+		</sidenav>
+		<!-- End CoCreate SideNav Right -->
 
-        <!-- end floating btn -->
-        <!--<script src="../dist/CoCreate-attributes.js"></script>-->
-        <script src="https://CoCreate.app/dist/CoCreate.js"></script>
-    </body>
+		<!-- end floating btn -->
+		<!--<script src="../dist/CoCreate-attributes.js"></script>-->
+		<script src="https://CoCreate.app/dist/CoCreate.js"></script>
+	</body>
 </html>

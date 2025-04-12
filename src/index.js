@@ -23,7 +23,7 @@ let initializing;
 // let activeElement;
 
 function init() {
-	let inputs = document.querySelectorAll(`[attribute-selector]`);
+	let inputs = document.querySelectorAll(`[attribute-query]`);
 	initElements(inputs);
 	initEvents();
 }
@@ -36,7 +36,7 @@ async function initElement(input, el) {
 	try {
 		// let value = await getInputValue(input);
 
-		let selector = input.getAttribute("attribute-selector");
+		let selector = input.getAttribute("attribute-query");
 		if (selector.trim().endsWith(";")) {
 			addClickEvent(input, selector);
 		} else {
@@ -173,7 +173,7 @@ function addClickEvent(input, selector) {
 
 function getPickr(container) {
 	let inputs = document.queryselectorAll(
-		".pickr[attribute][attribute-selector]"
+		".pickr[attribute][attribute-query]"
 	);
 	for (let input of inputs)
 		containers.get(container).get("inputs").set(input, "");
@@ -239,7 +239,7 @@ async function elClicked(e) {
 
 async function parseInput(input, element) {
 	if (!element) {
-		let selector = input.getAttribute("attribute-selector");
+		let selector = input.getAttribute("attribute-query");
 		if (!selector) return false;
 		if (selector.indexOf(";") !== -1) {
 			let [frameSelector, target] = selector.split(";");
@@ -315,7 +315,7 @@ function getInputFromElement(element, attribute) {
 	let inputs = initDocument.querySelectorAll(`[attribute="${attribute}"]`);
 	let matching = [];
 	for (let input of inputs) {
-		let selector = input.getAttribute("attribute-selector");
+		let selector = input.getAttribute("attribute-query");
 		if (selector && element.matches(selector)) matching.push(input);
 	}
 	return matching;
@@ -645,7 +645,7 @@ observer.init({
 observer.init({
 	name: "ccAttribute",
 	types: ["attributes"],
-	attributeFilter: ["attribute-selector"],
+	attributeFilter: ["attribute-query"],
 	callback: function (mutation) {
 		initElement(mutation.target);
 	}
