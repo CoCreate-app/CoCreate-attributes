@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.15.3...v1.15.4) (2025-12-26)
+
+
+### Bug Fixes
+
+* update worklow ([df224a6](https://github.com/CoCreate-app/CoCreate-attributes/commit/df224a6c6bd056007b0f406920987431ee17482a))
+
 ## [1.15.3](https://github.com/CoCreate-app/CoCreate-attributes/compare/v1.15.2...v1.15.3) (2025-05-01)
 
 
